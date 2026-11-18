@@ -1,0 +1,28 @@
+# SalesInsight - Python dependencies
+# Install with:  pip install -r requirements.txt
+# After installing, save exact versions with:  pip freeze > requirements-lock.txt
+
+# Data analysis
+pandas>=2.2,<4
+numpy>=1.26,<3
+
+# Statistics
+scipy>=1.11
+
+# Visualisation
+matplotlib>=3.8
+seaborn>=0.13
+
+# Database (MySQL)
+SQLAlchemy>=2.0,<3
+PyMySQL>=1.1
+cryptography>=42      # needed by PyMySQL to log in to MySQL 8 (caching_sha2_password)
+
+# Configuration
+python-dotenv>=1.0
+
+# Testing
+pytest>=8.0
+
+# Jupyter notebooks inside VS Code
+ipykernel>=6.29

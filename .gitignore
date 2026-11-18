@@ -1,0 +1,30 @@
+# Virtual environment
+.venv/
+
+# Secrets - never commit your real password
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Data files (raw data is downloaded from Kaggle; processed data is generated)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Logs
+logs/*
+!logs/.gitkeep
+
+# Editor / OS files
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
