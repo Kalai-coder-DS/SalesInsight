@@ -1,0 +1,20 @@
+check,status,affected_rows,details
+Required columns present,PASS,0,OK
+Dataset has rows,PASS,0,OK
+No missing values in key columns,PASS,0,OK
+Missing values in other columns,PASS,0,OK
+Row ID is unique,PASS,0,OK
+No duplicate records (ignoring Row ID),WARN,1,"1 extra copies; Row IDs involved: [3406, 3407]"
+Dates are valid,PASS,0,OK
+Ship Date is on or after Order Date,PASS,0,OK
+Sales is greater than 0,PASS,0,OK
+Quantity is a positive whole number,PASS,0,OK
+Discount is between 0 and 1,PASS,0,OK
+Profit is not greater than Sales,PASS,0,OK
+'Region' has only known values,PASS,0,OK
+'Category' has only known values,PASS,0,OK
+'Segment' has only known values,PASS,0,OK
+'Ship Mode' has only known values,PASS,0,OK
+Each order has one customer and one date,PASS,0,OK
+Each Product ID has one Product Name,WARN,32,"32 Product IDs have more than one name, e.g. ['FUR-BO-10002213', 'FUR-CH-10001146', 'FUR-FU-10001473', 'FUR-FU-10004017', 'FUR-FU-10004091']"
+Each Customer ID has one Customer Name,PASS,0,OK

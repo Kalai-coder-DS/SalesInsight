@@ -1,0 +1,22 @@
+column,dtype,non_null,missing,unique_values,example,min,max,description
+Row ID,int64,9994,0,9994,1,1,9994,Unique number for each row (one product line in an order)
+Order ID,string,9994,0,5009,CA-2016-152156,,,Order identifier; one order can contain several products (rows)
+Order Date,datetime64[us],9994,0,1237,2016-11-08 00:00:00,2014-01-03 00:00:00,2017-12-30 00:00:00,Date the order was placed
+Ship Date,datetime64[us],9994,0,1334,2016-11-11 00:00:00,2014-01-07 00:00:00,2018-01-05 00:00:00,Date the order was shipped
+Ship Mode,str,9994,0,4,Second Class,,,Shipping class chosen by the customer
+Customer ID,string,9994,0,793,CG-12520,,,Unique customer identifier
+Customer Name,str,9994,0,793,Claire Gute,,,Customer's name
+Segment,str,9994,0,3,Consumer,,,"Customer type: Consumer, Corporate or Home Office"
+Country,str,9994,0,1,United States,,,Country of delivery (United States only)
+City,str,9994,0,531,Henderson,,,City of delivery
+State,str,9994,0,49,Kentucky,,,US state of delivery
+Postal Code,string,9994,0,631,42420,,,ZIP code of delivery (kept as text to keep leading zeros)
+Region,str,9994,0,4,South,,,"US sales region: Central, East, South or West"
+Product ID,string,9994,0,1862,FUR-BO-10001798,,,Product identifier
+Category,str,9994,0,3,Furniture,,,"Product category: Furniture, Office Supplies or Technology"
+Sub-Category,str,9994,0,17,Bookcases,,,"Product sub-category, e.g. Chairs, Phones, Binders"
+Product Name,str,9994,0,1850,Bush Somerset Collection Bookcase,,,Full product name
+Sales,float64,9994,0,5825,261.96,0.444,22638.48,"Revenue for the row in USD, after discount"
+Quantity,int64,9994,0,14,2,1,14,Number of units sold
+Discount,float64,9994,0,12,0.0,0.0,0.8,Discount given as a fraction (0.2 = 20%)
+Profit,float64,9994,0,7287,41.9136,-6599.978,8399.976,Profit for the row in USD (negative = loss)
