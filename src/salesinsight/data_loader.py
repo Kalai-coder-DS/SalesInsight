@@ -122,3 +122,27 @@ def summarise(df: pd.DataFrame) -> dict[str, object]:
         if col in df.columns:
             summary[f"total_{col.lower()}"] = round(float(df[col].sum()), 2)
     return summary
+
+
+# Columns of the processed file that must stay as text when read back.
+CLEAN_TEXT_COLUMNS: list[str] = ["order_id", "customer_id", "product_id", "postal_code", "product_key"]
+CLEAN_DATE_COLUMNS: list[str] = ["order_date", "ship_date"]
+
+
+def load_clean_data(path: Path | str = config.CLEAN_DATA_FILE) -> pd.DataFrame:
+    """Read the cleaned file created in Phase 3 (data/processed/sales_clean.csv).
+
+    All later phases (SQL, KPIs, trends, ...) start from this function.
+    """
+    path = Path(path)
+    if not path.is_file():
+        raise FileNotFoundError(
+            f"Clean data not found: {path}\nRun first:  python scripts/run_cleaning.py"
+        )
+    df = pd.read_csv(
+        path,
+        dtype={col: str for col in CLEAN_TEXT_COLUMNS},
+        parse_dates=CLEAN_DATE_COLUMNS,
+    )
+    logger.info("Loaded clean data: %d rows x %d columns", df.shape[0], df.shape[1])
+    return df

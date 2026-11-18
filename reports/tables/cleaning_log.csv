@@ -1,0 +1,7 @@
+step,rows_before,rows_after,values_changed,note
+Standardise column names,9994,9994,21,Column names converted to snake_case
+Trim text spaces,9994,9994,16,Leading/trailing spaces removed
+Fix postal codes,9994,9994,438,"438 padded to 5 digits, 0 filled, 0 still missing"
+Remove duplicate records,9994,9993,1,1 duplicate rows removed
+Add product_key,9993,9993,1894,32 product_ids are shared by more than one product name
+Set data types,9993,9993,0,"Integers, decimals, text and dates fixed"
