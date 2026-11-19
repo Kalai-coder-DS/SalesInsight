@@ -168,3 +168,102 @@ def plot_margin_by_year(yearly: pd.DataFrame, overall_margin: float, folder: Pat
     ax.set_title("Profit margin by year")
     ax.margins(y=0.25)
     return save_figure(fig, "05_profit_margin_by_year", folder)
+
+
+# ---------------------------------------------------------------------------
+# Phase 6 charts: trends and seasonality
+# ---------------------------------------------------------------------------
+# Single-hue blue ramp (light -> dark) for magnitude, e.g. heatmaps.
+BLUE_RAMP = ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
+REVENUE_LIGHT = "#86b6ef"   # raw monthly values (recede)
+REVENUE_DARK = "#1c5cab"    # smoothed trend (stands out)
+
+
+def plot_monthly_trend(monthly: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Monthly revenue with its 3-month moving average."""
+    apply_style()
+    fig, ax = plt.subplots(figsize=(11, 5))
+    ax.plot(monthly["period"], monthly["revenue"], color=REVENUE_LIGHT, linewidth=1.5,
+            marker="o", markersize=4, label="Monthly revenue")
+    ax.plot(monthly["period"], monthly["revenue_ma"], color=REVENUE_DARK, linewidth=2.5,
+            label="3-month moving average")
+    best = monthly.loc[monthly["revenue"].idxmax()]
+    ax.annotate(f"Best month: {best['period']:%b %Y}\n{short_money(best['revenue'])}",
+                (best["period"], best["revenue"]), xytext=(-12, 0), textcoords="offset points",
+                ha="right", va="center", fontsize=9, color=TEXT_SECONDARY)
+    money_axis(ax)
+    ax.tick_params(axis="x", length=0)
+    ax.set_ylim(bottom=0)
+    ax.set_title("Monthly revenue and 3-month moving average")
+    ax.legend(loc="upper left", ncols=2)
+    return save_figure(fig, "06_monthly_revenue_trend", folder)
+
+
+def plot_revenue_heatmap(matrix: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Year x month heatmap: darker blue = more revenue."""
+    from matplotlib.colors import LinearSegmentedColormap
+
+    apply_style()
+    cmap = LinearSegmentedColormap.from_list("blue_ramp", BLUE_RAMP)
+    fig, ax = plt.subplots(figsize=(12, 1.2 + 0.8 * len(matrix)))
+    values = matrix.to_numpy(dtype=float)
+    image = ax.imshow(values, cmap=cmap, aspect="auto")
+    vmin, vmax = image.get_clim()
+    for (r, c), v in pd.DataFrame(values).stack().items():
+        dark = (v - vmin) / (vmax - vmin or 1) > 0.55
+        ax.text(c, r, short_money(v), ha="center", va="center", fontsize=8.5,
+                color="white" if dark else TEXT_PRIMARY)
+    ax.set_xticks(range(len(matrix.columns)), matrix.columns)
+    ax.set_yticks(range(len(matrix.index)), matrix.index.astype(str))
+    ax.tick_params(length=0)
+    ax.grid(False)
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+    # White gaps between cells.
+    ax.set_xticks([x - 0.5 for x in range(1, len(matrix.columns))], minor=True)
+    ax.set_yticks([y - 0.5 for y in range(1, len(matrix.index))], minor=True)
+    ax.grid(which="minor", color=SURFACE, linewidth=3)
+    ax.tick_params(which="minor", length=0)
+    ax.set_title("Revenue by month and year")
+    cbar = fig.colorbar(image, ax=ax, fraction=0.025, pad=0.01)
+    cbar.outline.set_visible(False)
+    cbar.ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: axis_money(v)))
+    cbar.ax.tick_params(colors=TEXT_SECONDARY, length=0)
+    return save_figure(fig, "06_revenue_heatmap", folder)
+
+
+def plot_seasonality_index(season: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Bars per calendar month; 100 = an average month."""
+    apply_style()
+    fig, ax = plt.subplots(figsize=(10, 4.8))
+    ax.bar(season["month_name"], season["seasonality_index"], width=0.6, color=REVENUE_COLOR,
+           edgecolor=SURFACE, linewidth=2)
+    ax.axhline(100, color=TEXT_SECONDARY, linewidth=1, linestyle="--")
+    ax.annotate("Average month = 100", (-0.45, 100), xytext=(0, 5),
+                textcoords="offset points", ha="left", fontsize=9, color=TEXT_SECONDARY)
+    for idx in (season["seasonality_index"].idxmax(), season["seasonality_index"].idxmin()):
+        row = season.loc[idx]
+        ax.annotate(f"{row['seasonality_index']:.0f}", (row["month_name"], row["seasonality_index"]),
+                    xytext=(0, 4), textcoords="offset points", ha="center", fontsize=9,
+                    color=TEXT_PRIMARY, fontweight="bold")
+    ax.tick_params(axis="x", length=0)
+    ax.set_title("Seasonality: average revenue per calendar month (index)")
+    ax.margins(y=0.1)
+    return save_figure(fig, "06_seasonality_index", folder)
+
+
+def plot_weekday_orders(weekday: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Share of orders placed on each weekday."""
+    apply_style()
+    fig, ax = plt.subplots(figsize=(9, 4.5))
+    labels = [d[:3] for d in weekday["weekday"]]
+    bars = ax.bar(labels, weekday["share_of_orders_pct"], width=0.6, color=REVENUE_COLOR,
+                  edgecolor=SURFACE, linewidth=2)
+    for bar, v in zip(bars, weekday["share_of_orders_pct"]):
+        ax.annotate(f"{v:.1f}%", (bar.get_x() + bar.get_width() / 2, v), xytext=(0, 4),
+                    textcoords="offset points", ha="center", fontsize=9, color=TEXT_SECONDARY)
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
+    ax.tick_params(axis="x", length=0)
+    ax.set_title("Share of orders by weekday")
+    ax.margins(y=0.12)
+    return save_figure(fig, "06_weekday_orders", folder)
