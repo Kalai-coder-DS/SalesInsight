@@ -83,3 +83,15 @@ def test_phase9_charts(sales_data, tmp_path):
         viz.plot_new_vs_returning(cu.new_vs_returning(sales_data), folder=tmp_path),
     ]
     assert all(p.exists() and p.stat().st_size > 10_000 for p in paths)
+
+
+def test_phase10_charts(sales_data, tmp_path):
+    from salesinsight import stats_tests as st
+    note = "Example result text for the subtitle."
+    paths = [
+        viz.plot_margin_by_discount_box(sales_data, note, folder=tmp_path),
+        viz.plot_loss_rate_by_discount(sales_data, note, folder=tmp_path),
+        viz.plot_margin_by_region_box(sales_data, note, folder=tmp_path),
+        viz.plot_aov_confidence(st.aov_confidence_by_year(sales_data), folder=tmp_path),
+    ]
+    assert all(p.exists() and p.stat().st_size > 10_000 for p in paths)

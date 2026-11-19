@@ -643,3 +643,103 @@ def plot_new_vs_returning(nvr: pd.DataFrame, folder: Path | None = None) -> Path
     ax.margins(y=0.15)
     ax.set_title("Revenue from new vs returning customers")
     return save_figure(fig, "09_new_vs_returning", folder)
+
+
+# ---------------------------------------------------------------------------
+# Phase 10 charts: statistics
+# ---------------------------------------------------------------------------
+def _title_with_note(ax: plt.Axes, title: str, note: str, width: int = 95) -> None:
+    """Bold title plus a wrapped grey line underneath with the test result."""
+    import textwrap
+
+    lines = textwrap.wrap(note, width)
+    ax.set_title(title, pad=14 + 13 * len(lines))
+    ax.text(0, 1.02, "\n".join(lines), transform=ax.transAxes, fontsize=9,
+            color=TEXT_SECONDARY, va="bottom", linespacing=1.4)
+
+
+def _boxplot(ax: plt.Axes, groups: list, labels: list[str], color: str) -> None:
+    """Thin box plots without outlier dots (the long tails would squash the boxes)."""
+    bp = ax.boxplot(groups, tick_labels=labels, showfliers=False, widths=0.5, patch_artist=True,
+                    medianprops={"color": TEXT_PRIMARY, "linewidth": 2},
+                    whiskerprops={"color": TEXT_SECONDARY}, capprops={"color": TEXT_SECONDARY},
+                    boxprops={"edgecolor": TEXT_SECONDARY})
+    for patch in bp["boxes"]:
+        patch.set_facecolor(color)
+        patch.set_alpha(0.85)
+
+
+def plot_margin_by_discount_box(df: pd.DataFrame, result_text: str, folder: Path | None = None) -> Path:
+    """Distribution of line profit margin for each discount band."""
+    from salesinsight.stats_tests import DISCOUNT_BAND_ORDER, line_margin
+
+    apply_style()
+    margin = line_margin(df)
+    bands = [b for b in DISCOUNT_BAND_ORDER if b in set(df["discount_band"])]
+    groups = [margin[df["discount_band"] == b].to_numpy() for b in bands]
+    fig, ax = plt.subplots(figsize=(9, 5))
+    _boxplot(ax, groups, bands, REVENUE_LIGHT)
+    ax.axhline(0, color=LOSS_COLOR, linewidth=1, linestyle="--")
+    ax.annotate("Break-even", (0.5, 0), xytext=(0, 4), textcoords="offset points",
+                fontsize=9, color=TEXT_SECONDARY)
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
+    ax.tick_params(axis="x", length=0)
+    _title_with_note(ax, "Profit margin of order lines by discount level", result_text)
+    return save_figure(fig, "10_margin_by_discount_box", folder)
+
+
+def plot_loss_rate_by_discount(df: pd.DataFrame, result_text: str, folder: Path | None = None) -> Path:
+    """Share of order lines that lose money, per discount band."""
+    from salesinsight.stats_tests import DISCOUNT_BAND_ORDER
+
+    apply_style()
+    rate = df.groupby("discount_band")["is_loss"].mean().mul(100)
+    rate = rate.reindex([b for b in DISCOUNT_BAND_ORDER if b in rate.index])
+    fig, ax = plt.subplots(figsize=(9, 4.8))
+    colors = [LOSS_COLOR if v >= 50 else REVENUE_COLOR for v in rate]
+    bars = ax.bar(rate.index, rate.values, width=0.55, color=colors, edgecolor=SURFACE, linewidth=2)
+    for bar, v in zip(bars, rate.values):
+        ax.annotate(f"{v:.0f}%", (bar.get_x() + bar.get_width() / 2, v), xytext=(0, 4),
+                    textcoords="offset points", ha="center", fontsize=10, color=TEXT_PRIMARY)
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
+    ax.set_ylim(0, 105)
+    ax.tick_params(axis="x", length=0)
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(color=REVENUE_COLOR, label="Under half lose money"),
+                       Patch(color=LOSS_COLOR, label="Half or more lose money")], loc="upper left")
+    _title_with_note(ax, "Share of order lines that lose money, by discount level", result_text)
+    return save_figure(fig, "10_loss_rate_by_discount", folder)
+
+
+def plot_margin_by_region_box(df: pd.DataFrame, result_text: str, folder: Path | None = None) -> Path:
+    from salesinsight.stats_tests import line_margin
+
+    apply_style()
+    margin = line_margin(df)
+    regions = margin.groupby(df["region"]).median().sort_values(ascending=False).index.tolist()
+    groups = [margin[df["region"] == r].to_numpy() for r in regions]
+    fig, ax = plt.subplots(figsize=(9, 5))
+    _boxplot(ax, groups, regions, REVENUE_LIGHT)
+    ax.axhline(0, color=LOSS_COLOR, linewidth=1, linestyle="--")
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
+    ax.tick_params(axis="x", length=0)
+    _title_with_note(ax, "Profit margin of order lines by region", result_text)
+    return save_figure(fig, "10_margin_by_region_box", folder)
+
+
+def plot_aov_confidence(ci: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Average order value per year with its 95% confidence interval."""
+    apply_style()
+    fig, ax = plt.subplots(figsize=(9, 4.8))
+    years = ci["order_year"].astype(str)
+    yerr = [ci["avg_order_value"] - ci["ci_lower"], ci["ci_upper"] - ci["avg_order_value"]]
+    ax.errorbar(years, ci["avg_order_value"], yerr=yerr, fmt="o", color=REVENUE_COLOR, markersize=9,
+                markeredgecolor=SURFACE, markeredgewidth=2, ecolor=REVENUE_LIGHT, elinewidth=3, capsize=0)
+    for xv, v, lo, hi in zip(years, ci["avg_order_value"], ci["ci_lower"], ci["ci_upper"]):
+        ax.annotate(f"${v:,.0f}\n(${lo:,.0f}-${hi:,.0f})", (xv, hi), xytext=(0, 6),
+                    textcoords="offset points", ha="center", fontsize=9, color=TEXT_SECONDARY)
+    money_axis(ax)
+    ax.tick_params(axis="x", length=0)
+    ax.margins(y=0.3)
+    ax.set_title("Average order value per year with 95% confidence interval")
+    return save_figure(fig, "10_aov_confidence", folder)
