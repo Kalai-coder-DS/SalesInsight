@@ -1,0 +1,17 @@
+metric,key,value,display
+Total revenue,total_revenue,2296919.4883,"$2,296,919.49"
+Total profit,total_profit,286409.0805,"$286,409.08"
+Profit margin,profit_margin_pct,12.4693,12.47%
+Orders,total_orders,5009.0,"5,009"
+Customers,total_customers,793.0,793
+Products,total_products,1894.0,"1,894"
+Units sold,units_sold,37871.0,"37,871"
+Average order value,avg_order_value,458.5585,$458.56
+Units per order,avg_units_per_order,7.5606,7.56
+Revenue before discount,revenue_before_discount,2863533.08,"$2,863,533.08"
+Discount given away,discount_given,566613.5917,"$566,613.59"
+Effective discount rate,effective_discount_pct,19.7872,19.79%
+Average line discount,avg_line_discount_pct,15.6188,15.62%
+Loss-making order lines,loss_lines,1870.0,"1,870"
+Share of lines at a loss,loss_lines_pct,18.7131,18.71%
+Total loss on those lines,loss_amount,-156119.2269,"-$156,119.23"

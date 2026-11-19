@@ -1,0 +1,8 @@
+kpi,pandas,mysql,match
+total_revenue,2296919.49,2296919.49,True
+total_profit,286409.08,286409.08,True
+profit_margin_pct,12.47,12.47,True
+total_orders,5009.0,5009.0,True
+total_customers,793.0,793.0,True
+units_sold,37871.0,37871.0,True
+avg_order_value,458.56,458.56,True

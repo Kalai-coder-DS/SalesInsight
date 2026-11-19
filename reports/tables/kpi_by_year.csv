@@ -1,0 +1,5 @@
+order_year,revenue,profit,total_orders,total_customers,units_sold,discount_given,profit_margin_pct,avg_order_value,revenue_growth_pct,profit_growth_pct,total_orders_growth_pct
+2014,483966.13,49556.03,969,595,7579,137826.1,10.24,499.45,,,
+2015,470532.51,61618.6,1038,573,7979,108910.67,13.1,453.31,-2.78,24.34,7.12
+2016,609205.6,81795.17,1315,638,9837,137628.12,13.43,463.27,29.47,32.74,26.69
+2017,733215.26,93439.27,1687,693,12476,182248.69,12.74,434.63,20.36,14.24,28.29
