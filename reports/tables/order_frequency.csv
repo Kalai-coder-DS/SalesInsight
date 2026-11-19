@@ -1,0 +1,6 @@
+order_band,total_customers,revenue,share_of_customers_pct,share_of_revenue_pct
+1 order,12,5167.64,1.51,0.22
+2-3 orders,87,98923.9,10.97,4.31
+4-6 orders,337,809961.87,42.5,35.26
+7-9 orders,269,938680.03,33.92,40.87
+10+ orders,88,444186.05,11.1,19.34

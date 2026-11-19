@@ -361,19 +361,21 @@ def plot_subcategory_profit(subs: pd.DataFrame, folder: Path | None = None) -> P
     return save_figure(fig, "07_subcategory_profit", folder)
 
 
-def plot_pareto(par: pd.DataFrame, folder: Path | None = None) -> Path:
-    """Cumulative share of revenue vs share of products (80/20 check)."""
+def plot_pareto(par: pd.DataFrame, folder: Path | None = None, entity: str = "products",
+                name: str = "07_pareto_revenue") -> Path:
+    """Cumulative share of revenue vs share of products or customers (80/20 check)."""
     apply_style()
+    rank_col = "rank_pct" if "rank_pct" in par.columns else "product_rank_pct"
     fig, ax = plt.subplots(figsize=(8, 5))
-    x = [0, *par["product_rank_pct"]]
+    x = [0, *par[rank_col]]
     y = [0, *par["cum_share_pct"]]
     ax.plot(x, y, color=REVENUE_COLOR, linewidth=2.5)
     ax.plot([0, 100], [0, 100], color=BASELINE, linewidth=1, linestyle=":")
     n80 = int((par["cum_share_pct"] < 80).sum())
-    x80 = float(par.loc[n80, "product_rank_pct"])
+    x80 = float(par.loc[n80, rank_col])
     ax.axhline(80, color=TEXT_SECONDARY, linewidth=1, linestyle="--")
     ax.axvline(x80, color=TEXT_SECONDARY, linewidth=1, linestyle="--")
-    ax.annotate(f"{x80:.0f}% of products make\n80% of revenue", (x80, 80), xytext=(10, -40),
+    ax.annotate(f"{x80:.0f}% of {entity} make\n80% of revenue", (x80, 80), xytext=(10, -40),
                 textcoords="offset points", fontsize=10, color=TEXT_PRIMARY)
     ax.annotate("Equal share line", (70, 70), xytext=(4, -14), textcoords="offset points",
                 fontsize=9, color=TEXT_SECONDARY)
@@ -382,11 +384,11 @@ def plot_pareto(par: pd.DataFrame, folder: Path | None = None) -> Path:
     ax.yaxis.set_major_formatter(pct)
     ax.set_xlim(0, 100)
     ax.set_ylim(0, 102)
-    ax.set_xlabel("Share of products (biggest sellers first)")
+    ax.set_xlabel(f"Share of {entity} (biggest first)")
     ax.set_ylabel("Cumulative share of revenue")
     ax.grid(axis="x", visible=True)
-    ax.set_title("Pareto check: how concentrated is revenue?")
-    return save_figure(fig, "07_pareto_revenue", folder)
+    ax.set_title(f"Pareto check: how concentrated is revenue across {entity}?")
+    return save_figure(fig, name, folder)
 
 
 def plot_discount_margin_heatmap(matrix: pd.DataFrame, folder: Path | None = None) -> Path:
@@ -557,3 +559,87 @@ def plot_region_revenue_by_year(yearly: pd.DataFrame, folder: Path | None = None
     ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.08), ncols=len(regions))
     ax.set_title("Revenue by region and year")
     return save_figure(fig, "08_region_revenue_by_year", folder)
+
+
+# ---------------------------------------------------------------------------
+# Phase 9 charts: customers
+# ---------------------------------------------------------------------------
+CUSTOMER_COLOR = SERIES[2]      # green = customers (fixed slot, never reused for revenue/profit)
+
+
+def plot_segment_performance(seg: pd.DataFrame, folder: Path | None = None) -> Path:
+    return plot_revenue_profit_groups(seg, "segment", "Revenue and profit by customer segment",
+                                      "09_segment_performance", folder)
+
+
+def plot_order_frequency(freq: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Share of customers vs share of revenue for each order-count band."""
+    apply_style()
+    fig, ax = plt.subplots(figsize=(9, 5))
+    x = range(len(freq))
+    width = 0.36
+    pairs = [("share_of_customers_pct", CUSTOMER_COLOR, "Share of customers", -1),
+             ("share_of_revenue_pct", REVENUE_COLOR, "Share of revenue", 1)]
+    for col, color, label, side in pairs:
+        bars = ax.bar([i + side * width / 2 for i in x], freq[col], width, color=color, label=label,
+                      edgecolor=SURFACE, linewidth=2)
+        for bar, v in zip(bars, freq[col]):
+            ax.annotate(f"{v:.0f}%", (bar.get_x() + bar.get_width() / 2, v), xytext=(0, 4),
+                        textcoords="offset points", ha="center", fontsize=9, color=TEXT_SECONDARY)
+    ax.set_xticks(list(x), freq["order_band"])
+    ax.tick_params(axis="x", length=0)
+    ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
+    ax.legend(loc="upper right", ncols=2)
+    ax.margins(y=0.15)
+    ax.set_title("How many orders do customers place?")
+    return save_figure(fig, "09_order_frequency", folder)
+
+
+def plot_rfm_segments(summary: pd.DataFrame, folder: Path | None = None) -> Path:
+    """For each RFM segment: share of customers vs share of revenue (horizontal bars)."""
+    apply_style()
+    data = summary.iloc[::-1].reset_index(drop=True)
+    fig, ax = plt.subplots(figsize=(10, 0.75 * len(data) + 1.6))
+    y = range(len(data))
+    h = 0.36
+    pairs = [("share_of_customers_pct", CUSTOMER_COLOR, "Share of customers", 1),
+             ("share_of_revenue_pct", REVENUE_COLOR, "Share of revenue", -1)]
+    for col, color, label, side in pairs:
+        bars = ax.barh([i + side * h / 2 for i in y], data[col], h, color=color, label=label,
+                       edgecolor=SURFACE, linewidth=2)
+        for bar, v in zip(bars, data[col]):
+            ax.annotate(f"{v:.0f}%", (v, bar.get_y() + bar.get_height() / 2), xytext=(4, 0),
+                        textcoords="offset points", va="center", fontsize=9, color=TEXT_SECONDARY)
+    labels = [f"{s} ({n})" for s, n in zip(data["rfm_segment"], data["total_customers"])]
+    ax.set_yticks(list(y), labels)
+    ax.tick_params(axis="y", length=0)
+    ax.grid(axis="y", visible=False)
+    ax.grid(axis="x", visible=True)
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
+    ax.margins(x=0.1)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.06), ncols=2)
+    ax.set_title("RFM customer segments (number of customers in brackets)")
+    return save_figure(fig, "09_rfm_segments", folder)
+
+
+def plot_new_vs_returning(nvr: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Stacked bars: revenue from returning customers (bottom) and new customers (top)."""
+    apply_style()
+    fig, ax = plt.subplots(figsize=(9, 5))
+    years = nvr["order_year"].astype(str)
+    ax.bar(years, nvr["revenue_returning"], width=0.55, color=REVENUE_COLOR,
+           label="Returning customers", edgecolor=SURFACE, linewidth=2)
+    ax.bar(years, nvr["revenue_new"], width=0.55, bottom=nvr["revenue_returning"],
+           color=CUSTOMER_COLOR, label="New customers", edgecolor=SURFACE, linewidth=2)
+    for i, (xv, ret, new, share) in enumerate(zip(years, nvr["revenue_returning"], nvr["revenue_new"],
+                                                  nvr["returning_revenue_share_pct"])):
+        # In the first year of data every customer is "new" by definition.
+        text = "first year of data" if i == 0 else f"{share:.0f}% returning"
+        ax.annotate(text, (xv, ret + new), xytext=(0, 4),
+                    textcoords="offset points", ha="center", fontsize=9, color=TEXT_SECONDARY)
+    money_axis(ax)
+    ax.tick_params(axis="x", length=0)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.08), ncols=2)
+    ax.margins(y=0.15)
+    ax.set_title("Revenue from new vs returning customers")
+    return save_figure(fig, "09_new_vs_returning", folder)

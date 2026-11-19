@@ -70,3 +70,16 @@ def test_phase8_charts(sales_data, tmp_path):
         viz.plot_region_revenue_by_year(rg.region_yearly(sales_data), folder=tmp_path),
     ]
     assert all(p.exists() and p.stat().st_size > 10_000 for p in paths)
+
+
+def test_phase9_charts(sales_data, tmp_path):
+    from salesinsight import customers as cu
+    customers = cu.customer_table(sales_data)
+    paths = [
+        viz.plot_segment_performance(cu.segment_performance(sales_data), folder=tmp_path),
+        viz.plot_order_frequency(cu.order_frequency(customers), folder=tmp_path),
+        viz.plot_pareto(cu.customer_pareto(customers), folder=tmp_path, entity="customers", name="p"),
+        viz.plot_rfm_segments(cu.rfm_summary(cu.rfm_table(customers)), folder=tmp_path),
+        viz.plot_new_vs_returning(cu.new_vs_returning(sales_data), folder=tmp_path),
+    ]
+    assert all(p.exists() and p.stat().st_size > 10_000 for p in paths)

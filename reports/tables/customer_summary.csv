@@ -1,0 +1,22 @@
+metric,value
+total_customers,793
+repeat_customers,781
+repeat_rate_pct,98.49
+avg_orders_per_customer,6.32
+median_days_between_orders,129.0
+avg_revenue_per_customer,2896.49
+median_revenue_per_customer,2256.39
+top10pct_customers_revenue_share,30.88
+top20pct_customers_revenue_share,48.14
+top_customer,Sean Miller
+top_customer_revenue,25043.05
+loss_making_customers,155
+top_segment_by_revenue,Consumer
+top_segment_revenue_share_pct,50.56
+best_margin_segment,Home Office
+champions_customers,111
+champions_revenue_share_pct,25.23
+at_risk_customers,135
+at_risk_revenue_share_pct,20.64
+last_year_retention_pct,87.46
+last_year_returning_revenue_share_pct,98.98

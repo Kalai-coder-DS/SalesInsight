@@ -1,0 +1,4 @@
+segment,revenue,units_sold,profit,total_orders,order_lines,loss_lines,discount_given,profit_margin_pct,effective_discount_pct,loss_lines_pct,share_of_revenue_pct,total_customers,avg_order_value,orders_per_customer,revenue_per_customer,share_of_profit_pct
+Consumer,1161401.34,19521,134119.21,2586,5191,1003,295070.4,11.55,20.26,19.32,50.56,409,449.11,6.32,2839.61,46.83
+Corporate,706146.37,11608,91979.13,1514,3020,556,157849.3,13.03,18.27,18.41,30.74,236,466.41,6.42,2992.15,32.11
+Home Office,429371.78,6742,60310.74,909,1782,311,113693.88,14.05,20.94,17.45,18.69,148,472.36,6.14,2901.16,21.06

@@ -1,0 +1,5 @@
+order_year,active_customers,new_customers,returning_customers,revenue_new,revenue_returning,retention_pct,returning_revenue_share_pct
+2014,595,595,0,483966.13,0.0,,0.0
+2015,573,136,437,105388.5,365144.01,73.45,77.6
+2016,638,51,587,54803.62,554401.98,78.88,91.0
+2017,693,11,682,7511.8,725703.45,87.46,98.98
