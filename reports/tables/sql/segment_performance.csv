@@ -1,0 +1,4 @@
+segment,total_customers,total_orders,revenue,profit,avg_order_value,orders_per_customer
+Consumer,409,2586,1161401.35,134119.21,449.11,6.32
+Corporate,236,1514,706146.37,91979.13,466.41,6.42
+Home Office,148,909,429371.78,60310.74,472.36,6.14

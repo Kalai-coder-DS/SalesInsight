@@ -68,3 +68,28 @@ def clean_sample(raw_csv) -> pd.DataFrame:
     """The sample loaded through the real loader (valid data, all checks should pass)."""
     from salesinsight.data_loader import load_raw_data
     return load_raw_data(raw_csv)
+
+
+@pytest.fixture
+def sales_data(clean_sample) -> pd.DataFrame:
+    """The sample after cleaning and feature engineering (like sales_clean.csv)."""
+    from salesinsight.cleaning import clean_data
+    from salesinsight.features import add_all_features
+    clean, _ = clean_data(clean_sample)
+    return add_all_features(clean)
+
+
+@pytest.fixture
+def sales_data_with_repeat(sales_data) -> pd.DataFrame:
+    """Sample plus a second order from Claire Gute, so one customer is a repeat buyer."""
+    extra = sales_data.iloc[[0]].copy()
+    extra["row_id"] = 100
+    extra["order_id"] = "CA-2017-999999"
+    extra["order_date"] = pd.Timestamp("2017-03-01")
+    extra["ship_date"] = pd.Timestamp("2017-03-04")
+    from salesinsight.features import add_all_features
+    extra = add_all_features(extra.drop(columns=[
+        "order_year", "order_quarter", "order_month", "order_month_name", "year_month",
+        "order_weekday", "ship_days", "profit_margin", "unit_price", "gross_sales",
+        "discount_amount", "is_loss", "discount_band"]))
+    return pd.concat([sales_data, extra], ignore_index=True)

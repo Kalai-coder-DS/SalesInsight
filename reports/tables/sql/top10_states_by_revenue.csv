@@ -1,0 +1,11 @@
+state,region,revenue,profit,profit_margin_pct
+California,West,457687.63,76381.39,16.69
+New York,East,310876.27,74038.55,23.82
+Texas,Central,170188.05,-25729.36,-15.12
+Washington,West,138641.27,33402.65,24.09
+Pennsylvania,East,116511.91,-15559.96,-13.35
+Florida,South,89473.71,-3399.3,-3.8
+Illinois,Central,80166.1,-12607.89,-15.73
+Ohio,East,77976.76,-16959.32,-21.75
+Michigan,Central,76269.61,24463.19,32.07
+Virginia,South,70636.72,18597.95,26.33
