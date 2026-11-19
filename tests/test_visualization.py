@@ -56,3 +56,17 @@ def test_phase7_charts(sales_data, tmp_path):
         viz.plot_discount_margin_heatmap(pr.discount_margin_matrix(sales_data), folder=tmp_path),
     ]
     assert all(p.exists() and p.stat().st_size > 10_000 for p in paths)
+
+
+def test_phase8_charts(sales_data, tmp_path):
+    from salesinsight import regions as rg
+    states = rg.state_performance(sales_data)
+    paths = [
+        viz.plot_region_performance(rg.region_performance(sales_data), folder=tmp_path),
+        viz.plot_top_states_revenue(rg.top_states(states), folder=tmp_path),
+        viz.plot_state_profit_extremes(states, folder=tmp_path),
+        viz.plot_region_category_heatmap(rg.region_category_matrix(sales_data), folder=tmp_path),
+        viz.plot_state_discount_vs_margin(states, -0.5, min_orders=1, folder=tmp_path),
+        viz.plot_region_revenue_by_year(rg.region_yearly(sales_data), folder=tmp_path),
+    ]
+    assert all(p.exists() and p.stat().st_size > 10_000 for p in paths)

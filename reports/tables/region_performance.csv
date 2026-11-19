@@ -1,0 +1,5 @@
+region,revenue,units_sold,profit,total_orders,order_lines,loss_lines,discount_given,profit_margin_pct,effective_discount_pct,loss_lines_pct,share_of_revenue_pct,total_customers,revenue_per_customer,share_of_profit_pct
+West,725457.82,12266,108418.45,1611,3203,318,133598.99,14.94,15.55,9.93,31.58,686,1057.52,37.85
+East,678499.87,10616,91534.84,1401,2847,552,163919.1,13.49,19.46,19.39,29.54,674,1006.68,31.96
+Central,501239.89,8780,39706.36,1175,2323,741,163217.89,7.92,24.56,31.9,21.82,629,796.88,13.86
+South,391721.9,6209,46749.43,822,1620,259,105877.62,11.93,21.28,15.99,17.05,512,765.08,16.32

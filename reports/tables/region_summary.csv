@@ -1,0 +1,21 @@
+metric,value
+regions,4
+states,49
+top_region_by_revenue,West
+top_region_revenue_share_pct,31.58
+best_margin_region,West
+best_margin_region_pct,14.94
+worst_margin_region,Central
+worst_margin_region_pct,7.92
+fastest_growing_region,West
+fastest_growing_region_cagr_pct,19.15
+top_state_by_revenue,California
+top_state_revenue,457687.63
+top_state_by_profit,California
+top_state_profit,76381.39
+worst_state_by_profit,Texas
+worst_state_profit,-25729.36
+loss_making_states,10
+loss_making_states_total,-98234.68
+loss_making_states_list,"Texas, Ohio, Pennsylvania, Illinois, North Carolina, Colorado, Tennessee, Arizona, Florida, Oregon"
+state_discount_margin_correlation,-0.98

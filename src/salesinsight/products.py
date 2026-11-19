@@ -39,6 +39,10 @@ def _performance(df: pd.DataFrame, by: list[str]) -> pd.DataFrame:
     return out.drop(columns=["gross_sales"])
 
 
+# Public name, so other modules (regions, customers) can reuse the same table.
+performance_table = _performance
+
+
 # ---------------------------------------------------------------------------
 # Q3: products
 # ---------------------------------------------------------------------------

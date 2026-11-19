@@ -303,15 +303,16 @@ def plot_top_products(top: pd.DataFrame, value: str = "revenue", folder: Path | 
     return save_figure(fig, f"07_top10_products_by_{value}", folder)
 
 
-def plot_category_performance(cats: pd.DataFrame, folder: Path | None = None) -> Path:
-    """Revenue and profit per category, with the margin written under each name."""
+def plot_revenue_profit_groups(table: pd.DataFrame, label_col: str, title: str, name: str,
+                               folder: Path | None = None) -> Path:
+    """Revenue and profit bars per group, with the margin written under each name."""
     apply_style()
-    fig, ax = plt.subplots(figsize=(9, 5))
-    x = range(len(cats))
+    fig, ax = plt.subplots(figsize=(max(8, 2.2 * len(table) + 2), 5))
+    x = range(len(table))
     width = 0.36
-    bars_r = ax.bar([i - width / 2 for i in x], cats["revenue"], width, color=REVENUE_COLOR,
+    bars_r = ax.bar([i - width / 2 for i in x], table["revenue"], width, color=REVENUE_COLOR,
                     label="Revenue", edgecolor=SURFACE, linewidth=2)
-    bars_p = ax.bar([i + width / 2 for i in x], cats["profit"], width, color=PROFIT_COLOR,
+    bars_p = ax.bar([i + width / 2 for i in x], table["profit"], width, color=PROFIT_COLOR,
                     label="Profit", edgecolor=SURFACE, linewidth=2)
     for bars in (bars_r, bars_p):
         for bar in bars:
@@ -319,15 +320,20 @@ def plot_category_performance(cats: pd.DataFrame, folder: Path | None = None) ->
             ax.annotate(short_money(h), (bar.get_x() + bar.get_width() / 2, h),
                         xytext=(0, 4 if h >= 0 else -12), textcoords="offset points",
                         ha="center", fontsize=9, color=TEXT_SECONDARY)
-    labels = [f"{c}\nmargin {m:.1f}%" for c, m in zip(cats["category"], cats["profit_margin_pct"])]
+    labels = [f"{c}\nmargin {m:.1f}%" for c, m in zip(table[label_col], table["profit_margin_pct"])]
     ax.set_xticks(list(x), labels)
     ax.tick_params(axis="x", length=0)
     ax.axhline(0, color=BASELINE, linewidth=1)
     money_axis(ax)
     ax.legend(loc="upper right", ncols=2)
     ax.margins(y=0.12)
-    ax.set_title("Revenue and profit by category")
-    return save_figure(fig, "07_category_performance", folder)
+    ax.set_title(title)
+    return save_figure(fig, name, folder)
+
+
+def plot_category_performance(cats: pd.DataFrame, folder: Path | None = None) -> Path:
+    return plot_revenue_profit_groups(cats, "category", "Revenue and profit by category",
+                                      "07_category_performance", folder)
 
 
 def plot_subcategory_profit(subs: pd.DataFrame, folder: Path | None = None) -> Path:
@@ -385,6 +391,13 @@ def plot_pareto(par: pd.DataFrame, folder: Path | None = None) -> Path:
 
 def plot_discount_margin_heatmap(matrix: pd.DataFrame, folder: Path | None = None) -> Path:
     """Margin % by sub-category and discount band; red = loss, blue = profit."""
+    return plot_diverging_heatmap(matrix, "Profit margin by sub-category and discount level",
+                                  "07_discount_margin_heatmap", folder)
+
+
+def plot_diverging_heatmap(matrix: pd.DataFrame, title: str, name: str,
+                           folder: Path | None = None) -> Path:
+    """Heatmap of % values that can be negative: red = loss, grey = 0, blue = profit."""
     from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
 
     apply_style()
@@ -392,7 +405,7 @@ def plot_discount_margin_heatmap(matrix: pd.DataFrame, folder: Path | None = Non
     values = matrix.to_numpy(dtype=float)
     limit = float(pd.Series(values.ravel()).abs().quantile(0.95)) or 1.0
     norm = TwoSlopeNorm(vmin=-limit, vcenter=0, vmax=limit)
-    fig, ax = plt.subplots(figsize=(8.5, 0.42 * len(matrix) + 1.8))
+    fig, ax = plt.subplots(figsize=(max(6, 1.6 * matrix.shape[1] + 2.5), 0.42 * len(matrix) + 1.8))
     image = ax.imshow(values, cmap=cmap, norm=norm, aspect="auto")
     for r in range(values.shape[0]):
         for c in range(values.shape[1]):
@@ -414,9 +427,133 @@ def plot_discount_margin_heatmap(matrix: pd.DataFrame, folder: Path | None = Non
     ax.set_yticks([y - 0.5 for y in range(1, values.shape[0])], minor=True)
     ax.grid(which="minor", color=SURFACE, linewidth=3)
     ax.tick_params(which="minor", length=0)
-    ax.set_title("Profit margin by sub-category and discount level", pad=28)
+    ax.set_title(title, pad=28)
     cbar = fig.colorbar(image, ax=ax, fraction=0.04, pad=0.02)
     cbar.outline.set_visible(False)
     cbar.ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
     cbar.ax.tick_params(colors=TEXT_SECONDARY, length=0)
-    return save_figure(fig, "07_discount_margin_heatmap", folder)
+    return save_figure(fig, name, folder)
+
+
+# ---------------------------------------------------------------------------
+# Phase 8 charts: regions and states
+# ---------------------------------------------------------------------------
+def plot_region_performance(regions: pd.DataFrame, folder: Path | None = None) -> Path:
+    return plot_revenue_profit_groups(regions, "region", "Revenue and profit by region",
+                                      "08_region_performance", folder)
+
+
+def plot_top_states_revenue(top: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Top states by revenue, horizontal bars, margin shown next to each value."""
+    apply_style()
+    data = top.iloc[::-1]
+    fig, ax = plt.subplots(figsize=(10, 0.5 * len(data) + 1.4))
+    bars = ax.barh(data["state"], data["revenue"], height=0.6, color=REVENUE_COLOR,
+                   edgecolor=SURFACE, linewidth=2)
+    for bar, rev, m in zip(bars, data["revenue"], data["profit_margin_pct"]):
+        ax.annotate(f"{short_money(rev)}  (margin {m:.1f}%)", (rev, bar.get_y() + bar.get_height() / 2),
+                    xytext=(4, 0), textcoords="offset points", va="center", fontsize=9,
+                    color=TEXT_SECONDARY)
+    ax.grid(axis="y", visible=False)
+    ax.grid(axis="x", visible=True)
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: axis_money(v)))
+    ax.tick_params(axis="y", length=0)
+    ax.margins(x=0.28)
+    ax.set_title(f"Top {len(data)} states by revenue")
+    return save_figure(fig, "08_top10_states_by_revenue", folder)
+
+
+def plot_state_profit_extremes(states: pd.DataFrame, n: int = 10, folder: Path | None = None) -> Path:
+    """The n most profitable and n least profitable states (losses in red)."""
+    apply_style()
+    best = states.nlargest(n, "profit")
+    worst = states.nsmallest(n, "profit")
+    data = pd.concat([best, worst]).drop_duplicates("state").sort_values("profit")
+    colors = [LOSS_COLOR if v < 0 else GAIN_COLOR for v in data["profit"]]
+    fig, ax = plt.subplots(figsize=(10, 0.4 * len(data) + 1.6))
+    bars = ax.barh(data["state"], data["profit"], height=0.65, color=colors,
+                   edgecolor=SURFACE, linewidth=2)
+    for bar, v in zip(bars, data["profit"]):
+        ax.annotate(short_money(v), (v, bar.get_y() + bar.get_height() / 2),
+                    xytext=(4 if v >= 0 else -4, 0), textcoords="offset points", va="center",
+                    ha="left" if v >= 0 else "right", fontsize=9, color=TEXT_SECONDARY)
+    ax.axvline(0, color=TEXT_SECONDARY, linewidth=1)
+    ax.grid(axis="y", visible=False)
+    ax.grid(axis="x", visible=True)
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: axis_money(v)))
+    ax.tick_params(axis="y", length=0)
+    ax.margins(x=0.15)
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(color=GAIN_COLOR, label="Profit"), Patch(color=LOSS_COLOR, label="Loss")],
+              loc="lower right")
+    ax.set_title(f"Most and least profitable states (top {n} and bottom {n})")
+    return save_figure(fig, "08_state_profit_extremes", folder)
+
+
+def plot_region_category_heatmap(matrix: pd.DataFrame, folder: Path | None = None) -> Path:
+    return plot_diverging_heatmap(matrix, "Profit margin by region and category",
+                                  "08_region_category_margin", folder)
+
+
+def plot_state_discount_vs_margin(states: pd.DataFrame, correlation: float, min_orders: int = 10,
+                                  label_n: int = 5, folder: Path | None = None) -> Path:
+    """Each dot is a state: effective discount (x) vs profit margin (y)."""
+    apply_style()
+    s = states[states["total_orders"] >= min_orders]
+    fig, ax = plt.subplots(figsize=(9, 5.5))
+    colors = [LOSS_COLOR if v < 0 else GAIN_COLOR for v in s["profit_margin_pct"]]
+    ax.scatter(s["effective_discount_pct"], s["profit_margin_pct"], s=70, c=colors,
+               edgecolors=SURFACE, linewidths=2, zorder=3)
+    ax.axhline(0, color=TEXT_SECONDARY, linewidth=1)
+    # Label the worst states. If a label would overlap one already placed,
+    # move it down step by step until it is clear.
+    fig.canvas.draw()
+    renderer = fig.canvas.get_renderer()
+    placed = []
+    worst = s.nsmallest(label_n, "profit_margin_pct").sort_values("profit_margin_pct", ascending=False)
+    for _, row in worst.iterrows():
+        point = (row["effective_discount_pct"], row["profit_margin_pct"])
+        for step in range(12):
+            leader = dict(arrowstyle="-", color=BASELINE, linewidth=0.8) if step else None
+            label = ax.annotate(row["state"], point, xytext=(7, -step * 11), textcoords="offset points",
+                                va="center", fontsize=9, color=TEXT_PRIMARY, arrowprops=leader)
+            box = label.get_window_extent(renderer)
+            if not any(box.overlaps(other) for other in placed):
+                placed.append(box)
+                break
+            label.remove()
+    ax.annotate(f"Correlation: {correlation:.2f}", xy=(0.98, 0.95), xycoords="axes fraction",
+                ha="right", va="top", fontsize=10, color=TEXT_PRIMARY)
+    pct = mticker.FuncFormatter(lambda v, _: f"{v:.0f}%")
+    ax.xaxis.set_major_formatter(pct)
+    ax.yaxis.set_major_formatter(pct)
+    ax.grid(axis="x", visible=True)
+    ax.set_xlabel("Effective discount rate")
+    ax.set_ylabel("Profit margin")
+    from matplotlib.lines import Line2D
+    ax.legend(handles=[Line2D([], [], marker="o", linestyle="", color=GAIN_COLOR, label="Profitable state"),
+                       Line2D([], [], marker="o", linestyle="", color=LOSS_COLOR, label="Loss-making state")],
+              loc="lower left")
+    ax.set_title(f"States: discount vs profit margin (states with {min_orders}+ orders)")
+    return save_figure(fig, "08_state_discount_vs_margin", folder)
+
+
+def plot_region_revenue_by_year(yearly: pd.DataFrame, folder: Path | None = None) -> Path:
+    """One line per region; colour follows the region, labels at the line ends."""
+    apply_style()
+    fig, ax = plt.subplots(figsize=(9, 5))
+    regions = sorted(yearly["region"].unique())
+    for i, region in enumerate(regions):
+        g = yearly[yearly["region"] == region].sort_values("order_year")
+        color = SERIES[i % len(SERIES)]
+        ax.plot(g["order_year"].astype(str), g["revenue"], color=color, marker="o", markersize=8,
+                markeredgecolor=SURFACE, markeredgewidth=2, label=region)
+        ax.annotate(region, (len(g) - 1, g["revenue"].iloc[-1]), xytext=(10, 0),
+                    textcoords="offset points", va="center", fontsize=9, color=TEXT_PRIMARY)
+    money_axis(ax)
+    ax.set_ylim(bottom=0)
+    ax.tick_params(axis="x", length=0)
+    ax.margins(x=0.12)
+    ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.08), ncols=len(regions))
+    ax.set_title("Revenue by region and year")
+    return save_figure(fig, "08_region_revenue_by_year", folder)
