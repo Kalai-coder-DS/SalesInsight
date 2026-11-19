@@ -1,0 +1,15 @@
+# Streamlit settings for the SalesInsight web app (read automatically from the project root).
+
+[theme]
+base = "dark"
+primaryColor = "#6366f1"
+backgroundColor = "#0b1020"
+secondaryBackgroundColor = "#151c33"
+textColor = "#e5e7eb"
+font = "sans serif"
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"

@@ -18,6 +18,10 @@ SQLAlchemy>=2.0,<3
 PyMySQL>=1.1
 cryptography>=42      # needed by PyMySQL to log in to MySQL 8 (caching_sha2_password)
 
+# Web application (Phase 13)
+streamlit>=1.50
+plotly>=5.24
+
 # Configuration
 python-dotenv>=1.0
 
