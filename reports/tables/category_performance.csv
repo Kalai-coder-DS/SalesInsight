@@ -1,0 +1,4 @@
+category,revenue,units_sold,profit,total_orders,order_lines,loss_lines,discount_given,profit_margin_pct,effective_discount_pct,loss_lines_pct,share_of_revenue_pct,share_of_profit_pct
+Technology,836154.03,6939,145454.95,1544,1847,271,202258.09,17.4,19.48,14.67,36.4,50.79
+Furniture,741718.42,8026,18463.33,1764,2120,713,185119.01,2.49,19.97,33.63,32.29,6.45
+Office Supplies,719047.03,22906,122490.8,3742,6026,886,179236.5,17.04,19.95,14.7,31.3,42.77

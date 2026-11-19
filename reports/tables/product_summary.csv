@@ -1,0 +1,21 @@
+metric,value
+products_total,1894
+top_product_by_revenue,Canon imageCLASS 2200 Advanced Copier
+top_product_revenue,61599.82
+worst_product_by_profit,Cubify CubeX 3D Printer Double Head Print
+worst_product_profit,-8879.97
+products_for_80pct_revenue,423
+products_for_80pct_revenue_pct,22.33
+top20pct_products_revenue_share,77.32
+loss_making_products,306
+loss_making_products_total,-77092.02
+top_category_by_revenue,Technology
+best_margin_category,Technology
+best_margin_category_pct,17.4
+best_subcategory_by_profit,Copiers
+best_subcategory_profit,55617.82
+worst_subcategory_by_profit,Tables
+worst_subcategory_profit,-17725.48
+loss_subcategories,"Supplies, Bookcases, Tables"
+margin_no_discount_pct,29.51
+margin_over_40pct_discount_pct,-77.4

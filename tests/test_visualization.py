@@ -42,3 +42,17 @@ def test_phase6_charts(sales_data, tmp_path):
         viz.plot_weekday_orders(t.weekday_sales(sales_data), folder=tmp_path),
     ]
     assert all(p.exists() and p.stat().st_size > 10_000 for p in paths)
+
+
+def test_phase7_charts(sales_data, tmp_path):
+    from salesinsight import products as pr
+    perf = pr.product_performance(sales_data)
+    paths = [
+        viz.plot_top_products(pr.top_products(perf, "revenue"), "revenue", folder=tmp_path),
+        viz.plot_top_products(pr.top_products(perf, "profit"), "profit", folder=tmp_path),
+        viz.plot_category_performance(pr.category_performance(sales_data), folder=tmp_path),
+        viz.plot_subcategory_profit(pr.subcategory_performance(sales_data), folder=tmp_path),
+        viz.plot_pareto(pr.pareto(perf), folder=tmp_path),
+        viz.plot_discount_margin_heatmap(pr.discount_margin_matrix(sales_data), folder=tmp_path),
+    ]
+    assert all(p.exists() and p.stat().st_size > 10_000 for p in paths)

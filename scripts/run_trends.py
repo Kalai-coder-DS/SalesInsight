@@ -49,7 +49,9 @@ def main() -> int:
         "revenue_by_month_year": matrix.reset_index(),
         "seasonality": season,
         "weekday_sales": weekday,
-        "trend_summary": pd.DataFrame([summary]).T.reset_index().set_axis(["metric", "value"], axis=1),
+        "trend_summary": pd.DataFrame(
+            [(k, round(v, 2) if isinstance(v, float) else v) for k, v in summary.items()],
+            columns=["metric", "value"]),
     }
     for name, table in tables.items():
         table.round(2).to_csv(config.TABLES_DIR / f"{name}.csv", index=False)

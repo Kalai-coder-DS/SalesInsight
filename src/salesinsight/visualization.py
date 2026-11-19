@@ -267,3 +267,156 @@ def plot_weekday_orders(weekday: pd.DataFrame, folder: Path | None = None) -> Pa
     ax.set_title("Share of orders by weekday")
     ax.margins(y=0.12)
     return save_figure(fig, "06_weekday_orders", folder)
+
+
+# ---------------------------------------------------------------------------
+# Phase 7 charts: products and categories
+# ---------------------------------------------------------------------------
+# Diverging ramp for values that can be negative or positive (e.g. margin %):
+# red = loss, grey = break-even, blue = profit. Equal steps on each side.
+DIVERGING = ["#a32c2c", "#e34948", "#f2a5a4", "#f0efec", "#9ec5f4", "#3987e5", "#184f95"]
+LOSS_COLOR = "#e34948"
+GAIN_COLOR = "#3987e5"
+
+
+def _shorten(text: str, limit: int = 45) -> str:
+    return text if len(text) <= limit else text[: limit - 1].rstrip() + "…"
+
+
+def plot_top_products(top: pd.DataFrame, value: str = "revenue", folder: Path | None = None) -> Path:
+    """Horizontal bars of the top products (biggest at the top)."""
+    apply_style()
+    data = top.iloc[::-1]
+    fig, ax = plt.subplots(figsize=(10, 0.5 * len(data) + 1.4))
+    bars = ax.barh([_shorten(n) for n in data["product_name"]], data[value], height=0.6,
+                   color=REVENUE_COLOR if value == "revenue" else PROFIT_COLOR,
+                   edgecolor=SURFACE, linewidth=2)
+    for bar, v in zip(bars, data[value]):
+        ax.annotate(short_money(v), (v, bar.get_y() + bar.get_height() / 2), xytext=(4, 0),
+                    textcoords="offset points", va="center", fontsize=9, color=TEXT_SECONDARY)
+    ax.grid(axis="y", visible=False)
+    ax.grid(axis="x", visible=True)
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: axis_money(v)))
+    ax.tick_params(axis="y", length=0)
+    ax.margins(x=0.12)
+    ax.set_title(f"Top {len(data)} products by {value}")
+    return save_figure(fig, f"07_top10_products_by_{value}", folder)
+
+
+def plot_category_performance(cats: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Revenue and profit per category, with the margin written under each name."""
+    apply_style()
+    fig, ax = plt.subplots(figsize=(9, 5))
+    x = range(len(cats))
+    width = 0.36
+    bars_r = ax.bar([i - width / 2 for i in x], cats["revenue"], width, color=REVENUE_COLOR,
+                    label="Revenue", edgecolor=SURFACE, linewidth=2)
+    bars_p = ax.bar([i + width / 2 for i in x], cats["profit"], width, color=PROFIT_COLOR,
+                    label="Profit", edgecolor=SURFACE, linewidth=2)
+    for bars in (bars_r, bars_p):
+        for bar in bars:
+            h = bar.get_height()
+            ax.annotate(short_money(h), (bar.get_x() + bar.get_width() / 2, h),
+                        xytext=(0, 4 if h >= 0 else -12), textcoords="offset points",
+                        ha="center", fontsize=9, color=TEXT_SECONDARY)
+    labels = [f"{c}\nmargin {m:.1f}%" for c, m in zip(cats["category"], cats["profit_margin_pct"])]
+    ax.set_xticks(list(x), labels)
+    ax.tick_params(axis="x", length=0)
+    ax.axhline(0, color=BASELINE, linewidth=1)
+    money_axis(ax)
+    ax.legend(loc="upper right", ncols=2)
+    ax.margins(y=0.12)
+    ax.set_title("Revenue and profit by category")
+    return save_figure(fig, "07_category_performance", folder)
+
+
+def plot_subcategory_profit(subs: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Profit per sub-category, sorted; losses in red, profits in blue."""
+    apply_style()
+    data = subs.sort_values("profit")
+    colors = [LOSS_COLOR if v < 0 else GAIN_COLOR for v in data["profit"]]
+    fig, ax = plt.subplots(figsize=(10, 0.42 * len(data) + 1.6))
+    bars = ax.barh(data["sub_category"], data["profit"], height=0.65, color=colors,
+                   edgecolor=SURFACE, linewidth=2)
+    for bar, v in zip(bars, data["profit"]):
+        ax.annotate(short_money(v), (v, bar.get_y() + bar.get_height() / 2),
+                    xytext=(4 if v >= 0 else -4, 0), textcoords="offset points", va="center",
+                    ha="left" if v >= 0 else "right", fontsize=9, color=TEXT_SECONDARY)
+    ax.axvline(0, color=TEXT_SECONDARY, linewidth=1)
+    ax.grid(axis="y", visible=False)
+    ax.grid(axis="x", visible=True)
+    ax.xaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: axis_money(v)))
+    ax.tick_params(axis="y", length=0)
+    ax.margins(x=0.15)
+    from matplotlib.patches import Patch
+    ax.legend(handles=[Patch(color=GAIN_COLOR, label="Profit"), Patch(color=LOSS_COLOR, label="Loss")],
+              loc="lower right")
+    ax.set_title("Total profit by sub-category")
+    return save_figure(fig, "07_subcategory_profit", folder)
+
+
+def plot_pareto(par: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Cumulative share of revenue vs share of products (80/20 check)."""
+    apply_style()
+    fig, ax = plt.subplots(figsize=(8, 5))
+    x = [0, *par["product_rank_pct"]]
+    y = [0, *par["cum_share_pct"]]
+    ax.plot(x, y, color=REVENUE_COLOR, linewidth=2.5)
+    ax.plot([0, 100], [0, 100], color=BASELINE, linewidth=1, linestyle=":")
+    n80 = int((par["cum_share_pct"] < 80).sum())
+    x80 = float(par.loc[n80, "product_rank_pct"])
+    ax.axhline(80, color=TEXT_SECONDARY, linewidth=1, linestyle="--")
+    ax.axvline(x80, color=TEXT_SECONDARY, linewidth=1, linestyle="--")
+    ax.annotate(f"{x80:.0f}% of products make\n80% of revenue", (x80, 80), xytext=(10, -40),
+                textcoords="offset points", fontsize=10, color=TEXT_PRIMARY)
+    ax.annotate("Equal share line", (70, 70), xytext=(4, -14), textcoords="offset points",
+                fontsize=9, color=TEXT_SECONDARY)
+    pct = mticker.FuncFormatter(lambda v, _: f"{v:.0f}%")
+    ax.xaxis.set_major_formatter(pct)
+    ax.yaxis.set_major_formatter(pct)
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 102)
+    ax.set_xlabel("Share of products (biggest sellers first)")
+    ax.set_ylabel("Cumulative share of revenue")
+    ax.grid(axis="x", visible=True)
+    ax.set_title("Pareto check: how concentrated is revenue?")
+    return save_figure(fig, "07_pareto_revenue", folder)
+
+
+def plot_discount_margin_heatmap(matrix: pd.DataFrame, folder: Path | None = None) -> Path:
+    """Margin % by sub-category and discount band; red = loss, blue = profit."""
+    from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm
+
+    apply_style()
+    cmap = LinearSegmentedColormap.from_list("diverging", DIVERGING).with_extremes(bad=SURFACE)
+    values = matrix.to_numpy(dtype=float)
+    limit = float(pd.Series(values.ravel()).abs().quantile(0.95)) or 1.0
+    norm = TwoSlopeNorm(vmin=-limit, vcenter=0, vmax=limit)
+    fig, ax = plt.subplots(figsize=(8.5, 0.42 * len(matrix) + 1.8))
+    image = ax.imshow(values, cmap=cmap, norm=norm, aspect="auto")
+    for r in range(values.shape[0]):
+        for c in range(values.shape[1]):
+            v = values[r, c]
+            if pd.isna(v):
+                ax.text(c, r, "–", ha="center", va="center", fontsize=9, color=TEXT_SECONDARY)
+                continue
+            strong = abs(v) > 0.6 * limit
+            ax.text(c, r, f"{v:.0f}%", ha="center", va="center", fontsize=9,
+                    color="white" if strong else TEXT_PRIMARY)
+    ax.set_xticks(range(len(matrix.columns)), matrix.columns)
+    ax.set_yticks(range(len(matrix.index)), matrix.index)
+    ax.xaxis.tick_top()
+    ax.tick_params(length=0)
+    ax.grid(False)
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+    ax.set_xticks([x - 0.5 for x in range(1, values.shape[1])], minor=True)
+    ax.set_yticks([y - 0.5 for y in range(1, values.shape[0])], minor=True)
+    ax.grid(which="minor", color=SURFACE, linewidth=3)
+    ax.tick_params(which="minor", length=0)
+    ax.set_title("Profit margin by sub-category and discount level", pad=28)
+    cbar = fig.colorbar(image, ax=ax, fraction=0.04, pad=0.02)
+    cbar.outline.set_visible(False)
+    cbar.ax.yaxis.set_major_formatter(mticker.FuncFormatter(lambda v, _: f"{v:.0f}%"))
+    cbar.ax.tick_params(colors=TEXT_SECONDARY, length=0)
+    return save_figure(fig, "07_discount_margin_heatmap", folder)

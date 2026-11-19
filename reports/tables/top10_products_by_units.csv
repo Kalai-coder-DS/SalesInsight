@@ -1,0 +1,11 @@
+product_key,product_name,category,sub_category,revenue,units_sold,profit,total_orders,order_lines,loss_lines,discount_given,profit_margin_pct,effective_discount_pct,loss_lines_pct,share_of_revenue_pct
+P00705,GBC Premium Transparent Covers with Diagonal Lined Pattern,Office Supplies,Binders,780.46,67,49.51,14,14,5,625.2,6.34,44.48,35.71,0.03
+P00096,"Situations Contoured Folding Chairs, 4/Set",Furniture,Chairs,3641.27,64,234.23,15,15,6,901.45,6.43,19.84,40.0,0.16
+P00334,Chromcraft Round Conference Tables,Furniture,Tables,8209.06,61,-189.98,13,13,7,2422.63,-2.31,22.79,53.85,0.36
+P00113,"Global Wood Trimmed Manager's Task Chair, Khaki",Furniture,Chairs,4166.88,59,-503.12,14,14,12,1200.94,-12.07,22.37,85.71,0.18
+P00849,Wilson Jones Turn Tabs Binder Tool for Ring Binders,Office Supplies,Binders,212.08,59,58.51,13,13,4,72.3,27.59,25.42,30.77,0.01
+P01574,Kingston Digital DataTraveler 16GB USB 2.0,Technology,Accessories,477.93,57,64.71,13,13,4,32.22,13.54,6.32,30.77,0.02
+P01377,Fellowes Officeware Wire Shelving,Office Supplies,Storage,4509.47,55,-332.37,11,11,4,431.18,-7.37,8.73,36.36,0.2
+P00100,"Global High-Back Leather Tilter, Burgundy",Furniture,Chairs,5436.16,54,-474.74,14,14,10,1205.3,-8.73,18.15,71.43,0.24
+P00124,SAFCO Arco Folding Chair,Furniture,Chairs,11572.78,53,1179.37,13,13,3,3065.82,10.19,20.94,23.08,0.5
+P01240,Xerox 226,Office Supplies,Paper,334.37,53,155.78,11,11,0,9.07,46.59,2.64,0.0,0.01

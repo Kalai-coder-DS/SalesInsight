@@ -1,0 +1,11 @@
+product_key,product_name,category,sub_category,revenue,units_sold,profit,total_orders,order_lines,loss_lines,discount_given,profit_margin_pct,effective_discount_pct,loss_lines_pct,share_of_revenue_pct
+P01641,Canon imageCLASS 2200 Advanced Copier,Technology,Copiers,61599.82,20,25199.93,5,5,0,8399.98,40.91,12.0,0.0,2.68
+P00788,Fellowes PB500 Electric Punch Plastic Comb Binding Machine with Manual Bind,Office Supplies,Binders,27453.38,31,7753.04,10,10,2,11947.31,28.24,30.32,20.0,1.2
+P01670,Cisco TelePresence System EX90 Videoconferencing Unit,Technology,Machines,22638.48,6,-1811.08,1,1,1,22638.48,-8.0,50.0,100.0,0.99
+P00083,HON 5400 Series Task Chairs for Big and Tall,Furniture,Chairs,21870.58,39,0.0,8,8,3,5467.64,0.0,20.0,37.5,0.95
+P00702,GBC DocuBind TL300 Electric Binding System,Office Supplies,Binders,19823.48,37,2233.51,11,11,4,13365.15,11.27,40.27,36.36,0.86
+P00668,GBC Ibimaster 500 Manual ProClick Binding System,Office Supplies,Binders,19024.5,48,760.98,9,9,6,17502.54,4.0,47.92,66.67,0.83
+P01631,Hewlett Packard LaserJet 3310 Copier,Technology,Copiers,18839.69,38,6983.88,8,8,0,3959.93,37.07,17.37,0.0,0.82
+P01658,"HP Designjet T520 Inkjet Large Format Printer - 24"" Color",Technology,Machines,18374.9,12,4094.98,3,3,1,2624.98,22.29,12.5,33.33,0.8
+P00859,GBC DocuBind P400 Electric Binding System,Office Supplies,Binders,17965.07,27,-1878.17,6,6,3,18781.66,-10.45,51.11,50.0,0.78
+P01444,High Speed Automatic Electric Letter Opener,Office Supplies,Supplies,17030.31,11,-262.0,3,3,1,982.52,-1.54,5.45,33.33,0.74

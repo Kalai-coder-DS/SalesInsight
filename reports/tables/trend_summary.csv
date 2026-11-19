@@ -1,16 +1,16 @@
 metric,value
 first_year,2014
 last_year,2017
-revenue_cagr_pct,14.852074047626761
+revenue_cagr_pct,14.85
 best_month,Nov 2017
-best_month_revenue,118447.825
+best_month_revenue,118447.82
 worst_month,Feb 2014
-worst_month_revenue,4519.892
+worst_month_revenue,4519.89
 peak_season_month,Nov
-peak_season_index,184.13936028425488
+peak_season_index,184.14
 low_season_month,Feb
-low_season_index,31.216375691543217
-q4_share_of_revenue_pct,38.22848661752112
-monthly_trend_slope,902.6336858065561
-monthly_trend_r_squared,0.25145389944174934
+low_season_index,31.22
+q4_share_of_revenue_pct,38.23
+monthly_trend_slope,902.63
+monthly_trend_r_squared,0.25
 busiest_weekday,Monday

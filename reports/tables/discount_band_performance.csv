@@ -1,0 +1,5 @@
+discount_band,revenue,units_sold,profit,total_orders,order_lines,loss_lines,discount_given,profit_margin_pct,effective_discount_pct,loss_lines_pct,share_of_revenue_pct
+No discount,1087908.47,18267,320987.6,2644,4798,0,0.0,29.51,0.0,0.0,47.36
+1-20%,846522.24,14231,100785.47,2507,3803,523,202052.9,11.91,19.27,13.75,36.85
+21-40%,233856.53,1738,-35805.41,400,459,414,128551.71,-15.31,35.47,90.2,10.18
+Over 40%,128632.25,3635,-99558.59,737,933,933,236008.98,-77.4,64.72,100.0,5.6
