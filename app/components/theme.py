@@ -175,6 +175,24 @@ h1, h2, h3, h4, p, li, label, .stMarkdown {{ color: {t['text']}; }}
 .si-highlight b {{ display: block; font-size: .8rem; color: #a5b4fc; margin-bottom: .15rem; }}
 .si-highlight p {{ margin: 0; font-size: .9rem; color: {t['text']}; }}
 
+/* Button rows (chart switches) wrap onto a second line instead of being cut off */
+[data-testid="stButtonGroup"] > div {{ flex-wrap: wrap; row-gap: .4rem; }}
+
+/* Recommendation cards */
+.si-rec {{
+    background: {t['panel']}; border: 1px solid {t['border']}; border-radius: 16px;
+    padding: 1rem 1.15rem; margin-bottom: .9rem; box-shadow: {t['shadow']};
+}}
+.si-rec-head {{ display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; margin-bottom: .45rem; }}
+.si-badge {{
+    font-size: .7rem; font-weight: 600; padding: .15rem .55rem; border-radius: 999px;
+    background: {t['panel_2']}; color: {t['muted']}; border: 1px solid {t['border']};
+}}
+.si-badge-p1 {{ background: {ACCENT_GRADIENT}; color: #fff; border: none; }}
+.si-rec-title {{ font-weight: 650; font-size: 1.02rem; color: {t['text']}; }}
+.si-rec p {{ margin: .3rem 0; font-size: .9rem; color: {t['text']}; line-height: 1.5; }}
+.si-rec p b {{ color: #a5b4fc; font-weight: 600; }}
+
 /* Empty state */
 .si-empty {{
     text-align: center; padding: 3rem 1rem; border: 1px dashed {t['border']};

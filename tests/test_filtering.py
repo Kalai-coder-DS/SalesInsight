@@ -306,3 +306,85 @@ def test_customer_stats_without_repeats(sales_data):
 def test_new_vs_returning_long(sales_data_with_repeat):
     n = dd.new_vs_returning_long(sales_data_with_repeat).set_index("label")
     assert n.loc["2017", "revenue_returning"] == pytest.approx(261.96)   # Claire's second order
+
+
+# --------------------------------------------------------------------------
+# 13D: insights and explorer data
+# --------------------------------------------------------------------------
+def test_safe_findings_full_sample(sales_data_with_repeat):
+    f, skipped = dd.safe_findings(sales_data_with_repeat)
+    for key in ("kpis", "trends", "products", "regions", "customers", "rfm", "aov_ci"):
+        assert key in f, (key, skipped.get(key))
+    assert f["high_discount_loss"] == pytest.approx(-383.031)
+    assert len(f["tests"]) >= 4
+
+
+def test_safe_findings_one_region_does_not_crash(sales_data):
+    one_region = sales_data[sales_data["region"] == "South"]
+    f, skipped = dd.safe_findings(one_region)
+    assert "kpis" in f
+    # comparing regions is impossible with one region -> that test is skipped, not crashed
+    assert "region_margin" not in [t.test for t in f["tests"]]
+
+
+def test_safe_findings_tiny_selection(sales_data):
+    f, skipped = dd.safe_findings(sales_data.iloc[[0]])
+    assert "kpis" in f
+    assert "rfm" in skipped                    # fewer than 5 customers
+
+
+def test_safe_recommendations_and_report(sales_data_with_repeat):
+    f, _ = dd.safe_findings(sales_data_with_repeat)
+    recs = dd.safe_recommendations(f)
+    assert len(recs) >= 4
+    assert [r.priority for r in recs] == sorted(r.priority for r in recs)
+    report = dd.safe_report(f, recs)
+    assert report.startswith("# SalesInsight")
+
+
+def test_safe_recommendations_with_missing_parts():
+    assert dd.safe_recommendations({}) == []
+    assert dd.safe_report({}, []) is None
+
+
+def test_key_findings(sales_data_with_repeat):
+    f, _ = dd.safe_findings(sales_data_with_repeat)
+    titles = [k["title"] for k in dd.key_findings(sales_data_with_repeat, f)]
+    assert titles[:2] == ["Revenue and profit", "Discounts"]
+    assert "Weakest category" in titles
+
+
+def test_opportunities(sales_data_with_repeat):
+    f, _ = dd.safe_findings(sales_data_with_repeat)
+    titles = [o["title"] for o in dd.opportunities(sales_data_with_repeat, f)]
+    assert any(t.startswith("Fastest-growing sub-categories") for t in titles) or len(titles) >= 1
+    assert "Protect full-price sales" in titles
+
+
+def test_loss_tables(sales_data):
+    t = dd.loss_tables(sales_data)
+    assert list(t) == ["Products", "Sub-categories", "States", "Customers"]
+    assert t["Products"]["sub_category"].tolist() == ["Tables"]
+    assert t["States"]["state"].tolist() == ["Florida"]
+    assert dd.loss_tables(sales_data.iloc[0:0]) == {}
+
+
+@pytest.mark.parametrize("query, expected", [
+    ("", 8), ("claire", 2), ("CLAIRE chairs", 1), ("florida tables", 1), ("no-such-thing", 0),
+    ("CA-2016-152156", 2),
+])
+def test_search_rows(sales_data, query, expected):
+    assert len(dd.search_rows(sales_data, query)) == expected
+
+
+def test_explorer_summary(sales_data):
+    s = dd.explorer_summary(sales_data, "segment")
+    assert s.loc[0, "segment"] == "Consumer"
+    assert s["revenue"].sum() == pytest.approx(sales_data["sales"].sum())
+
+
+def test_safe_findings_skips_trend_for_short_ranges(sales_data):
+    one_month = sales_data[sales_data["order_date"].dt.to_period("M") == sales_data["order_date"].dt.to_period("M").iloc[0]]
+    findings, skipped = dd.safe_findings(one_month)
+    assert "trends" not in findings and "trends" in skipped
+    assert "kpis" in findings

@@ -33,11 +33,8 @@ def render() -> None:
     left, right = st.columns(2, gap="medium")
     with left, card("cust-segments"):
         card_title("Customer segments", "Consumer, Corporate and Home Office")
-        c1, c2 = st.columns([1.6, 1.7])
-        with c1:
-            s_metric = chart_switch("cu_s_metric", list(dd.SEGMENT_METRICS), label="Metric")
-        with c2:
-            s_kind = chart_switch("cu_s_kind", charts.CATEGORY_KINDS)
+        s_metric = chart_switch("cu_s_metric", list(dd.SEGMENT_METRICS), label="Metric")
+        s_kind = chart_switch("cu_s_kind", charts.CATEGORY_KINDS)
         col, kind = dd.SEGMENT_METRICS[s_metric]
         seg = cu.segment_performance(df)
         fig, note = charts.category_chart(seg, "segment", col, s_kind, value_kind=kind, value_name=s_metric,

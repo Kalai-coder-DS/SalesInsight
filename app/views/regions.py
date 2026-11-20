@@ -55,11 +55,8 @@ def render() -> None:
     left, right = st.columns(2, gap="medium")
     with left, card("reg-regions"):
         card_title("Region comparison")
-        c1, c2 = st.columns([1, 1.7])
-        with c1:
-            r_metric = chart_switch("rg_r_metric", list(dd.METRICS), label="Metric")
-        with c2:
-            r_kind = chart_switch("rg_r_kind", charts.CATEGORY_KINDS)
+        r_metric = chart_switch("rg_r_metric", list(dd.METRICS), label="Metric")
+        r_kind = chart_switch("rg_r_kind", charts.CATEGORY_KINDS)
         col, kind = dd.METRICS[r_metric]
         fig, note = charts.category_chart(dd.breakdown(df, "region"), "region", col, r_kind,
                                           value_kind=kind, value_name=r_metric, height=340)

@@ -34,7 +34,8 @@ def card(key: str):
 
 def card_title(title: str, subtitle: str | None = None) -> None:
     sub = f"<div class='si-card-sub'>{escape(subtitle)}</div>" if subtitle else ""
-    st.markdown(f"<div class='si-card-title'>{escape(title)}</div>{sub}", unsafe_allow_html=True)
+    head = f"<div class='si-card-title'>{escape(title)}</div>" if title else ""
+    st.markdown(head + sub, unsafe_allow_html=True)
 
 
 def chart_switch(key: str, options: list[str], default: str | None = None, label: str = "Chart type") -> str:
@@ -74,7 +75,13 @@ COLUMN_LABELS = {
     "order_id": "Order ID", "order_date": "Order date", "ship_date": "Ship date",
     "rfm_segment": "RFM segment", "total_customers": "Customers", "avg_recency_days": "Days since last order",
     "avg_orders": "Orders per customer", "avg_revenue": "Revenue per customer", "recency_days": "Days since last order",
-    "share_of_customers_pct": "Share of customers",
+    "share_of_customers_pct": "Share of customers", "order_year": "Year", "ship_mode": "Ship mode",
+    "discount_band": "Discount band", "unit_price": "Unit price", "gross_sales": "Sales before discount",
+    "discount_amount": "Discount amount", "postal_code": "Postal code", "ship_days": "Days to ship",
+    "is_loss": "Loss?", "order_month_name": "Month", "year_month": "Year-month", "order_weekday": "Weekday",
+    "order_quarter": "Quarter", "order_month": "Month no.", "country": "Country", "row_id": "Row ID",
+    "priority": "Priority", "area": "Area", "title": "Recommendation", "finding": "Finding",
+    "action": "Action", "impact": "Expected impact",
 }
 
 
@@ -99,3 +106,23 @@ def data_table(df, money: list[str] = (), pct: list[str] = (), ints: list[str] =
 def csv_download(df, filename: str, label: str = "Download CSV", key: str | None = None) -> None:
     st.download_button(label, df.to_csv(index=False).encode("utf-8"), file_name=filename,
                        mime="text/csv", icon=":material/download:", key=key)
+
+
+def recommendation_cards(recs: list) -> None:
+    html = []
+    for i, r in enumerate(recs, 1):
+        badge = "si-badge si-badge-p1" if r.priority == 1 else "si-badge"
+        html.append(
+            f"<div class='si-rec'><div class='si-rec-head'>"
+            f"<span class='{badge}'>Priority {r.priority}</span><span class='si-badge'>{escape(r.area)}</span>"
+            f"<span class='si-rec-title'>{i}. {escape(r.title)}</span></div>"
+            f"<p><b>Finding:</b> {escape(r.finding)}</p>"
+            f"<p><b>Action:</b> {escape(r.action)}</p>"
+            f"<p><b>Expected impact:</b> {escape(r.impact)}</p></div>")
+    st.markdown("".join(html), unsafe_allow_html=True)
+
+
+def text_download(text: str, filename: str, label: str, mime: str = "text/markdown",
+                  key: str | None = None) -> None:
+    st.download_button(label, text.encode("utf-8"), file_name=filename, mime=mime,
+                       icon=":material/description:", key=key)

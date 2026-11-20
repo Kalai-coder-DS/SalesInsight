@@ -25,7 +25,7 @@ from components.context import PageContext, set_context  # noqa: E402
 from components.data import load_sales  # noqa: E402
 from components.filters import render_filters  # noqa: E402
 from salesinsight.filtering import apply_filters, date_window, previous_period  # noqa: E402
-from views import customers, overview, products, regions, trends  # noqa: E402
+from views import customers, explorer, insights, overview, products, regions, trends  # noqa: E402
 
 st.set_page_config(
     page_title="SalesInsight - Sales Intelligence",
@@ -68,6 +68,12 @@ pages = {
         st.Page(customers.render, title="Customer Intelligence", icon=":material/groups:",
                 url_path="customers"),
     ],
+    "Intelligence": [
+        st.Page(insights.render, title="Business Insights", icon=":material/lightbulb:", url_path="insights"),
+    ],
+    "Tools": [
+        st.Page(explorer.render, title="Data Explorer", icon=":material/table_view:", url_path="explorer"),
+    ],
 }
 page = st.navigation(pages, position="sidebar")
 
@@ -88,7 +94,14 @@ set_context(PageContext(
     compare_label=compare_label(state, prev_window),
 ))
 
-page.run()
+# --- Run the chosen page; any unexpected error is shown politely, not as a crash ----
+try:
+    page.run()
+except Exception as exc:  # noqa: BLE001 - the user sees a clear message and can report the details
+    st.error("Something went wrong while drawing this page. Try changing or resetting the filters.",
+             icon=":material/error:")
+    with st.expander("Technical details"):
+        st.exception(exc)
 
 st.sidebar.caption(f"Data: {len(data):,} order lines, "
                    f"{data['order_date'].min():%b %Y} - {data['order_date'].max():%b %Y}")

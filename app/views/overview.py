@@ -52,11 +52,9 @@ def render() -> None:
                                     (right, "region", "Sales by region", "ov_reg")):
         with column, card(key):
             card_title(title)
-            c1, c2 = st.columns([1, 1.6])
-            with c1:
-                metric = chart_switch(f"{key}_metric", METRIC_OPTIONS, label="Metric")
-            with c2:
-                kind = chart_switch(f"{key}_kind", charts.CATEGORY_KINDS)
+            # Metric and chart type on separate rows: 5 chart types do not fit beside the metric in a half card.
+            metric = chart_switch(f"{key}_metric", METRIC_OPTIONS, label="Metric")
+            kind = chart_switch(f"{key}_kind", charts.CATEGORY_KINDS)
             value_col, value_kind = dd.METRICS[metric]
             fig, note = charts.category_chart(dd.breakdown(df, dim), dim, value_col, kind,
                                               value_kind=value_kind, value_name=metric, height=340)

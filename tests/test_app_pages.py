@@ -144,7 +144,7 @@ def test_navigation_lists_all_pages():
     from pathlib import Path
     text = Path(APP).read_text(encoding="utf-8")
     for title in ("Executive Overview", "Sales Trends", "Product Intelligence",
-                  "Regional Intelligence", "Customer Intelligence"):
+                  "Regional Intelligence", "Customer Intelligence", "Business Insights", "Data Explorer"):
         assert title in text
 
 
@@ -185,6 +185,43 @@ def test_customers_page(options):
 def test_new_pages_with_filters_and_no_data(page):
     at = render_page(page, filters={"years": (2016,), "regions": ("West",)})
     assert not at.exception
+    at = render_page(page, filters={"years": (2014,), "start": "2017-01-01", "end": "2017-01-31"})
+    assert not at.exception
+    assert "No data matches" in page_text(at)
+
+
+# --------------------------------------------------------------------------
+# 13D: Business Insights and Data Explorer
+# --------------------------------------------------------------------------
+@pytest.mark.parametrize("options", [{}, {"in_area": "Pricing"}])
+def test_insights_page(options):
+    at = render_page("insights", options)
+    assert not at.exception and not at.error
+    text = page_text(at)
+    assert "Business Insights" in text and "Priority 1" in text
+    assert len(at.tabs) == 4
+
+
+@pytest.mark.parametrize("options", [
+    {},
+    {"ex_query": "chair west"},
+    {"ex_query": "zzzz-no-match"},
+    {"ex_cols": ["order_id", "sales", "ship_date"]},
+    {"ex_view": "Summary", "ex_group": "State"},
+    {"ex_view": "Summary", "ex_group": "Discount band"},
+])
+def test_explorer_page(options):
+    at = render_page("explorer", options)
+    assert not at.exception and not at.error
+    assert "Data Explorer" in page_text(at)
+
+
+@pytest.mark.parametrize("page", ["insights", "explorer"])
+def test_13d_pages_with_filters_and_no_data(page):
+    for filters in ({"regions": ("West",)}, {"states": ("Vermont",)}, {"years": (2017,), "segments": ("Home Office",)},
+                    {"start": "2017-03-01", "end": "2017-03-03"}):
+        at = render_page(page, filters=filters)
+        assert not at.exception and not at.error, filters
     at = render_page(page, filters={"years": (2014,), "start": "2017-01-01", "end": "2017-01-31"})
     assert not at.exception
     assert "No data matches" in page_text(at)

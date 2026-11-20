@@ -336,3 +336,202 @@ def new_vs_returning_long(df: pd.DataFrame) -> pd.DataFrame:
     n = new_vs_returning(df)
     n["label"] = n["order_year"].astype(str)
     return n
+
+
+# ---------------------------------------------------------------------------
+# Business Insights page (13D)
+#
+# insights.py and stats_tests.py were written for the whole dataset. In the
+# app the data is filtered (one region, one segment...), and some parts cannot
+# be calculated then (e.g. comparing regions when only one is selected). Each
+# part therefore runs on its own; a part that cannot be calculated is skipped
+# and reported, instead of breaking the whole page.
+# ---------------------------------------------------------------------------
+def _attempt(func):
+    import warnings
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        try:
+            return func(), None
+        except Exception as exc:  # the reason is shown to the user as "skipped"
+            return None, f"{type(exc).__name__}: {exc}"
+
+
+def safe_findings(df: pd.DataFrame) -> tuple[dict, dict]:
+    """Same keys as insights.collect_findings(); returns (findings, skipped {key: reason})."""
+    from salesinsight import customers as cu
+    from salesinsight import kpis as kp
+    from salesinsight import products as pr
+    from salesinsight import regions as rg
+    from salesinsight import stats_tests as st_
+    from salesinsight import trends as tr
+
+    high = df[df["discount"] > 0.2]
+    parts = {
+        "kpis": lambda: kp.compute_kpis(df),
+        "yearly": lambda: kp.yearly_kpis(df),
+        "trends": lambda: tr.trend_summary(df),
+        "products": lambda: pr.product_summary(df),
+        "categories": lambda: pr.category_performance(df),
+        "subcategories": lambda: pr.subcategory_performance(df),
+        "discount_bands": lambda: pr.discount_band_performance(df),
+        "regions": lambda: rg.region_performance(df),
+        "region_summary": lambda: rg.region_summary(df),
+        "segments": lambda: cu.segment_performance(df),
+        "customers": lambda: cu.customer_summary(df),
+        "rfm": lambda: cu.rfm_summary(cu.rfm_table(cu.customer_table(df))),
+        "aov_ci": lambda: st_.aov_confidence_by_year(df),
+        "high_discount_loss": lambda: float(high.loc[high["profit"] < 0, "profit"].sum()),
+        "high_discount_lines_pct": lambda: 100 * len(high) / len(df),
+    }
+    findings, skipped = {}, {}
+    # A trend line needs at least 3 months; fewer would make NumPy fit a line through 1-2 points.
+    if df["order_date"].dt.to_period("M").nunique() < 3:
+        parts.pop("trends")
+        skipped["trends"] = "a trend needs at least 3 months of data"
+    for key, func in parts.items():
+        value, error = _attempt(func)
+        if error is None:
+            findings[key] = value
+        else:
+            skipped[key] = error
+    tests = []
+    for test in (st_.test_discount_vs_margin, st_.test_discount_vs_loss, st_.test_region_margin,
+                 st_.test_segment_order_value, lambda d: st_.test_category_margin(d, "Furniture"),
+                 st_.test_q4_vs_rest):
+        result, error = _attempt(lambda t=test: t(df))
+        if error is None and result is not None and pd.notna(result.p_value):
+            tests.append(result)
+    findings["tests"] = tests
+    return findings, skipped
+
+
+def safe_recommendations(findings: dict) -> list:
+    """Run every recommendation rule; a rule whose inputs are missing is skipped."""
+    from salesinsight.insights import RULES
+    recs = []
+    for rule in RULES:
+        rec, error = _attempt(lambda r=rule: r(findings))
+        if error is None and rec is not None:
+            recs.append(rec)
+    return sorted(recs, key=lambda r: r.priority)
+
+
+def safe_report(findings: dict, recs: list) -> str | None:
+    from salesinsight.insights import build_report
+    report, error = _attempt(lambda: build_report(findings, recs))
+    return report if error is None else None
+
+
+def key_findings(df: pd.DataFrame, findings: dict) -> list[dict]:
+    """Short headline findings for the selection (each only if it can be calculated)."""
+    out = []
+    k = findings.get("kpis")
+    if k:
+        out.append({"title": "Revenue and profit",
+                    "text": f"{short_money(k['total_revenue'])} revenue and {short_money(k['total_profit'])} "
+                            f"profit, a {k['profit_margin_pct']:.1f}% margin."})
+        out.append({"title": "Discounts",
+                    "text": f"{short_money(k['discount_given'])} given away ({k['effective_discount_pct']:.1f}% of "
+                            f"list price); {k['loss_lines_pct']:.1f}% of order lines lose money "
+                            f"({short_money(k['loss_amount'])})."})
+    s = findings.get("region_summary")
+    if s and s["loss_making_states"]:
+        out.append({"title": "Loss-making states",
+                    "text": f"{s['loss_making_states']} state(s) lose money in total "
+                            f"({short_money(s['loss_making_states_total'])}); worst: {s['worst_state_by_profit']}."})
+    cats = findings.get("categories")
+    if cats is not None and len(cats) > 1:
+        weak = cats.loc[cats["profit_margin_pct"].idxmin()]
+        out.append({"title": "Weakest category",
+                    "text": f"{weak['category']} keeps only {weak['profit_margin_pct']:.1f}% of revenue as profit, "
+                            f"with {weak['loss_lines_pct']:.0f}% of its lines at a loss."})
+    t = findings.get("trends")
+    if t and pd.notna(t.get("revenue_cagr_pct")):
+        out.append({"title": "Growth and seasonality",
+                    "text": f"Revenue grows {t['revenue_cagr_pct']:.1f}% a year; {t['peak_season_month']} is the peak "
+                            f"month and Q4 brings {t['q4_share_of_revenue_pct']:.1f}% of revenue."})
+    return out
+
+
+def opportunities(df: pd.DataFrame, findings: dict) -> list[dict]:
+    """Where to grow: fastest-growing sub-categories and regions, and customers to win back."""
+    out = []
+    years = sorted(df["order_year"].unique())
+    if len(years) >= 2:
+        last, prev = years[-1], years[-2]
+        g = df[df["order_year"].isin([prev, last])].pivot_table(
+            index="sub_category", columns="order_year", values="sales", aggfunc="sum", fill_value=0)
+        g = g[(g[prev] > 0) & (g[last] >= 0.01 * g[last].sum())]
+        if len(g):
+            g["growth"] = 100 * (g[last] - g[prev]) / g[prev]
+            top = g.sort_values("growth", ascending=False).head(3)
+            text = ", ".join(f"{name} ({row['growth']:+.0f}%)" for name, row in top.iterrows())
+            out.append({"title": f"Fastest-growing sub-categories ({last} vs {prev})", "text": text + "."})
+    s = findings.get("region_summary")
+    if s and pd.notna(s.get("fastest_growing_region_cagr_pct")):
+        out.append({"title": "Fastest-growing region",
+                    "text": f"{s['fastest_growing_region']} grows {s['fastest_growing_region_cagr_pct']:.1f}% a year."})
+    rfm = findings.get("rfm")
+    if rfm is not None and "At risk" in set(rfm["rfm_segment"]):
+        r = rfm.set_index("rfm_segment").loc["At risk"]
+        out.append({"title": "Customers to win back",
+                    "text": f"{int(r['total_customers'])} 'At risk' customers brought {short_money(r['revenue'])} "
+                            f"({r['share_of_revenue_pct']:.1f}% of revenue) but have stopped ordering."})
+    bands = findings.get("discount_bands")
+    if bands is not None and len(bands):
+        nd = bands[bands["discount_band"].astype(str) == "No discount"]
+        if len(nd):
+            out.append({"title": "Protect full-price sales",
+                        "text": f"Lines sold without discount earn a {nd['profit_margin_pct'].iloc[0]:.1f}% margin."})
+    return out
+
+
+def loss_tables(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
+    """Everything that lost money in the selection: products, sub-categories, states, customers."""
+    from salesinsight.customers import customer_table
+    from salesinsight.products import loss_making_products, product_performance, subcategory_performance
+    if df.empty:
+        return {}
+    subs = subcategory_performance(df)
+    states = state_table(df)
+    cust = customer_table(df)
+    return {
+        "Products": loss_making_products(product_performance(df))[
+            ["product_name", "sub_category", "revenue", "profit", "profit_margin_pct", "effective_discount_pct"]],
+        "Sub-categories": subs[subs["profit"] < 0].sort_values("profit")[
+            ["category", "sub_category", "revenue", "profit", "profit_margin_pct", "effective_discount_pct"]],
+        "States": states[states["profit"] < 0].sort_values("profit")[
+            ["state", "region", "revenue", "profit", "profit_margin_pct", "effective_discount_pct"]],
+        "Customers": cust[cust["profit"] < 0].sort_values("profit")[
+            ["customer_name", "segment", "total_orders", "revenue", "profit", "profit_margin_pct"]],
+    }
+
+
+# ---------------------------------------------------------------------------
+# Data Explorer page (13D)
+# ---------------------------------------------------------------------------
+SEARCH_COLUMNS = ["order_id", "customer_id", "customer_name", "product_id", "product_name", "category",
+                  "sub_category", "segment", "region", "state", "city"]
+DEFAULT_COLUMNS = ["order_date", "order_id", "customer_name", "segment", "region", "state", "category",
+                   "sub_category", "product_name", "sales", "quantity", "discount", "profit"]
+
+
+def search_rows(df: pd.DataFrame, query: str) -> pd.DataFrame:
+    """Rows where EVERY word of the query appears in at least one text column (case-insensitive)."""
+    words = [w for w in str(query).lower().split() if w]
+    if not words:
+        return df
+    cols = [c for c in SEARCH_COLUMNS if c in df.columns]
+    haystack = df[cols].astype(str).agg(" ".join, axis=1).str.lower()
+    mask = pd.Series(True, index=df.index)
+    for word in words:
+        mask &= haystack.str.contains(word, regex=False)
+    return df[mask]
+
+
+def explorer_summary(df: pd.DataFrame, by: str) -> pd.DataFrame:
+    """Totals per group (revenue, profit, orders, margin, discount) for the explorer's summary view."""
+    if df.empty:
+        return pd.DataFrame(columns=[by, "revenue", "profit", "total_orders", "profit_margin_pct"])
+    return performance_table(df, [by]).sort_values("revenue", ascending=False).reset_index(drop=True)
