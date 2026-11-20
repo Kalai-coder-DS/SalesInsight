@@ -12,7 +12,9 @@ python scripts/run_pipeline.py
 
 **Live app:** [salesinsight-kalai.streamlit.app](https://salesinsight-kalai.streamlit.app/) (the first visit after a quiet period can take a minute while the app wakes up)
 
-**Interactive web app:** a 7-page BI dashboard (Streamlit + Plotly) with global filters, period comparisons, automated insights and CSV/report downloads - see [Web app](#web-app).
+**Interactive web app:** an 8-page BI dashboard (Streamlit + Plotly) with global filters, period comparisons, automated insights and CSV/report downloads - see [Web app](#web-app).
+
+**Bring your own data:** upload any business's sales file (CSV or Excel). SalesInsight matches its columns, cleans and checks it, and every page adapts to what the file contains - see [Analyse your own sales file](#analyse-your-own-sales-file).
 
 ---
 
@@ -81,8 +83,9 @@ flowchart LR
     F --> H[28 charts]
     G --> I[Insights report +<br/>recommendations]
     H --> I
-    F --> W[Streamlit web app<br/>7 interactive pages]
+    F --> W[Streamlit web app<br/>8 interactive pages]
     G --> W
+    U[Your sales file<br/>CSV / Excel] --> V[Match columns,<br/>clean, validate] --> W
 ```
 
 | Phase | What | Main files |
@@ -100,6 +103,7 @@ flowchart LR
 | 11 | Insights report and rule-based recommendations (Q7) | `insights.py` |
 | 12 | One-command pipeline, README | `scripts/run_pipeline.py` |
 | 13 | Interactive web app (Streamlit + Plotly), online deployment | `app/`, `filtering.py`, `dashboard_data.py` |
+| 14 | Upload your own sales file: column matching, cleaning, validation, pages that adapt | `upload/`, `app/views/data_source.py`, `app/components/caps.py` |
 
 ## Technical highlights
 
@@ -110,7 +114,9 @@ flowchart LR
 - **Statistics done properly:** non-parametric tests for skewed sales data, effect sizes next to every p-value (with 10,000 rows, tiny differences become "significant"), reproducible bootstrap intervals.
 - **Accessible charts:** one fixed colour-blind-checked palette (revenue = blue, profit = orange, customers = green), red/blue diverging scale for losses vs profits, one y-axis per chart.
 - **Interactive app built on the same tested code:** the dashboard reuses the analysis modules (no hard-coded numbers); every filter and chart switch recalculates from the cleaned data; parts that cannot be calculated for a small selection are skipped and listed instead of crashing the page.
-- **Tested:** 380+ pytest tests with hand-calculated expected values; database tests run on SQLite so no MySQL server is needed.
+- **Works on other businesses' data:** uploaded files are matched to a standard sales schema (21 fields, many common column names), parsed robustly (₹/$/€, Indian number grouping, day/month vs month/day dates, Excel dates) and validated with a plain-language report. Each file gets a list of capabilities (profit, customers, regions, ...) and charts or advice it cannot support are hidden, never shown with misleading zeros.
+- **Privacy by design:** an uploaded file lives only in that visitor's session - never written to disk, never in the shared cache, gone when the tab closes.
+- **Tested:** 490+ pytest tests with hand-calculated expected values; database tests run on SQLite so no MySQL server is needed.
 - **Lightweight:** CPU only, runs in seconds, well under 1 GB of RAM.
 
 ## Tech stack
@@ -132,10 +138,12 @@ flowchart LR
 SalesInsight/
 ├── data/
 │   ├── raw/                  Superstore.csv (download from Kaggle; not in Git)
-│   └── processed/            sales_clean.csv (generated)
+│   ├── processed/            sales_clean.csv (generated)
+│   └── samples/              example files to try the upload feature (synthetic)
 ├── sql/                      01_create_database.sql, 02_create_tables.sql, 03_analysis_queries.sql
 ├── app/                      Streamlit web app (streamlit_app.py, components/, views/, assets/)
 ├── src/salesinsight/         all analysis code (one module per topic)
+│   └── upload/               read, match, clean and validate uploaded sales files
 ├── scripts/                  one runnable script per phase + run_pipeline.py
 ├── tests/                    pytest suite
 ├── reports/
@@ -173,7 +181,7 @@ On macOS/Linux use `python3 -m venv .venv`, `source .venv/bin/activate` and `cp 
 
 ## Web app
 
-Seven pages: **Executive Overview, Sales Trends, Product Intelligence, Regional Intelligence, Customer Intelligence, Business Insights** and a **Data Explorer**.
+Eight pages: **Data Source**, **Executive Overview, Sales Trends, Product Intelligence, Regional Intelligence, Customer Intelligence, Business Insights** and a **Data Explorer**.
 
 - Global sidebar filters (year, date range, region, state, category, sub-category, segment) apply to every page; state and sub-category options follow the region and category chosen.
 - KPI cards compare with the previous period (the same months one year earlier, or an equal number of days for a custom range).
@@ -190,6 +198,28 @@ Run it locally (after step 2 above):
 
 **Online version:** the dataset is not stored in this repository. On Streamlit Community Cloud the app downloads it from Kaggle at start-up, using a Kaggle API key kept in the app's Secrets (`KAGGLE_USERNAME`, `KAGGLE_KEY`). The online app installs only `app/requirements.txt`.
 
+## Analyse your own sales file
+
+On the **Data Source** page, choose *My own sales file*:
+
+1. **Upload** a CSV or Excel (.xlsx) file - up to 20 MB and 200,000 rows, one row per sale or order line.
+2. **Preview** the first rows. Files that are not sales data (no dates or amounts) are explained, not analysed.
+3. **Match your columns.** SalesInsight suggests a match for each field from the column names *and* the values (for example *Bill Date* -> order date, *Amount (₹)* -> sales). Only the **order date** and the **sales amount** are needed (or unit price and quantity); everything else unlocks more analysis.
+4. **Check & analyse.** A data check lists every fix (rows without a date removed, "10%" read as 0.10, ...) and which analyses the file supports.
+
+All pages then show the uploaded data, in its currency. Charts and recommendations that need missing fields are replaced by a short note such as *"Add a profit or cost column"*; the sidebar shows only the filters the file has. *Use demo data* switches back at any time.
+
+| What your file has | What you get |
+|---|---|
+| Date + amount | Revenue KPIs, trends, seasonality, weekdays, best sellers (with a product column) |
+| + order ID / customer | Orders, average order value, repeat customers, RFM, customer recommendations |
+| + profit or cost | Margins, loss-makers, profit waterfall, pricing recommendations |
+| + discount, category, region, state | Discount analysis, category and regional views, US map (for US states) |
+
+**Try it:** `data/samples/` holds three example files with different column names and formats (an Indian retailer in ₹ with day/month dates, an online store in Excel with cost instead of profit, a café with only price and quantity) - also downloadable on the Data Source page. `scripts/make_sample_uploads.py` recreates them.
+
+**Privacy:** the file is kept only in your browser session. It is not saved, not shared with other visitors and disappears when you close the tab or click *Remove my file*.
+
 ## Dataset
 
 [Superstore Dataset](https://www.kaggle.com/datasets/vivek468/superstore-dataset-final) on Kaggle: 9,994 order lines of a US retailer, 2014-2017, 21 columns (orders, customers, products, locations, sales, quantity, discount, profit). The dataset is a public sample; findings describe this data, not a specific real company.
@@ -199,6 +229,7 @@ Run it locally (after step 2 above):
 - No cost breakdown in the data, so low margins cannot be split into supplier, shipping or return costs.
 - Discounts and losses are strongly associated, but proving how much a discount cap would recover needs a controlled pricing test.
 - Impact estimates in the report are upper bounds that assume sales volume stays the same.
+- Uploaded files: one table per file (no joining of several files), `.xls` must be saved as `.xlsx`, the US map works for US state names only, and amounts are shown in one currency (no conversion).
 
 ## Author
 
