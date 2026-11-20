@@ -10,6 +10,8 @@ python scripts/run_pipeline.py
 
 **Full report:** [reports/insights_report.md](reports/insights_report.md)
 
+**Live app:** [salesinsight-kalai.streamlit.app](https://salesinsight-kalai.streamlit.app/) (the first visit after a quiet period can take a minute while the app wakes up)
+
 **Interactive web app:** a 7-page BI dashboard (Streamlit + Plotly) with global filters, period comparisons, automated insights and CSV/report downloads - see [Web app](#web-app).
 
 ---

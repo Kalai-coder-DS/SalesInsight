@@ -199,6 +199,7 @@ h1, h2, h3, h4, p, li, label, .stMarkdown {{ color: {t['text']}; }}
     border-radius: 16px; color: {t['muted']};
 }}
 
+{light_widgets_css() if current_theme() == "light" else ""}
 footer {{ visibility: hidden; }}
 @media (max-width: 640px) {{
     .si-title {{ font-size: 1.45rem; }}
@@ -209,6 +210,56 @@ footer {{ visibility: hidden; }}
 """,
         unsafe_allow_html=True,
     )
+
+
+def light_widgets_css() -> str:
+    """Light mode: recolour Streamlit's own controls in the page area.
+
+    The app's base theme is dark, so buttons, tabs and inputs keep light text by
+    default - invisible on a white page. The sidebar is left dark on purpose.
+    """
+    m = '[data-testid="stMain"]'
+    return f"""
+/* --- Light mode: Streamlit controls in the page area --- */
+{m} [data-testid="stButtonGroup"] button,
+{m} [data-testid="stDownloadButton"] button,
+{m} [data-testid="stBaseButton-secondary"] {{
+    background: #ffffff !important; border: 1px solid rgba(15, 23, 42, 0.16) !important;
+}}
+{m} [data-testid="stButtonGroup"] button, {m} [data-testid="stButtonGroup"] button *,
+{m} [data-testid="stDownloadButton"] button, {m} [data-testid="stDownloadButton"] button *,
+{m} [data-testid="stBaseButton-secondary"], {m} [data-testid="stBaseButton-secondary"] * {{
+    color: #334155 !important;
+}}
+{m} [data-testid="stButtonGroup"] button:hover, {m} [data-testid="stDownloadButton"] button:hover {{
+    border-color: #6366f1 !important; background: #f5f6ff !important;
+}}
+{m} [data-testid="stBaseButton-segmented_controlActive"] {{
+    background: rgba(99, 102, 241, 0.12) !important; border-color: #6366f1 !important;
+}}
+{m} [data-testid="stBaseButton-segmented_controlActive"],
+{m} [data-testid="stBaseButton-segmented_controlActive"] * {{ color: #4338ca !important; font-weight: 600; }}
+
+/* Tabs */
+{m} [data-baseweb="tab"], {m} [data-baseweb="tab"] * {{ color: #64748b !important; }}
+{m} [data-baseweb="tab"][aria-selected="true"], {m} [data-baseweb="tab"][aria-selected="true"] * {{
+    color: #4338ca !important;
+}}
+
+/* Text inputs and multiselects (Data Explorer) */
+{m} [data-baseweb="input"], {m} [data-baseweb="base-input"], {m} [data-baseweb="select"] > div {{
+    background: #ffffff !important; border-color: rgba(15, 23, 42, 0.16) !important;
+}}
+{m} [data-baseweb="input"] input, {m} [data-baseweb="select"] * {{ color: #0f172a !important; }}
+{m} input::placeholder {{ color: #94a3b8 !important; }}
+{m} [data-baseweb="tag"] {{ background: rgba(99, 102, 241, 0.12) !important; }}
+
+/* Expanders, captions, alerts */
+{m} [data-testid="stExpander"] details {{ background: #ffffff; border-color: rgba(15, 23, 42, 0.12) !important; }}
+{m} [data-testid="stExpander"] summary, {m} [data-testid="stExpander"] summary * {{ color: #0f172a !important; }}
+{m} [data-testid="stCaptionContainer"], {m} [data-testid="stCaptionContainer"] * {{ color: #64748b !important; }}
+{m} [data-testid="stAlert"] * {{ color: #0f172a !important; }}
+"""
 
 
 def plotly_layout() -> dict:
