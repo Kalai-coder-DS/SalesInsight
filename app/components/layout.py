@@ -61,3 +61,38 @@ def highlight_list(items: list[dict]) -> None:
     html = "".join(f"<div class='si-highlight'><b>{escape(i['title'])}</b><p>{escape(i['text'])}</p></div>"
                    for i in items)
     st.markdown(html, unsafe_allow_html=True)
+
+
+COLUMN_LABELS = {
+    "product_name": "Product", "product_key": "Product key", "product_id": "Product ID",
+    "category": "Category", "sub_category": "Sub-category", "region": "Region", "state": "State",
+    "city": "City", "segment": "Segment", "customer_id": "Customer ID", "customer_name": "Customer",
+    "revenue": "Revenue", "sales": "Sales", "profit": "Profit", "units_sold": "Units",
+    "quantity": "Quantity", "total_orders": "Orders", "order_lines": "Order lines",
+    "profit_margin_pct": "Margin", "effective_discount_pct": "Discount", "discount": "Discount",
+    "loss_lines_pct": "Lines at a loss", "share_of_revenue_pct": "Share of revenue",
+    "order_id": "Order ID", "order_date": "Order date", "ship_date": "Ship date",
+}
+
+
+def column_label(name: str) -> str:
+    return COLUMN_LABELS.get(name, name.replace("_", " ").capitalize())
+
+
+def data_table(df, money: list[str] = (), pct: list[str] = (), ints: list[str] = (),
+               height: int | None = None, key: str | None = None) -> None:
+    """A sortable table with friendly column names and readable number formats."""
+    config = {c: st.column_config.Column(column_label(c)) for c in df.columns}
+    config.update({c: st.column_config.NumberColumn(column_label(c), format="dollar")
+                   for c in money if c in df.columns})
+    config.update({c: st.column_config.NumberColumn(column_label(c), format="%.1f%%")
+                   for c in pct if c in df.columns})
+    config.update({c: st.column_config.NumberColumn(column_label(c), format="localized")
+                   for c in ints if c in df.columns})
+    kwargs = {"height": height} if height else {}
+    st.dataframe(df, column_config=config, hide_index=True, width="stretch", key=key, **kwargs)
+
+
+def csv_download(df, filename: str, label: str = "Download CSV", key: str | None = None) -> None:
+    st.download_button(label, df.to_csv(index=False).encode("utf-8"), file_name=filename,
+                       mime="text/csv", icon=":material/download:", key=key)

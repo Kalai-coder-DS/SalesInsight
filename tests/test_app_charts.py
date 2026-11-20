@@ -63,3 +63,61 @@ def test_waterfall(sales_data):
     fig, _ = charts.waterfall_chart(dd.profit_bridge(sales_data, "region"))
     assert fig.data[0].type == "waterfall"
     assert list(fig.data[0].measure)[-1] == "total"
+
+
+# --------------------------------------------------------------------------
+# 13B chart builders
+# --------------------------------------------------------------------------
+def test_time_chart_moving_average_stays_a_line(sales_data):
+    s = dd.metric_series(sales_data, "Year", "Revenue")
+    fig, _ = charts.time_chart(s, [("value", "Revenue", "#3b82f6"), ("moving_avg", "MA", "#1d4ed8", "line")], "Bar")
+    assert [t.type for t in fig.data] == ["bar", "scatter"]
+
+
+def test_ranked_bar_keeps_every_product(sales_data):
+    ranked = dd.ranked_products(sales_data, "Revenue", 8)
+    fig, _ = charts.ranked_bar(ranked, "product_name", "revenue")
+    assert len(fig.data[0].y) == 8
+    assert fig.data[0].orientation == "h"
+
+
+@pytest.mark.parametrize("kind, trace_type", [("Treemap", "treemap"), ("Sunburst", "sunburst"), ("Bar", "bar")])
+def test_hierarchy_chart(sales_data, kind, trace_type):
+    fig, _ = charts.hierarchy_chart(dd.category_hierarchy(sales_data), kind)
+    assert fig.data[0].type == trace_type
+
+
+def test_heatmaps(sales_data):
+    from salesinsight import products as pr
+    seq, _ = charts.heatmap(dd.month_by_year(sales_data), "money")
+    div, _ = charts.heatmap(pr.discount_margin_matrix(sales_data), "pct", diverging=True)
+    assert seq.data[0].type == div.data[0].type == "heatmap"
+    assert div.data[0].zmid == 0
+
+
+def test_diverging_bars_split_profit_and_loss(sales_data):
+    from salesinsight import products as pr
+    fig, _ = charts.diverging_bars(pr.subcategory_performance(sales_data), "sub_category", "profit")
+    assert {t.name for t in fig.data} == {"Profit", "Loss"}
+
+
+def test_bubble_scatter_trend_line(sales_data):
+    from salesinsight import products as pr
+    fig, note = charts.bubble_scatter(pr.subcategory_performance(sales_data), "effective_discount_pct",
+                                      "profit_margin_pct", "revenue", "sub_category", "Discount", "Margin")
+    assert len(fig.data) == 2 and "Correlation" in note
+
+
+def test_pareto_growth_lines_index(sales_data):
+    from salesinsight import products as pr
+    assert charts.pareto_chart(pr.pareto(pr.product_performance(sales_data)))[0].data
+    assert charts.growth_bars(dd.growth(sales_data, "Year"), "revenue_growth_pct")[0].data[0].type == "bar"
+    assert len(charts.month_lines(dd.month_by_year(sales_data))[0].data) == 4
+    assert charts.index_bars(dd.seasonality_index(sales_data))[0].data[0].type == "bar"
+
+
+def test_lines_are_not_smoothed(sales_data):
+    # Smoothed (spline) lines overshoot between points and show values not in the data.
+    ts = dd.time_series(sales_data, "Month")
+    fig, _ = charts.time_chart(ts, [("revenue", "Revenue", "#3b82f6")], "Line")
+    assert fig.data[0].line.shape == "linear"

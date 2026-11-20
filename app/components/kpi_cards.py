@@ -22,7 +22,7 @@ def _value_text(card: dict) -> str:
 
 def _delta_html(card: dict, compare_label: str | None) -> str:
     if compare_label is None or card["previous"] is None:
-        return "<div class='si-kpi-delta si-flat'>&#9679; <span>no earlier period to compare</span></div>"
+        return "<div class='si-kpi-delta si-flat'><span>Select a year to compare</span></div>"
     change = card["change"]
     if change is None:
         return (f"<div class='si-kpi-delta si-flat'>&#9679; <span>no % change "
@@ -44,3 +44,13 @@ def render_kpi_cards(cards: list[dict], compare_label: str | None) -> None:
         f"<div class='si-kpi-value'>{escape(_value_text(c))}</div>{_delta_html(c, compare_label)}</div>"
         for c in cards)
     st.markdown(f"<div class='si-kpi-grid'>{html}</div>", unsafe_allow_html=True)
+
+
+def render_stat_cards(items: list[dict]) -> None:
+    """Simple cards: label, big value and a grey line underneath (no comparison)."""
+    html = "".join(
+        f"<div class='si-kpi'><div class='si-kpi-label'>{escape(i['label'])}</div>"
+        f"<div class='si-kpi-value'>{escape(str(i['value']))}</div>"
+        f"<div class='si-kpi-delta si-flat'><span>{escape(i.get('sub', ''))}</span></div></div>"
+        for i in items)
+    st.markdown(f"<div class='si-kpi-grid si-cols-4'>{html}</div>", unsafe_allow_html=True)

@@ -192,3 +192,76 @@ def test_previous_period_for_custom_dates_has_same_length(sales_data):
     state = FilterState(start=pd.Timestamp("2017-01-01"), end=pd.Timestamp("2017-01-10"))
     _, window = fl.previous_period(sales_data, state)
     assert window == (pd.Timestamp("2016-12-22"), pd.Timestamp("2016-12-31"))
+
+
+# --------------------------------------------------------------------------
+# 13B: trends and products data
+# --------------------------------------------------------------------------
+def test_metric_series_moving_average(sales_data):
+    s = dd.metric_series(sales_data, "Year", "Revenue")
+    assert s["value"].tolist() == pytest.approx([907.152, 979.9455, 1008.52, 106.122])
+    assert pd.isna(s.loc[0, "moving_avg"])
+    assert s.loc[1, "moving_avg"] == pytest.approx((907.152 + 979.9455) / 2)
+
+
+def test_growth_year(sales_data):
+    g = dd.growth(sales_data, "Year").set_index("label")
+    assert g.loc["2015", "revenue_growth_pct"] == pytest.approx(100 * (979.9455 - 907.152) / 907.152)
+    assert pd.isna(g.loc["2016", "profit_growth_pct"])      # 2015 profit was negative
+    assert "2014" not in g.index                            # nothing to compare with
+
+
+def test_month_by_year(sales_data):
+    m = dd.month_by_year(sales_data)
+    assert list(m.columns) == dd.MONTHS
+    assert m.loc[2016, "Nov"] == pytest.approx(261.96 + 731.94)
+    assert pd.isna(m.loc[2014, "Jan"])
+
+
+def test_seasonality_index_averages_100():
+    dates = pd.date_range("2015-01-01", "2016-12-31", freq="MS")
+    df = pd.DataFrame({"order_date": dates, "sales": [100.0 * d.month for d in dates],
+                       "profit": 1.0, "order_id": range(len(dates))})
+    s = dd.seasonality_index(df)
+    assert s["index"].mean() == pytest.approx(100)
+    assert s.loc[s["month"] == "Dec", "index"].iloc[0] == pytest.approx(100 * 12 / 6.5)
+
+
+def test_margin_series_blank_for_empty_periods(sales_data):
+    m = dd.margin_series(sales_data, "Month")
+    assert m["margin_pct"].isna().sum() == (m["revenue"] == 0).sum()
+
+
+def test_trend_stats(sales_data):
+    stats = {s["label"]: s for s in dd.trend_stats(sales_data)}
+    assert stats["Best month"]["value"] == "Nov 2016"
+    expected_cagr = 100 * ((106.122 / 907.152) ** (1 / 3) - 1)
+    assert stats["Revenue growth (CAGR)"]["value"] == f"{expected_cagr:+.1f}%"
+
+
+def test_trend_stats_single_year(sales_data):
+    stats = {s["label"]: s for s in dd.trend_stats(sales_data[sales_data["order_year"] == 2016])}
+    assert stats["Revenue growth (CAGR)"]["value"] == "-"
+
+
+def test_ranked_products(sales_data):
+    top = dd.ranked_products(sales_data, "Revenue", 2, top=True)
+    assert top.loc[0, "sub_category"] == "Tables"
+    bottom = dd.ranked_products(sales_data, "Profit", 1, top=False)
+    assert bottom.loc[0, "profit"] == pytest.approx(-383.031)
+    units = dd.ranked_products(sales_data, "Units", 1)
+    assert units.loc[0, "units_sold"] == 6
+
+
+def test_category_hierarchy(sales_data):
+    h = dd.category_hierarchy(sales_data)
+    assert len(h) == 8
+    assert h.groupby("category")["revenue"].sum()["Furniture"] == pytest.approx(261.96 + 731.94 + 957.5775)
+
+
+def test_product_stats(sales_data):
+    stats = {s["label"]: s for s in dd.product_stats(sales_data)}
+    assert stats["Products sold"]["value"] == "8"
+    assert stats["Loss-making products"]["value"] == "1"
+    assert stats["Most profitable sub-category"]["value"] == "Chairs"
+    assert dd.product_stats(sales_data.iloc[0:0]) == []

@@ -25,7 +25,7 @@ from components.context import PageContext, set_context  # noqa: E402
 from components.data import load_sales  # noqa: E402
 from components.filters import render_filters  # noqa: E402
 from salesinsight.filtering import apply_filters, date_window, previous_period  # noqa: E402
-from views import overview  # noqa: E402
+from views import overview, products, trends  # noqa: E402
 
 st.set_page_config(
     page_title="SalesInsight - Sales Intelligence",
@@ -45,12 +45,9 @@ def compare_label(state, prev_window) -> str | None:
     return f"vs {prev_window[0]:%d %b %Y} - {prev_window[1]:%d %b %Y}"
 
 
-# --- Sidebar brand ------------------------------------------------------------------
-st.sidebar.markdown(
-    "<div class='si-brand'><div class='si-brand-mark'>S</div><div>"
-    "<div class='si-brand-name'>SalesInsight</div>"
-    "<div class='si-brand-sub'>Sales intelligence platform</div></div></div>",
-    unsafe_allow_html=True)
+# --- Brand: logo at the very top of the sidebar (icon only when collapsed) ------------
+ASSETS = ROOT / "app" / "assets"
+st.logo(str(ASSETS / "logo.svg"), size="large", icon_image=str(ASSETS / "icon.svg"))
 
 # --- Data -------------------------------------------------------------------------
 try:
@@ -59,11 +56,14 @@ except Exception as exc:  # show a clear message instead of a traceback
     st.error(f"Could not load the sales data. {exc}")
     st.stop()
 
-# --- Navigation (pages are added step by step: 13A = Overview) ----------------------
+# --- Navigation (pages are added step by step: 13A Overview, 13B Trends + Products) --
 pages = {
     "Analytics": [
         st.Page(overview.render, title="Executive Overview", icon=":material/space_dashboard:",
                 url_path="overview", default=True),
+        st.Page(trends.render, title="Sales Trends", icon=":material/trending_up:", url_path="trends"),
+        st.Page(products.render, title="Product Intelligence", icon=":material/inventory_2:",
+                url_path="products"),
     ],
 }
 page = st.navigation(pages, position="sidebar")

@@ -67,8 +67,15 @@ def inject_css() -> None:
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-html, body, [class*="css"], .stApp, .stMarkdown, button, input, textarea {{
+html, body, .stApp, .stMarkdown, p, label, input, textarea, button {{
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}}
+h1, h2, h3, h4, h5, h6 {{
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
+}}
+/* Keep Streamlit's icon font for icons (menu, buttons), never replace it with Inter */
+[data-testid="stIconMaterial"], .material-symbols-rounded, span[class*="material-symbols"] {{
+    font-family: 'Material Symbols Rounded' !important;
 }}
 .stApp {{
     background:
@@ -87,6 +94,8 @@ h1, h2, h3, h4, p, li, label, .stMarkdown {{ color: {t['text']}; }}
     border-right: 1px solid rgba(148, 163, 184, 0.12);
 }}
 [data-testid="stSidebar"] * {{ color: #e5e7eb; }}
+[data-testid="stSidebarHeader"] {{ padding-top: 1.2rem; }}
+[data-testid="stSidebarHeader"] img {{ height: 2.1rem !important; }}
 .si-brand {{ display: flex; align-items: center; gap: .65rem; margin: .2rem 0 1rem 0; }}
 .si-brand-mark {{
     width: 36px; height: 36px; border-radius: 10px; background: {ACCENT_GRADIENT};
@@ -106,7 +115,11 @@ h1, h2, h3, h4, p, li, label, .stMarkdown {{ color: {t['text']}; }}
     display: inline-block; font-size: .72rem; font-weight: 600; letter-spacing: .08em;
     text-transform: uppercase; color: #a5b4fc; margin-bottom: .35rem;
 }}
-.si-title {{ font-size: 1.85rem; font-weight: 700; margin: 0; color: {t['text']}; line-height: 1.2; }}
+.si-header h1.si-title {{
+    font-size: 1.9rem !important; font-weight: 700 !important; margin: 0 !important;
+    padding: 0 !important; color: {t['text']}; line-height: 1.2 !important; letter-spacing: -0.01em;
+}}
+.si-header h1 a, .si-header [data-testid="stHeaderActionElements"] {{ display: none !important; }}
 .si-subtitle {{ color: {t['muted']}; margin-top: .35rem; font-size: .95rem; }}
 .si-chips {{ display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .7rem; }}
 .si-chip {{
@@ -117,8 +130,15 @@ h1, h2, h3, h4, p, li, label, .stMarkdown {{ color: {t['text']}; }}
 
 /* KPI cards */
 .si-kpi-grid {{
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem; margin: .4rem 0 1.4rem 0;
+    display: grid; grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: .9rem; margin: .4rem 0 1.4rem 0;
+}}
+.si-kpi-grid.si-cols-4 {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
+@media (max-width: 1250px) {{
+    .si-kpi-grid, .si-kpi-grid.si-cols-4 {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
+}}
+@media (max-width: 760px) {{
+    .si-kpi-grid, .si-kpi-grid.si-cols-4 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
 }}
 .si-kpi {{
     position: relative; overflow: hidden;
@@ -129,7 +149,10 @@ h1, h2, h3, h4, p, li, label, .stMarkdown {{ color: {t['text']}; }}
     content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: {ACCENT_GRADIENT};
 }}
 .si-kpi-label {{ font-size: .8rem; color: {t['muted']}; font-weight: 500; }}
-.si-kpi-value {{ font-size: 1.65rem; font-weight: 700; color: {t['text']}; margin: .3rem 0 .25rem 0; }}
+.si-kpi-value {{
+    font-size: 1.55rem; font-weight: 700; color: {t['text']}; margin: .3rem 0 .25rem 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}}
 .si-kpi-delta {{ font-size: .8rem; font-weight: 600; }}
 .si-kpi-delta span {{ color: {t['muted']}; font-weight: 400; }}
 .si-up {{ color: {t['up']}; }}
@@ -173,14 +196,14 @@ footer {{ visibility: hidden; }}
 def plotly_layout() -> dict:
     """Shared Plotly layout for the current theme (transparent background, Inter font)."""
     t = palette()
-    axis = dict(gridcolor=t["grid"], zerolinecolor=t["grid"], linecolor=t["grid"],
+    axis = dict(gridcolor=t["grid"], zerolinecolor=t["grid"], linecolor=t["grid"], automargin=True,
                 tickfont=dict(color=t["muted"], size=12), title_font=dict(color=t["muted"], size=12))
     return dict(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         font=dict(family="Inter, system-ui, sans-serif", color=t["text"], size=13),
         colorway=SERIES,
-        margin=dict(l=8, r=8, t=12, b=8),
+        margin=dict(l=10, r=16, t=16, b=10, pad=4),
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0,
                     font=dict(color=t["muted"], size=12), bgcolor="rgba(0,0,0,0)"),
         hoverlabel=dict(bgcolor=t["panel_2"], bordercolor=t["border"], font=dict(color=t["text"], size=12)),
