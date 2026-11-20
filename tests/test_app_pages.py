@@ -143,5 +143,48 @@ def test_pages_with_no_data(page):
 def test_navigation_lists_all_pages():
     from pathlib import Path
     text = Path(APP).read_text(encoding="utf-8")
-    for title in ("Executive Overview", "Sales Trends", "Product Intelligence"):
+    for title in ("Executive Overview", "Sales Trends", "Product Intelligence",
+                  "Regional Intelligence", "Customer Intelligence"):
         assert title in text
+
+
+# --------------------------------------------------------------------------
+# 13C: Regional and Customer Intelligence pages
+# --------------------------------------------------------------------------
+@pytest.mark.parametrize("options", [
+    {},
+    {"rg_map_metric": "Profit"},
+    {"rg_map_metric": "Margin", "rg_map_view": "Bars"},
+    {"rg_r_metric": "Orders", "rg_r_kind": "Donut"},
+    {"rg_m_metric": "Revenue"},
+    {"rg_s_dir": "Bottom", "rg_s_metric": "Profit", "rg_s_view": "Table"},
+    {"rg_y_kind": "Stacked area", "rg_y_metric": "Profit"},
+])
+def test_regions_page(options):
+    at = render_page("regions", options)
+    assert not at.exception
+    assert "Regional Intelligence" in page_text(at)
+
+
+@pytest.mark.parametrize("options", [
+    {},
+    {"cu_s_metric": "Avg order value", "cu_s_kind": "Horizontal bar"},
+    {"cu_s_metric": "Customers", "cu_s_kind": "Treemap"},
+    {"cu_rfm_view": "Treemap"},
+    {"cu_rfm_view": "Table"},
+    {"cu_nr_kind": "Stacked area"},
+    {"cu_t_dir": "Bottom", "cu_t_metric": "Profit", "cu_t_view": "Table"},
+])
+def test_customers_page(options):
+    at = render_page("customers", options)
+    assert not at.exception
+    assert "Customer Intelligence" in page_text(at)
+
+
+@pytest.mark.parametrize("page", ["regions", "customers"])
+def test_new_pages_with_filters_and_no_data(page):
+    at = render_page(page, filters={"years": (2016,), "regions": ("West",)})
+    assert not at.exception
+    at = render_page(page, filters={"years": (2014,), "start": "2017-01-01", "end": "2017-01-31"})
+    assert not at.exception
+    assert "No data matches" in page_text(at)

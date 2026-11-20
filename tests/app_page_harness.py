@@ -16,9 +16,10 @@ from components import theme  # noqa: E402
 from components.context import PageContext, set_context  # noqa: E402
 from components.data import load_sales  # noqa: E402
 from salesinsight.filtering import FilterState, apply_filters, date_window, previous_period  # noqa: E402
-from views import overview, products, trends  # noqa: E402
+from views import customers, overview, products, regions, trends  # noqa: E402
 
-PAGES = {"overview": overview, "trends": trends, "products": products}
+PAGES = {"overview": overview, "trends": trends, "products": products, "regions": regions,
+         "customers": customers}
 
 theme.inject_css()
 data = load_sales()

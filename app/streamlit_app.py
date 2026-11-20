@@ -25,7 +25,7 @@ from components.context import PageContext, set_context  # noqa: E402
 from components.data import load_sales  # noqa: E402
 from components.filters import render_filters  # noqa: E402
 from salesinsight.filtering import apply_filters, date_window, previous_period  # noqa: E402
-from views import overview, products, trends  # noqa: E402
+from views import customers, overview, products, regions, trends  # noqa: E402
 
 st.set_page_config(
     page_title="SalesInsight - Sales Intelligence",
@@ -56,7 +56,7 @@ except Exception as exc:  # show a clear message instead of a traceback
     st.error(f"Could not load the sales data. {exc}")
     st.stop()
 
-# --- Navigation (pages are added step by step: 13A Overview, 13B Trends + Products) --
+# --- Navigation ---------------------------------------------------------------------
 pages = {
     "Analytics": [
         st.Page(overview.render, title="Executive Overview", icon=":material/space_dashboard:",
@@ -64,6 +64,9 @@ pages = {
         st.Page(trends.render, title="Sales Trends", icon=":material/trending_up:", url_path="trends"),
         st.Page(products.render, title="Product Intelligence", icon=":material/inventory_2:",
                 url_path="products"),
+        st.Page(regions.render, title="Regional Intelligence", icon=":material/public:", url_path="regions"),
+        st.Page(customers.render, title="Customer Intelligence", icon=":material/groups:",
+                url_path="customers"),
     ],
 }
 page = st.navigation(pages, position="sidebar")

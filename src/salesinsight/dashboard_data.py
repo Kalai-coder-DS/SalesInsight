@@ -240,3 +240,99 @@ def product_stats(df: pd.DataFrame) -> list[dict]:
         {"label": "Most profitable sub-category", "value": best["sub_category"],
          "sub": f"{short_money(best['profit'])} profit"},
     ]
+
+
+# ---------------------------------------------------------------------------
+# Regional Intelligence page (13C)
+# ---------------------------------------------------------------------------
+STATE_METRICS = {
+    # label -> (column, kind, diverging colour scale?)
+    "Revenue": ("revenue", "money", False),
+    "Profit": ("profit", "money", True),
+    "Margin": ("profit_margin_pct", "pct", True),
+    "Discount": ("effective_discount_pct", "pct", False),
+    "Orders": ("total_orders", "int", False),
+}
+
+
+def state_table(df: pd.DataFrame) -> pd.DataFrame:
+    """One row per state with revenue, profit, margin, discount, orders and its map code."""
+    from salesinsight.geo import state_code
+    from salesinsight.regions import state_performance
+    if df.empty:
+        return pd.DataFrame(columns=["region", "state", "code", "revenue", "profit", "profit_margin_pct",
+                                     "effective_discount_pct", "total_orders"])
+    t = state_performance(df)
+    t.insert(2, "code", t["state"].map(state_code))
+    return t
+
+
+def region_stats(df: pd.DataFrame) -> list[dict]:
+    from salesinsight.regions import discount_margin_correlation, region_performance
+    if df.empty:
+        return []
+    regions = region_performance(df)
+    states = state_table(df)
+    top = regions.iloc[0]
+    best = regions.loc[regions["profit_margin_pct"].idxmax()]
+    losing = states[states["profit"] < 0]
+    corr = discount_margin_correlation(states)
+    return [
+        {"label": "Largest region", "value": top["region"],
+         "sub": f"{top['share_of_revenue_pct']:.1f}% of revenue"},
+        {"label": "Best margin region", "value": best["region"],
+         "sub": f"{best['profit_margin_pct']:.1f}% profit margin"},
+        {"label": "Loss-making states", "value": f"{len(losing)} of {len(states)}",
+         "sub": f"{short_money(losing['profit'].sum())} total" if len(losing) else "no state loses money"},
+        {"label": "Discount vs margin (states)", "value": f"{corr:.2f}" if pd.notna(corr) else "-",
+         "sub": "correlation, states with 10+ orders" if pd.notna(corr) else "needs 3+ states with 10+ orders"},
+    ]
+
+
+def region_by_year(df: pd.DataFrame, metric: str = "Revenue") -> pd.DataFrame:
+    """Long table: region, year, value - for one line per region."""
+    column = METRICS[metric][0]
+    if df.empty:
+        return pd.DataFrame(columns=["group", "x", "value"])
+    g = df.groupby(["region", "order_year"])
+    values = {"revenue": g["sales"].sum(), "profit": g["profit"].sum(),
+              "total_orders": g["order_id"].nunique()}[column]
+    out = values.reset_index()
+    out.columns = ["group", "x", "value"]
+    out["x"] = out["x"].astype(str)
+    return out
+
+
+# ---------------------------------------------------------------------------
+# Customer Intelligence page (13C)
+# ---------------------------------------------------------------------------
+SEGMENT_METRICS = {
+    "Revenue": ("revenue", "money"), "Profit": ("profit", "money"),
+    "Customers": ("total_customers", "int"), "Avg order value": ("avg_order_value", "money"),
+}
+
+
+def customer_stats(df: pd.DataFrame) -> list[dict]:
+    from salesinsight.customers import concentration, customer_table, days_between_orders
+    if df.empty:
+        return []
+    c = customer_table(df)
+    repeat = 100 * (c["total_orders"] >= 2).mean()
+    gaps = days_between_orders(df)
+    return [
+        {"label": "Customers", "value": f"{len(c):,}", "sub": f"{short_money(c['revenue'].mean())} revenue each"},
+        {"label": "Repeat customers", "value": f"{repeat:.1f}%", "sub": "ordered more than once"},
+        {"label": "Orders per customer", "value": f"{c['total_orders'].mean():.1f}",
+         "sub": f"median {gaps.median():.0f} days between orders" if len(gaps) else "no repeat orders yet"},
+        {"label": "Top 20% of customers", "value": f"{concentration(c, 20):.1f}%", "sub": "of revenue"},
+    ]
+
+
+def new_vs_returning_long(df: pd.DataFrame) -> pd.DataFrame:
+    """new_vs_returning() reshaped for a stacked chart, plus retention per year."""
+    from salesinsight.customers import new_vs_returning
+    if df.empty:
+        return pd.DataFrame(columns=["label", "revenue_returning", "revenue_new", "retention_pct"])
+    n = new_vs_returning(df)
+    n["label"] = n["order_year"].astype(str)
+    return n

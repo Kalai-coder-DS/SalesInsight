@@ -398,3 +398,98 @@ def index_bars(season: pd.DataFrame) -> tuple[go.Figure, str | None]:
                   annotation_font=dict(color=palette()["muted"], size=11))
     fig.update_layout(bargap=0.3)
     return _finish(fig, 360, False), None
+
+
+# ---------------------------------------------------------------------------
+# 13C charts
+# ---------------------------------------------------------------------------
+def us_map(states: pd.DataFrame, value: str, value_kind: str = "money", value_name: str = "Revenue",
+           diverging: bool = False, height: int = 520) -> tuple[go.Figure, str | None]:
+    """Choropleth of US states. Diverging (red/blue around 0) for profit and margin."""
+    d = states.dropna(subset=["code"])
+    t = palette()
+    scale = dict(colorscale=sequential_scale())
+    if diverging:
+        limit = max(1.0, float(d[value].abs().quantile(0.95)))
+        scale = dict(colorscale=diverging_scale(), zmid=0, zmin=-limit, zmax=limit)
+    hover_val = {"money": "$%{z:,.0f}", "pct": "%{z:.1f}%", "int": "%{z:,.0f}"}[value_kind]
+    fig = go.Figure(go.Choropleth(
+        locations=d["code"], z=d[value], locationmode="USA-states",
+        marker_line_color=t["panel"], marker_line_width=1,
+        customdata=list(zip(d["state"], d["region"], d["revenue"], d["profit_margin_pct"])),
+        hovertemplate=(f"<b>%{{customdata[0]}}</b> (%{{customdata[1]}})<br>{value_name}: {hover_val}"
+                       "<br>Revenue: $%{customdata[2]:,.0f}<br>Margin: %{customdata[3]:.1f}%<extra></extra>"),
+        colorbar=dict(thickness=12, outlinewidth=0, len=0.75,
+                      tickprefix="$" if value_kind == "money" else "",
+                      ticksuffix="%" if value_kind == "pct" else ""),
+        **scale))
+    fig.update_geos(scope="usa", bgcolor="rgba(0,0,0,0)", showlakes=False, showland=True,
+                    landcolor=t["panel_2"], subunitcolor=t["panel"], showframe=False)
+    fig.update_layout(margin=dict(l=0, r=0, t=0, b=0))
+    note = None
+    missing = states["code"].isna().sum()
+    if missing:
+        note = f"{missing} location(s) without a US state code are not shown on the map."
+    return _finish(fig, height, False), note
+
+
+def group_chart(data: pd.DataFrame, kind: str = "Line", value_kind: str = "money",
+                value_name: str = "Revenue", height: int = 380) -> tuple[go.Figure, str | None]:
+    """One series per group (columns: group, x, value). Colour follows the group, never its rank."""
+    fig = go.Figure()
+    groups = sorted(data["group"].unique())
+    hover_val = _hover_value(value_kind)
+    for i, grp in enumerate(groups):
+        part = data[data["group"] == grp]
+        color = SERIES[i % len(SERIES)]
+        hover = f"{grp} %{{x}}<br>{value_name}: {hover_val}<extra></extra>"
+        if kind == "Bar":
+            fig.add_trace(go.Bar(x=part["x"], y=part["value"], name=grp, marker_color=color,
+                                 marker_line_width=0, hovertemplate=hover))
+        else:
+            fig.add_trace(go.Scatter(x=part["x"], y=part["value"], name=grp, mode="lines+markers",
+                                     line=dict(color=color, width=2.5, shape="linear"),
+                                     marker=dict(size=8), hovertemplate=hover,
+                                     stackgroup="one" if kind == "Stacked area" else None))
+    if kind == "Bar":
+        fig.update_layout(barmode="group", bargap=0.22, bargroupgap=0.06)
+    return _finish(fig, height, True, value_kind), None
+
+
+def paired_bars(data: pd.DataFrame, label: str, first: tuple[str, str, str], second: tuple[str, str, str],
+                horizontal: bool = False, height: int | None = None) -> tuple[go.Figure, str | None]:
+    """Two % series side by side per label, e.g. share of customers vs share of revenue."""
+    fig = go.Figure()
+    d = data.iloc[::-1] if horizontal else data
+    for column, name, color in (first, second):
+        values = d[column]
+        common = dict(name=name, marker_color=color, marker_line_width=0,
+                      text=[f"{v:.0f}%" for v in values], textposition="outside", cliponaxis=False)
+        if horizontal:
+            fig.add_trace(go.Bar(y=d[label], x=values, orientation="h",
+                                 hovertemplate=f"%{{y}}<br>{name}: %{{x:.1f}}%<extra></extra>", **common))
+        else:
+            fig.add_trace(go.Bar(x=d[label], y=values,
+                                 hovertemplate=f"%{{x}}<br>{name}: %{{y:.1f}}%<extra></extra>", **common))
+    fig.update_layout(barmode="group", bargap=0.25, bargroupgap=0.05)
+    h = height or (max(320, 46 * len(d) + 90) if horizontal else 360)
+    return _finish(fig, h, True, "pct", value_axis="x" if horizontal else "y"), None
+
+
+def stacked_chart(data: pd.DataFrame, x: str, series: list[tuple[str, str, str]], kind: str = "Stacked bars",
+                  value_kind: str = "money", height: int = 380) -> tuple[go.Figure, str | None]:
+    """Stacked bars or stacked area, e.g. revenue from returning (bottom) and new (top) customers."""
+    fig = go.Figure()
+    hover_val = _hover_value(value_kind)
+    for column, name, color in series:
+        hover = f"%{{x}}<br>{name}: {hover_val}<extra></extra>"
+        if kind == "Stacked bars":
+            fig.add_trace(go.Bar(x=data[x], y=data[column], name=name, marker_color=color,
+                                 marker_line_color=palette()["panel"], marker_line_width=2, hovertemplate=hover))
+        else:
+            fig.add_trace(go.Scatter(x=data[x], y=data[column], name=name, mode="lines", stackgroup="one",
+                                     line=dict(color=color, width=2), fillcolor=_rgba(color, 0.45),
+                                     hovertemplate=hover))
+    if kind == "Stacked bars":
+        fig.update_layout(barmode="stack", bargap=0.35)
+    return _finish(fig, height, True, value_kind), None

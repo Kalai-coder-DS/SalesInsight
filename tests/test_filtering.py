@@ -265,3 +265,44 @@ def test_product_stats(sales_data):
     assert stats["Loss-making products"]["value"] == "1"
     assert stats["Most profitable sub-category"]["value"] == "Chairs"
     assert dd.product_stats(sales_data.iloc[0:0]) == []
+
+
+# --------------------------------------------------------------------------
+# 13C: regions and customers data
+# --------------------------------------------------------------------------
+def test_state_table_has_codes(sales_data):
+    t = dd.state_table(sales_data).set_index("state")
+    assert t.loc["Kentucky", "code"] == "KY"
+    assert t.loc["Florida", "profit"] == pytest.approx(-383.031 + 2.5164)
+    assert dd.state_table(sales_data.iloc[0:0]).empty
+
+
+def test_region_stats(sales_data):
+    stats = {s["label"]: s for s in dd.region_stats(sales_data)}
+    assert stats["Largest region"]["value"] == "South"
+    assert stats["Loss-making states"]["value"] == "1 of 6"
+    assert stats["Discount vs margin (states)"]["value"] == "-"     # too few orders per state
+
+
+def test_region_by_year(sales_data):
+    r = dd.region_by_year(sales_data)
+    south_2016 = r[(r["group"] == "South") & (r["x"] == "2016")]["value"].iloc[0]
+    assert south_2016 == pytest.approx(261.96 + 731.94)
+    assert r["value"].sum() == pytest.approx(sales_data["sales"].sum())
+
+
+def test_customer_stats(sales_data_with_repeat):
+    stats = {s["label"]: s for s in dd.customer_stats(sales_data_with_repeat)}
+    assert stats["Customers"]["value"] == "6"
+    assert stats["Repeat customers"]["value"] == f"{100 / 6:.1f}%"
+    assert dd.customer_stats(sales_data_with_repeat.iloc[0:0]) == []
+
+
+def test_customer_stats_without_repeats(sales_data):
+    stats = {s["label"]: s for s in dd.customer_stats(sales_data)}
+    assert stats["Orders per customer"]["sub"] == "no repeat orders yet"
+
+
+def test_new_vs_returning_long(sales_data_with_repeat):
+    n = dd.new_vs_returning_long(sales_data_with_repeat).set_index("label")
+    assert n.loc["2017", "revenue_returning"] == pytest.approx(261.96)   # Claire's second order

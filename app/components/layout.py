@@ -72,6 +72,9 @@ COLUMN_LABELS = {
     "profit_margin_pct": "Margin", "effective_discount_pct": "Discount", "discount": "Discount",
     "loss_lines_pct": "Lines at a loss", "share_of_revenue_pct": "Share of revenue",
     "order_id": "Order ID", "order_date": "Order date", "ship_date": "Ship date",
+    "rfm_segment": "RFM segment", "total_customers": "Customers", "avg_recency_days": "Days since last order",
+    "avg_orders": "Orders per customer", "avg_revenue": "Revenue per customer", "recency_days": "Days since last order",
+    "share_of_customers_pct": "Share of customers",
 }
 
 
