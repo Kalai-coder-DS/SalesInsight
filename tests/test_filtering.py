@@ -388,3 +388,20 @@ def test_safe_findings_skips_trend_for_short_ranges(sales_data):
     findings, skipped = dd.safe_findings(one_month)
     assert "trends" not in findings and "trends" in skipped
     assert "kpis" in findings
+
+
+def test_highlights_adapt_to_capabilities(sales_data):
+    demo = dd.highlights(sales_data)
+    assert [h["title"] for h in demo] == ["Largest category", "Weakest region margin", "Loss-making order lines"]
+    no_profit = dd.highlights(sales_data, frozenset({"category", "products", "orders"}))
+    titles = [h["title"] for h in no_profit]
+    assert "Loss-making order lines" not in titles and "Weakest region margin" not in titles
+    assert "margin" not in no_profit[0]["text"] and len(no_profit) == 3
+    minimal = dd.highlights(sales_data, frozenset())
+    assert [h["title"] for h in minimal] == ["Best month", "Average sale"]
+
+
+def test_q4_stat_without_q4_data(sales_data):
+    no_q4 = sales_data[sales_data["order_date"].dt.quarter != 4]
+    q4 = next(s for s in dd.trend_stats(no_q4) if s["label"] == "Q4 share of revenue")
+    assert q4["value"] == "-" and "no October-December" in q4["sub"]

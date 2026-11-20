@@ -288,3 +288,37 @@ def test_whole_app_runs_on_uploaded_data():
     assert "online_store_orders.xlsx" in sidebar
     at.sidebar.button(key="ds_side_demo").click().run()
     assert not at.exception and at.session_state["ds_mode"] == "demo"
+
+
+# --------------------------------------------------------------------------
+# 14C: pages adapt to what an uploaded file contains
+# --------------------------------------------------------------------------
+UPLOADS = ["indian_retail_sales.csv", "online_store_orders.xlsx", "cafe_daily_sales.csv"]
+ANALYTICS = ["overview", "trends", "products", "regions", "customers", "explorer"]
+
+
+@pytest.mark.parametrize("upload", UPLOADS)
+@pytest.mark.parametrize("page", ANALYTICS)
+def test_pages_with_uploaded_data(page, upload):
+    at = render_page(page, {"harness_upload": upload})
+    assert not at.exception and not at.error, (page, upload)
+
+
+def test_currency_and_missing_profit_on_overview():
+    at = render_page("overview", {"harness_upload": "indian_retail_sales.csv"})
+    text = page_text(at)
+    assert "₹" in text and "Total profit" not in text           # no profit data -> no profit card
+    assert "not available for your data" in text and "profit or cost column" in text
+
+
+def test_page_without_customers_explains_why():
+    at = render_page("customers", {"harness_upload": "cafe_daily_sales.csv"})
+    assert not at.exception
+    assert "Customer Intelligence is not available for your data" in page_text(at)
+
+
+def test_demo_pages_show_no_unavailable_notes():
+    for page in ANALYTICS:
+        at = render_page(page)
+        notes = [m.value for m in at.markdown if "si-unavailable" in m.value and "<style>" not in m.value]
+        assert not notes, page

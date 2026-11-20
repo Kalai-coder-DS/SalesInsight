@@ -103,7 +103,7 @@ else:
     st.sidebar.markdown(f"<div class='si-source'>Demo<b>{ds.DEMO_NAME}</b></div>", unsafe_allow_html=True)
 
 # --- Global filters (same for every page) ------------------------------------------
-state = render_filters(data)
+state = render_filters(data, ds.capabilities())
 st.sidebar.markdown("<div class='si-side-title'>Appearance</div>", unsafe_allow_html=True)
 st.sidebar.toggle("Light mode", key="light_mode")
 

@@ -11,12 +11,23 @@ from __future__ import annotations
 import pandas as pd
 import plotly.graph_objects as go
 
-from components.theme import GAIN, LOSS, PROFIT, REVENUE, SERIES, palette, plotly_layout
+from components.theme import GAIN, LOSS, PROFIT, REVENUE, SERIES, currency_symbol, fx, palette, plotly_layout
 from salesinsight.kpis import short_money
 
 CATEGORY_KINDS = ["Bar", "Horizontal bar", "Pie", "Donut", "Treemap"]
 TIME_KINDS = ["Line", "Area", "Bar"]
 PART_OF_WHOLE = {"Pie", "Donut", "Treemap"}
+
+
+def _cur() -> str:
+    """Currency of the active data ("$" for the demo data)."""
+    return currency_symbol()
+
+
+def _money_axis() -> tuple[str, str]:
+    """(tickformat, tickprefix) for money axes. "$" keeps Plotly's own dollar format
+    (exactly as before Phase 14); other currencies use a prefix."""
+    return ("$~s", "") if _cur() == "$" else ("~s", _cur())
 
 
 def _rgba(hex_color: str, alpha: float) -> str:
@@ -27,7 +38,7 @@ def _rgba(hex_color: str, alpha: float) -> str:
 
 def _fmt(value: float, value_kind: str) -> str:
     if value_kind == "money":
-        return short_money(value)
+        return fx(short_money(value))
     if value_kind == "pct":
         return f"{value:.1f}%"
     return f"{value:,.0f}"
@@ -35,7 +46,7 @@ def _fmt(value: float, value_kind: str) -> str:
 
 def _hover_value(value_kind: str, axis: str = "y") -> str:
     if value_kind == "money":
-        return f"$%{{{axis}:,.0f}}"
+        return f"{_cur()}%{{{axis}:,.0f}}"
     if value_kind == "pct":
         return f"%{{{axis}:.1f}}%"
     return f"%{{{axis}:,.0f}}"
@@ -45,12 +56,14 @@ def _finish(fig: go.Figure, height: int, showlegend: bool, value_kind: str | Non
             value_axis: str = "y") -> go.Figure:
     fig.update_layout(**plotly_layout(), height=height, showlegend=showlegend)
     if value_kind:
-        fmt = {"money": "$~s", "pct": ".0f", "int": "~s"}[value_kind]
+        money_fmt, prefix = _money_axis()
+        fmt = {"money": money_fmt, "pct": ".0f", "int": "~s"}[value_kind]
         suffix = "%" if value_kind == "pct" else ""
+        prefix = prefix if value_kind == "money" else ""
         if value_axis == "y":
-            fig.update_yaxes(tickformat=fmt, ticksuffix=suffix)
+            fig.update_yaxes(tickformat=fmt, ticksuffix=suffix, tickprefix=prefix)
         else:
-            fig.update_xaxes(tickformat=fmt, ticksuffix=suffix)
+            fig.update_xaxes(tickformat=fmt, ticksuffix=suffix, tickprefix=prefix)
     return fig
 
 
@@ -89,7 +102,7 @@ def category_chart(data: pd.DataFrame, label: str, value: str, kind: str = "Bar"
         return _finish(fig, height, False, value_kind, value_axis="x"), note
 
     if kind in ("Pie", "Donut"):
-        money = "$%{value:,.0f}" if value_kind == "money" else "%{value:,.0f}"
+        money = f"{_cur()}%{{value:,.0f}}" if value_kind == "money" else "%{value:,.0f}"
         fig = go.Figure(go.Pie(
             labels=labels, values=values, hole=0.58 if kind == "Donut" else 0, sort=False,
             marker=dict(colors=SERIES[:len(labels)], line=dict(color=t["panel"], width=2)),
@@ -101,7 +114,7 @@ def category_chart(data: pd.DataFrame, label: str, value: str, kind: str = "Bar"
         return _finish(fig, height, True), note
 
     if kind == "Treemap":
-        money = "$%{value:,.0f}" if value_kind == "money" else "%{value:,.0f}"
+        money = f"{_cur()}%{{value:,.0f}}" if value_kind == "money" else "%{value:,.0f}"
         fig = go.Figure(go.Treemap(
             labels=labels, parents=[""] * len(labels), values=values,
             marker=dict(colors=SERIES[:len(labels)], line=dict(color=t["panel"], width=2)),
@@ -162,12 +175,12 @@ def waterfall_chart(bridge: pd.DataFrame, height: int = 380) -> tuple[go.Figure,
     t = palette()
     fig = go.Figure(go.Waterfall(
         x=bridge["label"], y=bridge["value"], measure=bridge["measure"],
-        text=[short_money(v) for v in bridge["value"]], textposition="outside", cliponaxis=False,
+        text=[fx(short_money(v)) for v in bridge["value"]], textposition="outside", cliponaxis=False,
         increasing=dict(marker=dict(color=GAIN)),
         decreasing=dict(marker=dict(color=LOSS)),
         totals=dict(marker=dict(color="#8b5cf6")),
         connector=dict(line=dict(color=t["grid"], width=1, dash="dot")),
-        hovertemplate="%{x}: $%{y:,.0f}<extra></extra>"))
+        hovertemplate=f"%{{x}}: {_cur()}%{{y:,.0f}}<extra></extra>"))
     return _finish(fig, height, False, "money"), None
 
 
@@ -203,7 +216,7 @@ def ranked_bar(data: pd.DataFrame, label: str, value: str, value_kind: str = "mo
     hover = "<b>%{customdata[0]}</b><br>" + f"{value_name}: {_hover_value(value_kind, 'x')}"
     for i, (col, (name, kind)) in enumerate((extra or {}).items(), start=1):
         custom.append(d[col])
-        fmt = {"money": f"$%{{customdata[{i}]:,.0f}}", "pct": f"%{{customdata[{i}]:.1f}}%",
+        fmt = {"money": f"{_cur()}%{{customdata[{i}]:,.0f}}", "pct": f"%{{customdata[{i}]:.1f}}%",
                "int": f"%{{customdata[{i}]:,.0f}}", "text": f"%{{customdata[{i}]}}"}[kind]
         hover += f"<br>{name}: {fmt}"
     fig = go.Figure(go.Bar(
@@ -226,7 +239,7 @@ def hierarchy_chart(h: pd.DataFrame, kind: str = "Treemap", size: str = "revenue
             fig.add_trace(go.Bar(x=g["sub_category"], y=g[size], name=cat, marker_color=SERIES[i],
                                  marker_line_width=0, customdata=g["profit_margin_pct"],
                                  hovertemplate=f"%{{x}}<br>{size_name}: " +
-                                 ("$%{y:,.0f}" if size == "revenue" else "%{y:,.0f}") +
+                                 (f"{_cur()}%{{y:,.0f}}" if size == "revenue" else "%{y:,.0f}") +
                                  "<br>Margin: %{customdata:.1f}%<extra>" + cat + "</extra>"))
         fig.update_layout(bargap=0.25)
         fig.update_xaxes(tickangle=-35)
@@ -241,7 +254,7 @@ def hierarchy_chart(h: pd.DataFrame, kind: str = "Treemap", size: str = "revenue
     values = list(cats[size]) + list(h[size])
     margins = list(cats["profit_margin_pct"]) + list(h["profit_margin_pct"])
     limit = max(5.0, float(pd.Series(margins).abs().quantile(0.9)))
-    value_fmt = "$%{value:,.0f}" if size == "revenue" else "%{value:,.0f}"
+    value_fmt = f"{_cur()}%{{value:,.0f}}" if size == "revenue" else "%{value:,.0f}"
     common = dict(
         ids=ids, labels=labels, parents=parents, values=values, branchvalues="total",
         marker=dict(colors=margins, colorscale=diverging_scale(), cmid=0, cmin=-limit, cmax=limit,
@@ -263,8 +276,8 @@ def hierarchy_chart(h: pd.DataFrame, kind: str = "Treemap", size: str = "revenue
 def heatmap(matrix: pd.DataFrame, value_kind: str = "money", diverging: bool = False,
             value_name: str = "Revenue", height: int | None = None) -> tuple[go.Figure, str | None]:
     z = matrix.astype(float)
-    text_fmt = {"money": "%{z:$.3s}", "pct": "%{z:.0f}%", "int": "%{z:,.0f}"}[value_kind]
-    hover_fmt = {"money": "$%{z:,.0f}", "pct": "%{z:.1f}%", "int": "%{z:,.0f}"}[value_kind]
+    text_fmt = {"money": "%{z:$.3s}" if _cur() == "$" else f"{_cur()}%{{z:.3s}}", "pct": "%{z:.0f}%", "int": "%{z:,.0f}"}[value_kind]
+    hover_fmt = {"money": f"{_cur()}%{{z:,.0f}}", "pct": "%{z:.1f}%", "int": "%{z:,.0f}"}[value_kind]
     kwargs = dict(colorscale=sequential_scale())
     if diverging:
         limit = max(5.0, float(pd.Series(z.to_numpy().ravel()).abs().quantile(0.95)))
@@ -275,7 +288,7 @@ def heatmap(matrix: pd.DataFrame, value_kind: str = "money", diverging: bool = F
         hovertemplate=f"%{{y}} / %{{x}}<br>{value_name}: {hover_fmt}<extra></extra>",
         colorbar=dict(thickness=12, outlinewidth=0,
                       ticksuffix="%" if value_kind == "pct" else "",
-                      tickprefix="$" if value_kind == "money" else ""),
+                      tickprefix=_cur() if value_kind == "money" else ""),
         **kwargs))
     fig.update_yaxes(autorange="reversed", showgrid=False)
     fig.update_xaxes(showgrid=False, side="top")
@@ -320,7 +333,7 @@ def bubble_scatter(data: pd.DataFrame, x: str, y: str, size: str, label: str,
         customdata=d[size],
         hovertemplate=(f"<b>%{{text}}</b><br>{x_name}: {_hover_value(x_kind, 'x')}"
                        f"<br>{y_name}: {_hover_value(y_kind)}"
-                       f"<br>{size_name}: $%{{customdata:,.0f}}<extra></extra>")))
+                       f"<br>{size_name}: {_cur()}%{{customdata:,.0f}}<extra></extra>")))
     note = None
     if len(d) >= 3 and d[x].nunique() > 1:
         slope, intercept = np.polyfit(d[x], d[y], 1)
@@ -333,7 +346,8 @@ def bubble_scatter(data: pd.DataFrame, x: str, y: str, size: str, label: str,
     fig.add_hline(y=0, line=dict(color=palette()["muted"], width=1))
     fig = _finish(fig, 440, False, y_kind)
     fig.update_xaxes(ticksuffix="%" if x_kind == "pct" else "",
-                     tickformat="$~s" if x_kind == "money" else None, title_text=x_name)
+                     tickformat=_money_axis()[0] if x_kind == "money" else None,
+                     tickprefix=_money_axis()[1] if x_kind == "money" else "", title_text=x_name)
     fig.update_yaxes(title_text=y_name)
     return fig, note
 
@@ -412,15 +426,15 @@ def us_map(states: pd.DataFrame, value: str, value_kind: str = "money", value_na
     if diverging:
         limit = max(1.0, float(d[value].abs().quantile(0.95)))
         scale = dict(colorscale=diverging_scale(), zmid=0, zmin=-limit, zmax=limit)
-    hover_val = {"money": "$%{z:,.0f}", "pct": "%{z:.1f}%", "int": "%{z:,.0f}"}[value_kind]
+    hover_val = {"money": f"{_cur()}%{{z:,.0f}}", "pct": "%{z:.1f}%", "int": "%{z:,.0f}"}[value_kind]
     fig = go.Figure(go.Choropleth(
         locations=d["code"], z=d[value], locationmode="USA-states",
         marker_line_color=t["panel"], marker_line_width=1,
         customdata=list(zip(d["state"], d["region"], d["revenue"], d["profit_margin_pct"])),
         hovertemplate=(f"<b>%{{customdata[0]}}</b> (%{{customdata[1]}})<br>{value_name}: {hover_val}"
-                       "<br>Revenue: $%{customdata[2]:,.0f}<br>Margin: %{customdata[3]:.1f}%<extra></extra>"),
+                       f"<br>Revenue: {_cur()}%{{customdata[2]:,.0f}}<br>Margin: %{{customdata[3]:.1f}}%<extra></extra>"),
         colorbar=dict(thickness=12, outlinewidth=0, len=0.75,
-                      tickprefix="$" if value_kind == "money" else "",
+                      tickprefix=_cur() if value_kind == "money" else "",
                       ticksuffix="%" if value_kind == "pct" else ""),
         **scale))
     fig.update_geos(scope="usa", bgcolor="rgba(0,0,0,0)", showlakes=False, showland=True,

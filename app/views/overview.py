@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from components import charts
+from components import caps, charts
 from components.context import get_context
 from components.kpi_cards import render_kpi_cards
 from components.layout import (card, card_title, chart_switch, empty_state, highlight_list, page_header,
@@ -22,8 +22,8 @@ def render() -> None:
     start, end = ctx.window
     page_header(
         "Executive Overview",
-        f"{start:%d %b %Y} - {end:%d %b %Y}  |  {len(df):,} order lines  |  "
-        f"{df['order_id'].nunique():,} orders",
+        f"{start:%d %b %Y} - {end:%d %b %Y}  |  {len(df):,} order lines"
+        + (f"  |  {df['order_id'].nunique():,} orders" if caps.has("orders") else ""),
         eyebrow="Analytics",
         chips=describe_filters(ctx.state),
     )
@@ -37,23 +37,35 @@ def render() -> None:
     with card("overview-trend"):
         top = st.columns([2, 1.2, 1.2])
         with top[0]:
-            card_title("Revenue and profit over time", "Both in dollars, on one shared axis")
+            if caps.has("profit"):
+                card_title("Revenue and profit over time",
+                           "Both in dollars, on one shared axis" if ctx.currency == "$" else "Both on one shared axis")
+            else:
+                card_title("Revenue over time", "Your file has no profit or cost data")
         with top[1]:
             grain = chart_switch("ov_grain", ["Month", "Quarter", "Year"], label="Period")
         with top[2]:
             kind = chart_switch("ov_trend_kind", charts.TIME_KINDS)
         ts = dd.time_series(df, grain)
-        fig, note = charts.time_chart(ts, [("revenue", "Revenue", REVENUE), ("profit", "Profit", PROFIT)], kind)
+        series = [("revenue", "Revenue", REVENUE)] + ([("profit", "Profit", PROFIT)] if caps.has("profit") else [])
+        fig, note = charts.time_chart(ts, series, kind)
         show_chart(fig, note, key="ov_trend_chart")
 
     # --- Breakdowns by category and by region ------------------------------------
+    # Demo data: category and region. An upload uses the first two groupings it has.
     left, right = st.columns(2, gap="medium")
-    for column, dim, title, key in ((left, "category", "Sales by category", "ov_cat"),
-                                    (right, "region", "Sales by region", "ov_reg")):
+    dims = caps.dimensions()
+    slots = ((left, dims[0] if dims else None, "category", "ov_cat"),
+             (right, dims[1] if len(dims) > 1 else None, "region", "ov_reg"))
+    for column, dim, wanted, key in slots:
+        if dim is None:
+            with column:
+                caps.unavailable_card(key, f"Sales by {wanted}", [wanted])
+            continue
         with column, card(key):
-            card_title(title)
+            card_title(f"Sales by {caps.DIMENSIONS[dim].lower()}")
             # Metric and chart type on separate rows: 5 chart types do not fit beside the metric in a half card.
-            metric = chart_switch(f"{key}_metric", METRIC_OPTIONS, label="Metric")
+            metric = chart_switch(f"{key}_metric", caps.options(METRIC_OPTIONS), label="Metric")
             kind = chart_switch(f"{key}_kind", charts.CATEGORY_KINDS)
             value_col, value_kind = dd.METRICS[metric]
             fig, note = charts.category_chart(dd.breakdown(df, dim), dim, value_col, kind,
@@ -62,15 +74,22 @@ def render() -> None:
 
     # --- Profit bridge and highlights --------------------------------------------
     left, right = st.columns([1.7, 1], gap="medium")
-    with left, card("overview-bridge"):
-        top = st.columns([1.4, 1.6])
-        with top[0]:
-            card_title("Where the profit comes from", "Each bar adds to or takes away from total profit")
-        with top[1]:
-            dim_label = chart_switch("ov_bridge_dim", ["Category", "Region", "Segment"], label="Split by")
-        dim = {"Category": "category", "Region": "region", "Segment": "segment"}[dim_label]
-        fig, note = charts.waterfall_chart(dd.profit_bridge(df, dim))
-        show_chart(fig, note, key="ov_bridge_chart")
+    splits = [label for label, col in (("Category", "category"), ("Region", "region"), ("Segment", "segment"))
+              if caps.has(col)]
+    if not caps.has("profit") or not splits:
+        with left:
+            caps.unavailable_card("overview-bridge", "Where the profit comes from",
+                                  caps.missing("profit") + ([] if splits else ["category"]))
+    else:
+        with left, card("overview-bridge"):
+            top = st.columns([1.4, 1.6])
+            with top[0]:
+                card_title("Where the profit comes from", "Each bar adds to or takes away from total profit")
+            with top[1]:
+                dim_label = chart_switch("ov_bridge_dim", splits, label="Split by")
+            dim = {"Category": "category", "Region": "region", "Segment": "segment"}[dim_label]
+            fig, note = charts.waterfall_chart(dd.profit_bridge(df, dim))
+            show_chart(fig, note, key="ov_bridge_chart")
     with right, card("overview-highlights"):
         card_title("Highlights", "Calculated from the filtered data")
-        highlight_list(dd.highlights(df))
+        highlight_list(dd.highlights(df, ctx.capabilities))

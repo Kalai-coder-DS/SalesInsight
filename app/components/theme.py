@@ -55,6 +55,22 @@ def current_theme() -> str:
         return "dark"
 
 
+def currency_symbol() -> str:
+    """Currency of the active data: "$" for the demo data, chosen/detected for an upload."""
+    try:
+        ctx = st.session_state.get("_si_ctx")
+        return "$" if ctx is None else ctx.currency
+    except Exception:   # outside a running app
+        return "$"
+
+
+def fx(text: str) -> str:
+    """Show money text in the active currency. Texts from the analysis modules use "$";
+    for the demo data nothing changes."""
+    symbol = currency_symbol()
+    return text if symbol == "$" or not isinstance(text, str) else text.replace("$", symbol)
+
+
 def palette() -> dict:
     return THEMES[current_theme()]
 
@@ -134,6 +150,10 @@ h1, h2, h3, h4, p, li, label, .stMarkdown {{ color: {t['text']}; }}
     gap: .9rem; margin: .4rem 0 1.4rem 0;
 }}
 .si-kpi-grid.si-cols-4 {{ grid-template-columns: repeat(4, minmax(0, 1fr)); }}
+.si-kpi-grid.si-cols-3 {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
+.si-kpi-grid.si-cols-2 {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+.si-kpi-grid.si-cols-1 {{ grid-template-columns: minmax(0, 1fr); max-width: 420px; }}
+.si-kpi-grid.si-cols-5 {{ grid-template-columns: repeat(5, minmax(0, 1fr)); }}
 @media (max-width: 1250px) {{
     .si-kpi-grid, .si-kpi-grid.si-cols-4 {{ grid-template-columns: repeat(3, minmax(0, 1fr)); }}
 }}
@@ -187,6 +207,14 @@ h1, h2, h3, h4, p, li, label, .stMarkdown {{ color: {t['text']}; }}
 .si-source-custom {{ border-color: #6366f1; background: rgba(99, 102, 241, 0.14); }}
 .si-map-example {{ color: {t['muted']}; font-size: .82rem; padding-top: 2.1rem; overflow: hidden;
                    text-overflow: ellipsis; white-space: nowrap; }}
+
+/* "Not available for your data" note (Phase 14C) */
+.si-unavailable {{
+    border: 1px dashed {t['border']}; border-radius: 12px; padding: 1rem 1.1rem; margin: .4rem 0 .8rem 0;
+    background: {t['panel_2']};
+}}
+.si-unavailable b {{ color: {t['text']}; font-weight: 600; font-size: .92rem; }}
+.si-unavailable p {{ color: {t['muted']}; font-size: .85rem; margin: .25rem 0 0 0; }}
 
 /* Recommendation cards */
 .si-rec {{

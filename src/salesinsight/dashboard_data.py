@@ -6,6 +6,7 @@ reshape their results into the simple tables that charts need.
 
 from __future__ import annotations
 
+import numpy as np
 import pandas as pd
 
 from salesinsight.kpis import short_money
@@ -70,27 +71,53 @@ def profit_bridge(df: pd.DataFrame, by: str = "category") -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def highlights(df: pd.DataFrame) -> list[dict]:
-    """Three short, data-driven highlights for the overview page."""
+def highlights(df: pd.DataFrame, caps: frozenset | set | None = None) -> list[dict]:
+    """Three short, data-driven highlights for the overview page.
+
+    caps: what the data supports (None = everything, as for the Superstore data).
+    Uploaded files without profit, categories or regions get other highlights.
+    """
     if df.empty:
         return []
+
+    def has(*names: str) -> bool:
+        return caps is None or all(n in caps for n in names)
+
     out = []
-    cats = breakdown(df, "category")
-    top = cats.iloc[0]
-    out.append({"title": "Largest category",
-                "text": f"{top['category']} brings {top['share_of_revenue_pct']:.1f}% of revenue "
-                        f"at a {top['profit_margin_pct']:.1f}% margin."})
-    regions = breakdown(df, "region")
-    if len(regions) > 1:
-        weak = regions.loc[regions["profit_margin_pct"].idxmin()]
-        out.append({"title": "Weakest region margin",
-                    "text": f"{weak['region']} earns a {weak['profit_margin_pct']:.1f}% margin with a "
-                            f"{weak['effective_discount_pct']:.1f}% effective discount."})
-    losses = df["profit"] < 0
-    out.append({"title": "Loss-making order lines",
-                "text": f"{100 * losses.mean():.1f}% of order lines lose money, "
-                        f"{short_money(df.loc[losses, 'profit'].sum())} in total."})
-    return out
+    if has("category"):
+        cats = breakdown(df, "category")
+        top = cats.iloc[0]
+        margin = f" at a {top['profit_margin_pct']:.1f}% margin" if has("profit") else ""
+        out.append({"title": "Largest category",
+                    "text": f"{top['category']} brings {top['share_of_revenue_pct']:.1f}% of revenue{margin}."})
+    if has("region", "profit"):
+        regions = breakdown(df, "region")
+        if len(regions) > 1:
+            weak = regions.loc[regions["profit_margin_pct"].idxmin()]
+            discount = (f" with a {weak['effective_discount_pct']:.1f}% effective discount" if has("discount")
+                        else "")
+            out.append({"title": "Weakest region margin",
+                        "text": f"{weak['region']} earns a {weak['profit_margin_pct']:.1f}% margin{discount}."})
+    if has("profit"):
+        losses = df["profit"] < 0
+        out.append({"title": "Loss-making order lines",
+                    "text": f"{100 * losses.mean():.1f}% of order lines lose money, "
+                            f"{short_money(df.loc[losses, 'profit'].sum())} in total."})
+    if len(out) < 3:                      # fill up with facts every sales file supports
+        months = time_series(df, "Month")
+        best = months.loc[months["revenue"].idxmax()]
+        out.append({"title": "Best month", "text": f"{best['label']} brought {short_money(best['revenue'])} "
+                                                  f"({100 * best['revenue'] / df['sales'].sum():.1f}% of sales)."})
+    if len(out) < 3 and has("products"):
+        prod = df.groupby("product_name")["sales"].sum().sort_values(ascending=False)
+        out.append({"title": "Top product", "text": f"{prod.index[0]} brought {short_money(prod.iloc[0])} "
+                                                   f"({100 * prod.iloc[0] / prod.sum():.1f}% of sales)."})
+    if len(out) < 3:
+        per = "order" if has("orders") else "sale"
+        avg = df["sales"].sum() / (df["order_id"].nunique() if has("orders") else len(df))
+        out.append({"title": f"Average {per}", "text": f"{short_money(avg)} per {per} across "
+                                                      f"{df['order_id'].nunique() if has('orders') else len(df):,} {per}s."})
+    return out[:3]
 
 
 # ---------------------------------------------------------------------------
@@ -188,12 +215,14 @@ def trend_stats(df: pd.DataFrame) -> list[dict]:
     season = seasonality_index(df)
     peak = season.loc[season["index"].idxmax()] if len(season) else None
     q4 = df.loc[df["order_date"].dt.quarter == 4, "sales"].sum() / df["sales"].sum() * 100
+    has_q4 = bool((df["order_date"].dt.quarter == 4).any())
     return [
         {"label": "Revenue growth (CAGR)", "value": cagr_text, "sub": cagr_sub},
         {"label": "Best month", "value": best["label"], "sub": f"{short_money(best['revenue'])} revenue"},
         {"label": "Peak season", "value": peak["month"] if peak is not None else "-",
          "sub": f"index {peak['index']:.0f} (100 = average month)" if peak is not None else ""},
-        {"label": "Q4 share of revenue", "value": f"{q4:.1f}%", "sub": "October to December"},
+        {"label": "Q4 share of revenue", "value": f"{q4:.1f}%" if has_q4 else "-",
+         "sub": "October to December" if has_q4 else "no October-December sales in the selection"},
     ]
 
 
@@ -232,7 +261,8 @@ def product_stats(df: pd.DataFrame) -> list[dict]:
     subs = subcategory_performance(df)
     best = subs.iloc[0]
     return [
-        {"label": "Products sold", "value": f"{len(perf):,}", "sub": f"{df['quantity'].sum():,} units"},
+        {"label": "Products sold", "value": f"{len(perf):,}",
+         "sub": f"{df['quantity'].sum():,.0f} units" if df["quantity"].notna().any() else "units not in the data"},
         {"label": "Products making 80% of revenue", "value": f"{par['products_for_target']:,}",
          "sub": f"{par['products_for_target_pct']:.1f}% of all products"},
         {"label": "Loss-making products", "value": f"{len(losers):,}",
@@ -276,7 +306,8 @@ def region_stats(df: pd.DataFrame) -> list[dict]:
     top = regions.iloc[0]
     best = regions.loc[regions["profit_margin_pct"].idxmax()]
     losing = states[states["profit"] < 0]
-    corr = discount_margin_correlation(states)
+    with np.errstate(divide="ignore", invalid="ignore"):   # no variation (e.g. no discounts) -> NaN, no warning
+        corr = discount_margin_correlation(states)
     return [
         {"label": "Largest region", "value": top["region"],
          "sub": f"{top['share_of_revenue_pct']:.1f}% of revenue"},

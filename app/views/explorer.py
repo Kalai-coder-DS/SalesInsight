@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import streamlit as st
 
+from components import caps
 from components.context import get_context
 from components.layout import card, card_title, chart_switch, csv_download, data_table, empty_state, page_header
 from salesinsight import dashboard_data as dd
 from salesinsight.filtering import describe_filters
 
+GROUP_NEEDS = {"category": "category", "sub_category": "sub_category", "region": "region", "state": "state",
+               "segment": "segment", "discount_band": "discount", "ship_mode": "shipping"}
 GROUPS = {"Category": "category", "Sub-category": "sub_category", "Region": "region", "State": "state",
           "Segment": "segment", "Year": "order_year", "Ship mode": "ship_mode", "Discount band": "discount_band"}
 
@@ -52,7 +55,8 @@ def render() -> None:
             csv_download(table, "salesinsight_order_lines.csv", f"Download {len(table):,} rows (.csv)",
                          key="ex_csv")
         else:
-            group_label = chart_switch("ex_group", list(GROUPS), label="Group by")
+            groups = [g for g, col in GROUPS.items() if col not in GROUP_NEEDS or caps.has(GROUP_NEEDS[col])]
+            group_label = chart_switch("ex_group", groups, label="Group by")
             summary = dd.explorer_summary(rows, GROUPS[group_label])
             cols = [GROUPS[group_label], "revenue", "profit", "profit_margin_pct", "total_orders", "units_sold",
                     "effective_discount_pct", "loss_lines_pct", "share_of_revenue_pct"]

@@ -38,7 +38,12 @@ def _date_range(value, opts: dict) -> tuple[pd.Timestamp | None, pd.Timestamp | 
     return start, end
 
 
-def render_filters(df: pd.DataFrame) -> FilterState:
+def render_filters(df: pd.DataFrame, capabilities: frozenset | None = None) -> FilterState:
+    """capabilities=None (demo data) shows every filter; for an uploaded file only the
+    fields it really has are shown (Phase 14C)."""
+    def show(cap: str) -> bool:
+        return capabilities is None or cap in capabilities
+
     base_opts = filter_options(df)
     _init_state(base_opts)
 
@@ -50,21 +55,26 @@ def render_filters(df: pd.DataFrame) -> FilterState:
                   min_value=base_opts["min_date"].date(), max_value=base_opts["max_date"].date(),
                   format="DD/MM/YYYY")
 
-    sb.multiselect("Region", base_opts["regions"], key="f_regions", placeholder="All regions")
-    # Cascading: only states inside the chosen regions; drop states that no longer fit.
-    opts = filter_options(df, FilterState(regions=tuple(st.session_state["f_regions"]),
-                                          categories=tuple(st.session_state["f_categories"])))
-    st.session_state["f_states"] = list(prune_selection(st.session_state["f_states"], opts["states"]))
-    sb.multiselect("State", opts["states"], key="f_states", placeholder="All states")
+    if show("region"):
+        sb.multiselect("Region", base_opts["regions"], key="f_regions", placeholder="All regions")
+    if show("state"):
+        # Cascading: only states inside the chosen regions; drop states that no longer fit.
+        opts = filter_options(df, FilterState(regions=tuple(st.session_state["f_regions"]),
+                                              categories=tuple(st.session_state["f_categories"])))
+        st.session_state["f_states"] = list(prune_selection(st.session_state["f_states"], opts["states"]))
+        sb.multiselect("State", opts["states"], key="f_states", placeholder="All states")
 
-    sb.multiselect("Category", base_opts["categories"], key="f_categories", placeholder="All categories")
-    opts = filter_options(df, FilterState(categories=tuple(st.session_state["f_categories"])))
-    st.session_state["f_subcategories"] = list(
-        prune_selection(st.session_state["f_subcategories"], opts["subcategories"]))
-    sb.multiselect("Sub-category", opts["subcategories"], key="f_subcategories",
-                   placeholder="All sub-categories")
+    if show("category"):
+        sb.multiselect("Category", base_opts["categories"], key="f_categories", placeholder="All categories")
+    if show("sub_category"):
+        opts = filter_options(df, FilterState(categories=tuple(st.session_state["f_categories"])))
+        st.session_state["f_subcategories"] = list(
+            prune_selection(st.session_state["f_subcategories"], opts["subcategories"]))
+        sb.multiselect("Sub-category", opts["subcategories"], key="f_subcategories",
+                       placeholder="All sub-categories")
 
-    sb.multiselect("Customer segment", base_opts["segments"], key="f_segments", placeholder="All segments")
+    if show("segment"):
+        sb.multiselect("Customer segment", base_opts["segments"], key="f_segments", placeholder="All segments")
     sb.button("Reset filters", on_click=reset_filters, args=(base_opts,), width="stretch",
               icon=":material/restart_alt:")
 

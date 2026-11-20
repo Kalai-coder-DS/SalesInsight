@@ -6,6 +6,8 @@ from html import escape
 
 import streamlit as st
 
+from components.theme import currency_symbol, fx
+
 PLOTLY_CONFIG = {
     "displaylogo": False,
     "modeBarButtonsToRemove": ["lasso2d", "select2d", "autoScale2d"],
@@ -40,7 +42,9 @@ def card_title(title: str, subtitle: str | None = None) -> None:
 
 def chart_switch(key: str, options: list[str], default: str | None = None, label: str = "Chart type") -> str:
     """Segmented buttons to choose a chart type (or a metric). Always returns a valid option."""
-    default = default or options[0]
+    default = default if default in options else options[0]
+    if key in st.session_state and st.session_state[key] not in options:
+        del st.session_state[key]          # e.g. "Profit" chosen before switching to a file without profit
     choice = st.segmented_control(label, options, default=default, key=key,
                                   label_visibility="collapsed")
     return choice if choice in options else default
@@ -49,7 +53,7 @@ def chart_switch(key: str, options: list[str], default: str | None = None, label
 def show_chart(fig, note: str | None = None, key: str | None = None) -> None:
     st.plotly_chart(fig, width="stretch", theme=None, config=PLOTLY_CONFIG, key=key)
     if note:
-        st.caption(note)
+        st.caption(fx(note))
 
 
 def empty_state(message: str = "No data matches the current filters.",
@@ -59,7 +63,7 @@ def empty_state(message: str = "No data matches the current filters.",
 
 
 def highlight_list(items: list[dict]) -> None:
-    html = "".join(f"<div class='si-highlight'><b>{escape(i['title'])}</b><p>{escape(i['text'])}</p></div>"
+    html = "".join(f"<div class='si-highlight'><b>{escape(i['title'])}</b><p>{escape(fx(i['text']))}</p></div>"
                    for i in items)
     st.markdown(html, unsafe_allow_html=True)
 
@@ -85,6 +89,12 @@ COLUMN_LABELS = {
 }
 
 
+def money_format() -> str:
+    """Table format for money columns in the active currency ("dollar" for the demo data)."""
+    symbol = currency_symbol()
+    return {"$": "dollar", "€": "euro", "¥": "yen"}.get(symbol, f"{symbol} %.2f" if symbol else "%.2f")
+
+
 def column_label(name: str) -> str:
     return COLUMN_LABELS.get(name, name.replace("_", " ").capitalize())
 
@@ -93,7 +103,7 @@ def data_table(df, money: list[str] = (), pct: list[str] = (), ints: list[str] =
                height: int | None = None, key: str | None = None) -> None:
     """A sortable table with friendly column names and readable number formats."""
     config = {c: st.column_config.Column(column_label(c)) for c in df.columns}
-    config.update({c: st.column_config.NumberColumn(column_label(c), format="dollar")
+    config.update({c: st.column_config.NumberColumn(column_label(c), format=money_format())
                    for c in money if c in df.columns})
     config.update({c: st.column_config.NumberColumn(column_label(c), format="%.1f%%")
                    for c in pct if c in df.columns})
@@ -116,9 +126,9 @@ def recommendation_cards(recs: list) -> None:
             f"<div class='si-rec'><div class='si-rec-head'>"
             f"<span class='{badge}'>Priority {r.priority}</span><span class='si-badge'>{escape(r.area)}</span>"
             f"<span class='si-rec-title'>{i}. {escape(r.title)}</span></div>"
-            f"<p><b>Finding:</b> {escape(r.finding)}</p>"
-            f"<p><b>Action:</b> {escape(r.action)}</p>"
-            f"<p><b>Expected impact:</b> {escape(r.impact)}</p></div>")
+            f"<p><b>Finding:</b> {escape(fx(r.finding))}</p>"
+            f"<p><b>Action:</b> {escape(fx(r.action))}</p>"
+            f"<p><b>Expected impact:</b> {escape(fx(r.impact))}</p></div>")
     st.markdown("".join(html), unsafe_allow_html=True)
 
 
