@@ -1,0 +1,10 @@
+# Packages for the ONLINE web app (Streamlit Community Cloud reads this file
+# because it sits next to app/streamlit_app.py). The full project list
+# (MySQL, Matplotlib, Jupyter, pytest) stays in the root requirements.txt.
+streamlit>=1.50
+plotly>=5.24
+pandas>=2.2,<4
+numpy>=1.26,<3
+scipy>=1.11
+python-dotenv>=1.0
+requests>=2.31

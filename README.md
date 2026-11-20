@@ -1,6 +1,6 @@
 # SalesInsight – Business Sales Analytics and Intelligence Platform
 
-An end-to-end sales analytics project that turns ~10,000 raw retail order lines into tested, reproducible business insights, using **Python, Pandas, NumPy, SQL (MySQL), statistics, Matplotlib and Seaborn**.
+An end-to-end sales analytics project that turns ~10,000 raw retail order lines into tested, reproducible business insights, using **Python, Pandas, NumPy, SQL (MySQL), statistics, Matplotlib, Seaborn, Streamlit and Plotly**.
 
 One command validates and cleans the data, loads a MySQL star schema, runs 21 SQL queries, analyses revenue, trends, products, regions and customers, tests every pattern statistically, and writes a business report with prioritised recommendations.
 
@@ -9,6 +9,8 @@ python scripts/run_pipeline.py
 ```
 
 **Full report:** [reports/insights_report.md](reports/insights_report.md)
+
+**Interactive web app:** a 7-page BI dashboard (Streamlit + Plotly) with global filters, period comparisons, automated insights and CSV/report downloads - see [Web app](#web-app).
 
 ---
 
@@ -77,6 +79,8 @@ flowchart LR
     F --> H[28 charts]
     G --> I[Insights report +<br/>recommendations]
     H --> I
+    F --> W[Streamlit web app<br/>7 interactive pages]
+    G --> W
 ```
 
 | Phase | What | Main files |
@@ -93,6 +97,7 @@ flowchart LR
 | 10 | Hypothesis tests, effect sizes, bootstrap confidence intervals | `stats_tests.py` |
 | 11 | Insights report and rule-based recommendations (Q7) | `insights.py` |
 | 12 | One-command pipeline, README | `scripts/run_pipeline.py` |
+| 13 | Interactive web app (Streamlit + Plotly), online deployment | `app/`, `filtering.py`, `dashboard_data.py` |
 
 ## Technical highlights
 
@@ -102,7 +107,8 @@ flowchart LR
 - **Correct metrics:** average order value divides by distinct orders (not rows); growth after a $0 month is left blank; seasonality uses complete years only; RFM ties always get the same score.
 - **Statistics done properly:** non-parametric tests for skewed sales data, effect sizes next to every p-value (with 10,000 rows, tiny differences become "significant"), reproducible bootstrap intervals.
 - **Accessible charts:** one fixed colour-blind-checked palette (revenue = blue, profit = orange, customers = green), red/blue diverging scale for losses vs profits, one y-axis per chart.
-- **Tested:** 220+ pytest tests with hand-calculated expected values; database tests run on SQLite so no MySQL server is needed.
+- **Interactive app built on the same tested code:** the dashboard reuses the analysis modules (no hard-coded numbers); every filter and chart switch recalculates from the cleaned data; parts that cannot be calculated for a small selection are skipped and listed instead of crashing the page.
+- **Tested:** 380+ pytest tests with hand-calculated expected values; database tests run on SQLite so no MySQL server is needed.
 - **Lightweight:** CPU only, runs in seconds, well under 1 GB of RAM.
 
 ## Tech stack
@@ -113,7 +119,8 @@ flowchart LR
 | Data | pandas, NumPy |
 | Database | MySQL 8, SQLAlchemy 2, PyMySQL |
 | Statistics | SciPy |
-| Visualisation | Matplotlib, Seaborn |
+| Visualisation | Matplotlib, Seaborn (report charts), Plotly (web app) |
+| Web app | Streamlit (Community Cloud) |
 | Testing | pytest |
 | Config | python-dotenv |
 
@@ -125,6 +132,7 @@ SalesInsight/
 │   ├── raw/                  Superstore.csv (download from Kaggle; not in Git)
 │   └── processed/            sales_clean.csv (generated)
 ├── sql/                      01_create_database.sql, 02_create_tables.sql, 03_analysis_queries.sql
+├── app/                      Streamlit web app (streamlit_app.py, components/, views/, assets/)
 ├── src/salesinsight/         all analysis code (one module per topic)
 ├── scripts/                  one runnable script per phase + run_pipeline.py
 ├── tests/                    pytest suite
@@ -160,6 +168,25 @@ copy .env.example .env      # then put your MySQL password in .env
 ```
 
 On macOS/Linux use `python3 -m venv .venv`, `source .venv/bin/activate` and `cp .env.example .env`.
+
+## Web app
+
+Seven pages: **Executive Overview, Sales Trends, Product Intelligence, Regional Intelligence, Customer Intelligence, Business Insights** and a **Data Explorer**.
+
+- Global sidebar filters (year, date range, region, state, category, sub-category, segment) apply to every page; state and sub-category options follow the region and category chosen.
+- KPI cards compare with the previous period (the same months one year earlier, or an equal number of days for a custom range).
+- Chart switches change the actual chart (bar, horizontal bar, pie, donut, treemap, sunburst, line, area, heatmap, US map, waterfall, Pareto).
+- Business Insights runs the Phase 10-11 statistics and recommendation rules on the filtered data.
+- Downloads: filtered order lines, summaries, loss-makers, recommendations (CSV) and the insights report (Markdown).
+- Dark theme with an optional light mode for the page area.
+
+Run it locally (after step 2 above):
+
+```powershell
+.\.venv\Scripts\python.exe -m streamlit run app/streamlit_app.py
+```
+
+**Online version:** the dataset is not stored in this repository. On Streamlit Community Cloud the app downloads it from Kaggle at start-up, using a Kaggle API key kept in the app's Secrets (`KAGGLE_USERNAME`, `KAGGLE_KEY`). The online app installs only `app/requirements.txt`.
 
 ## Dataset
 

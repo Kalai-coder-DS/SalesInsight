@@ -28,3 +28,6 @@ logs/*
 .idea/
 Thumbs.db
 .DS_Store
+
+# Streamlit secrets (Kaggle API key) - never commit
+.streamlit/secrets.toml
