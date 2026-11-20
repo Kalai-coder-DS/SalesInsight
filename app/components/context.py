@@ -19,6 +19,11 @@ class PageContext:
     window: tuple                 # (start, end) of the selected period
     previous_window: tuple | None
     compare_label: str | None     # e.g. "vs 2016" or "vs previous period"
+    # Phase 14: which data is shown
+    source: str = "demo"                      # "demo" or "custom"
+    source_name: str = "Superstore demo data"
+    capabilities: frozenset | None = None     # None = demo (everything available)
+    currency: str = "$"
 
 
 def set_context(ctx: PageContext) -> None:

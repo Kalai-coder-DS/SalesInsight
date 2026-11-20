@@ -178,6 +178,16 @@ h1, h2, h3, h4, p, li, label, .stMarkdown {{ color: {t['text']}; }}
 /* Button rows (chart switches) wrap onto a second line instead of being cut off */
 [data-testid="stButtonGroup"] > div {{ flex-wrap: wrap; row-gap: .4rem; }}
 
+/* Data source badge (sidebar) and column-mapping examples */
+.si-source {{
+    font-size: .75rem; color: #94a3b8; background: #151c33; border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 12px; padding: .5rem .7rem; margin-bottom: .5rem;
+}}
+.si-source b {{ display: block; color: #e5e7eb; font-size: .88rem; font-weight: 600; word-break: break-all; }}
+.si-source-custom {{ border-color: #6366f1; background: rgba(99, 102, 241, 0.14); }}
+.si-map-example {{ color: {t['muted']}; font-size: .82rem; padding-top: 2.1rem; overflow: hidden;
+                   text-overflow: ellipsis; white-space: nowrap; }}
+
 /* Recommendation cards */
 .si-rec {{
     background: {t['panel']}; border: 1px solid {t['border']}; border-radius: 16px;

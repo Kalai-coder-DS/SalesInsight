@@ -144,7 +144,8 @@ def test_navigation_lists_all_pages():
     from pathlib import Path
     text = Path(APP).read_text(encoding="utf-8")
     for title in ("Executive Overview", "Sales Trends", "Product Intelligence",
-                  "Regional Intelligence", "Customer Intelligence", "Business Insights", "Data Explorer"):
+                  "Regional Intelligence", "Customer Intelligence", "Business Insights", "Data Explorer",
+                  "Data Source"):
         assert title in text
 
 
@@ -225,3 +226,65 @@ def test_13d_pages_with_filters_and_no_data(page):
     at = render_page(page, filters={"years": (2014,), "start": "2017-01-01", "end": "2017-01-31"})
     assert not at.exception
     assert "No data matches" in page_text(at)
+
+
+# --------------------------------------------------------------------------
+# 14B: Data Source page (upload your own sales file)
+# --------------------------------------------------------------------------
+SAMPLES = config.PROJECT_ROOT / "data" / "samples"
+
+
+def uploaded_state(name: str) -> dict:
+    """Session state as if the visitor had uploaded a sample file (AppTest cannot use the uploader)."""
+    from salesinsight.upload import read_upload, suggest_mapping
+    raw = read_upload(name, (SAMPLES / name).read_bytes())
+    mapping, _ = suggest_mapping(raw)
+    state = {"ds_choice": "My own sales file", "ds_raw": raw, "ds_file_name": name, "ds_file_key": name,
+             "ds_currency_choice": "$"}
+    state.update({f"map_{k}": (v or "- not in my file -") for k, v in mapping.items()})
+    return state
+
+
+def test_data_source_page_demo():
+    at = render_page("data_source")
+    assert not at.exception and not at.error
+    assert "Data Source" in page_text(at) and "Demo data is active" in page_text(at)
+
+
+@pytest.mark.parametrize("name", ["indian_retail_sales.csv", "online_store_orders.xlsx", "cafe_daily_sales.csv"])
+def test_upload_and_analyse_sample(name):
+    at = render_page("data_source", uploaded_state(name))
+    assert not at.exception
+    at.button(key="ds_analyse").click().run()
+    assert not at.exception
+    assert at.session_state["ds_mode"] == "custom" and at.session_state["ds_active_name"] == name
+    assert "Rows ready" in page_text(at)
+
+
+def test_not_sales_file_is_explained():
+    at = render_page("data_source", uploaded_state("not_sales_data.csv"))
+    assert any("doesn't look like sales data" in w.value for w in at.warning)
+    at.button(key="ds_analyse").click().run()
+    assert len(at.error) >= 1
+    # A failed check must not switch the app to the uploaded data ("ds_mode" may never be set).
+    try:
+        mode = at.session_state["ds_mode"]
+    except KeyError:
+        mode = None
+    assert mode != "custom"
+
+
+def test_whole_app_runs_on_uploaded_data():
+    from salesinsight.upload import prepare_sales, read_upload, suggest_mapping
+    raw = read_upload("online_store_orders.xlsx", (SAMPLES / "online_store_orders.xlsx").read_bytes())
+    result = prepare_sales(raw, suggest_mapping(raw)[0])
+    at = AppTest.from_file(APP, default_timeout=60)
+    for key, value in {"ds_mode": "custom", "ds_result": result, "ds_active_name": "online_store_orders.xlsx",
+                       "ds_currency": "$"}.items():
+        at.session_state[key] = value
+    at.run()
+    assert not at.exception
+    sidebar = " ".join(m.value for m in at.sidebar.markdown)
+    assert "online_store_orders.xlsx" in sidebar
+    at.sidebar.button(key="ds_side_demo").click().run()
+    assert not at.exception and at.session_state["ds_mode"] == "demo"

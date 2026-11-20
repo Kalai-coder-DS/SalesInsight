@@ -20,12 +20,25 @@ from salesinsight.insights import recommendations_to_frame
 from salesinsight.kpis import kpi_table, short_money
 
 
-@st.cache_data(show_spinner="Generating insights...")
-def _insights(df: pd.DataFrame):
+def _compute(df: pd.DataFrame):
     findings, skipped = dd.safe_findings(df)
     recs = dd.safe_recommendations(findings)
     report = dd.safe_report(findings, recs)
     return findings, skipped, recs, report
+
+
+@st.cache_data(show_spinner="Generating insights...")
+def _cached(df: pd.DataFrame):
+    return _compute(df)
+
+
+def _insights(df: pd.DataFrame, source: str):
+    """Demo data uses the shared cache. Uploaded data never does: the cache is shared by
+    all visitors and outlives the session."""
+    if source == "custom":
+        with st.spinner("Generating insights..."):
+            return _compute(df)
+    return _cached(df)
 
 
 def render() -> None:
@@ -38,7 +51,7 @@ def render() -> None:
         empty_state()
         return
 
-    findings, skipped, recs, report = _insights(df)
+    findings, skipped, recs, report = _insights(df, ctx.source)
     k = findings.get("kpis", {})
     render_stat_cards([
         {"label": "Recommendations", "value": str(len(recs)),

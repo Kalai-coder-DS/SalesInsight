@@ -295,7 +295,7 @@ def time_features(df: pd.DataFrame) -> pd.DataFrame:
     key = year * 100 + month
     labels = {k: f"{k // 100:04d}-{k % 100:02d}" for k in key.unique()}
     df["year_month"] = key.map(labels).astype(str)
-    df["order_weekday"] = d.dt.weekday.map(lambda i: WEEKDAYS[i]).astype(str)
+    df["order_weekday"] = d.dt.day_of_week.map(lambda i: WEEKDAYS[i]).astype(str)
     return df
 
 
