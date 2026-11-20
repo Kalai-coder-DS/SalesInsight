@@ -8,3 +8,4 @@ numpy>=1.26,<3
 scipy>=1.11
 python-dotenv>=1.0
 requests>=2.31
+openpyxl>=3.1

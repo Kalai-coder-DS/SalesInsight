@@ -1,0 +1,1204 @@
+﻿Invoice No,Bill Date,Customer,Item,Category,Qty,Rate,Discount %,Amount (₹),Zone,State
+INV-10000,19/09/2024,Customer 061,Power Bank,Electronics,3,"₹1,800",0%,"₹5,509.48",South,Karnataka
+INV-10000,08/12/2023,Customer 144,Earphones,Electronics,1,"₹1,200",25%,₹919.47,East,Odisha
+INV-10001,21/06/2024,Customer 147,Sports Shoes,Fashion,4,"₹3,200",0%,"₹12,988.00",West,Maharashtra
+INV-10001,10/12/2024,Customer 141,Saree,Fashion,1,"₹2,800",0%,"₹2,842.05",East,West Bengal
+INV-10002,04/11/2023,Customer 079,Mixer Grinder,Home,2,"₹3,500",40%,"₹4,221.59",North,Uttar Pradesh
+INV-10002,31/02/2023,Customer 010,Kurta,Fashion,1,₹900,0%,₹933.42,South,Tamil Nadu
+INV-10003,08/07/2024,Customer 166,Sports Shoes,Fashion,1,"₹3,200",25%,"₹2,514.58",East,Odisha
+INV-10003,24/08/2024,Customer 082,Earphones,Electronics,3,"₹1,200",25%,"₹2,609.39",North,Uttar Pradesh
+INV-10004,20/08/2024,Customer 020,Mobile Phone,Electronics,4,"₹15,000",0%,"₹58,012.22",North,Punjab
+INV-10004,17/05/2024,Customer 065,Kurta,Fashion,1,₹900,15%,₹779.23,East,Odisha
+INV-10005,16/06/2023,Customer 066,Bedsheet Set,Home,1,"₹1,500",5%,"₹1,360.46",West,Maharashtra
+INV-10005,23/11/2024,Customer 179,Sports Shoes,Fashion,4,"₹3,200",25%,"₹9,325.70",South,Tamil Nadu
+INV-10006,16/10/2024,Customer 003,Saree,Fashion,3,"₹2,800",10%,,South,Tamil Nadu
+INV-10006,05/05/2024,Customer 035,Power Bank,Electronics,4,"₹1,800",0%,"₹7,418.16",West,Maharashtra
+INV-10007,18/04/2023,Customer 176,Pressure Cooker,Home,4,"₹2,400",40%,"₹5,474.82",East,Odisha
+INV-10007,22/02/2024,Customer 037,Power Bank,Electronics,4,"₹1,800",10%,"₹6,449.97",South,Karnataka
+INV-10008,29/12/2023,Customer 031,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,710.68",North,Punjab
+INV-10008,03/12/2023,Customer 040,Power Bank,Electronics,1,"₹1,800",25%,"₹1,386.25",East,West Bengal
+INV-10009,13/09/2023,Customer 055,Mobile Phone,Electronics,2,"₹15,000",0%,"₹30,861.17",South,Tamil Nadu
+INV-10009,03/02/2023,Customer 100,Mobile Phone,Electronics,1,"₹15,000",15%,"₹12,750.94",North,Delhi
+INV-10010,24/02/2023,Customer 067,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,683.65",South,Kerala
+INV-10010,17/10/2023,Customer 121,Earphones,Electronics,1,"₹1,200",0%,"₹1,203.08",South,Tamil Nadu
+INV-10011,27/11/2024,Customer 003,Saree,Fashion,2,"₹2,800",10%,"₹4,838.02",East,West Bengal
+INV-10011,12/01/2023,Customer 030,Kurta,Fashion,2,₹900,15%,"₹1,598.55",West,Gujarat
+INV-10012,06/07/2024,Customer 114,Power Bank,Electronics,2,"₹1,800",5%,"₹3,274.95",North,Delhi
+INV-10012,29/06/2023,Customer 147,Pressure Cooker,Home,2,"₹2,400",25%,"₹3,421.76",West,Gujarat
+INV-10013,15/01/2024,Customer 179,Kurta,Fashion,2,₹900,0%,"₹1,726.80",South,Karnataka
+INV-10013,15/07/2024,Customer 040,Saree,Fashion,1,"₹2,800",40%,"₹1,636.50",South,Karnataka
+INV-10014,21/04/2023,Customer 007,Mixer Grinder,Home,4,"₹3,500",0%,"₹13,366.77",East,West Bengal
+INV-10014,18/02/2024,Customer 022,Saree,Fashion,2,"₹2,800",0%,"₹5,804.79",South,Karnataka
+INV-10015,19/10/2023,Customer 085,Saree,Fashion,4,"₹2,800",25%,"₹8,142.96",West,Maharashtra
+INV-10015,27/12/2024,Customer 077,Earphones,Electronics,1,"₹1,200",0%,"₹1,180.80",East,Odisha
+INV-10016,03/09/2024,Customer 151,Kurta,Fashion,1,₹900,0%,₹928.18,South,Tamil Nadu
+INV-10016,25/03/2023,Customer 172,Earphones,Electronics,1,"₹1,200",25%,₹891.32,South,Kerala
+INV-10017,23/12/2024,Customer 002,Power Bank,Electronics,1,"₹1,800",10%,"₹1,665.37",East,West Bengal
+INV-10017,25/09/2024,Customer 139,Mobile Phone,Electronics,4,"₹15,000",10%,"₹52,326.22",South,Kerala
+INV-10018,12/06/2024,Customer 006,Saree,Fashion,1,"₹2,800",25%,"₹2,193.41",South,Tamil Nadu
+INV-10018,29/08/2023,Customer 160,Saree,Fashion,3,"₹2,800",0%,"₹8,507.96",South,Tamil Nadu
+INV-10019,15/01/2023,Customer 087,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,949.07",South,Tamil Nadu
+INV-10019,19/12/2024,Customer 101,Kurta,Fashion,1,₹900,25%,₹648.65,South,Kerala
+INV-10020,27/07/2024,Customer 061,Earphones,Electronics,4,"₹1,200",10%,"₹4,398.12",East,West Bengal
+INV-10020,11/01/2023,Customer 030,Power Bank,Electronics,4,"₹1,800",15%,"₹5,874.55",East,Odisha
+INV-10021,03/01/2023,Customer 096,Sports Shoes,Fashion,4,"₹3,200",15%,"₹11,214.76",South,Kerala
+INV-10021,19/02/2024,Customer 120,Saree,Fashion,3,"₹2,800",5%,"₹8,209.54",South,Karnataka
+INV-10022,18/01/2023,Customer 101,Mobile Phone,Electronics,4,"₹15,000",40%,"₹36,307.06",East,Odisha
+INV-10022,15/05/2023,Customer 177,Bedsheet Set,Home,3,"₹1,500",5%,"₹4,320.33",West,Gujarat
+INV-10023,11/09/2024,Customer 146,Saree,Fashion,3,"₹2,800",0%,"₹8,191.17",South,Kerala
+INV-10023,21/08/2024,Customer 060,Saree,Fashion,4,"₹2,800",0%,"₹11,456.36",South,Tamil Nadu
+INV-10024,02/07/2024,Customer 114,Pressure Cooker,Home,1,"₹2,400",25%,"₹1,825.15",South,Tamil Nadu
+INV-10024,11/06/2023,Customer 125,Sports Shoes,Fashion,3,"₹3,200",5%,"₹9,367.88",South,Karnataka
+INV-10025,13/02/2024,Customer 140,Saree,Fashion,2,"₹2,800",5%,"₹5,516.43",North,Uttar Pradesh
+INV-10025,21/01/2023,Customer 040,Earphones,Electronics,2,"₹1,200",25%,"₹1,797.57",East,Odisha
+INV-10026,11/02/2024,Customer 137,Pressure Cooker,Home,4,"₹2,400",0%,"₹9,933.00",North,Punjab
+INV-10026,04/12/2023,Customer 112,Mixer Grinder,Home,3,"₹3,500",5%,"₹9,724.01",South,Karnataka
+INV-10027,09/04/2024,Customer 103,Sports Shoes,Fashion,3,"₹3,200",5%,"₹8,896.97",North,Uttar Pradesh
+INV-10027,28/07/2023,Customer 053,Mobile Phone,Electronics,4,"₹15,000",40%,"₹37,029.77",South,Kerala
+INV-10028,13/12/2024,Customer 024,Bedsheet Set,Home,4,"₹1,500",0%,"₹5,824.11",West,Gujarat
+INV-10028,02/05/2024,Customer 143,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,507.04",East,Odisha
+INV-10029,12/05/2024,Customer 170,Pressure Cooker,Home,4,"₹2,400",15%,"₹8,190.63",West,Gujarat
+INV-10029,17/06/2024,Customer 144,Saree,Fashion,2,"₹2,800",15%,"₹4,963.49",West,Maharashtra
+INV-10030,20/09/2023,Customer 003,Bedsheet Set,Home,1,"₹1,500",15%,"₹1,287.48",West,Maharashtra
+INV-10030,19/12/2023,Customer 031,Power Bank,Electronics,2,"₹1,800",15%,"₹3,104.33",East,Odisha
+INV-10031,24/04/2024,Customer 171,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,503.85",West,Maharashtra
+INV-10031,19/01/2024,Customer 101,Mixer Grinder,Home,3,"₹3,500",0%,"₹10,093.25",West,Maharashtra
+INV-10032,17/10/2023,Customer 072,Power Bank,Electronics,1,"₹1,800",15%,"₹1,574.87",West,Gujarat
+INV-10032,16/05/2024,Customer 018,Earphones,Electronics,4,"₹1,200",0%,"₹4,982.86",West,Gujarat
+INV-10033,05/03/2023,Customer 058,Kurta,Fashion,2,₹900,40%,"₹1,068.35",South,Tamil Nadu
+INV-10033,08/04/2023,Customer 124,Earphones,Electronics,3,"₹1,200",10%,"₹3,161.19",West,Maharashtra
+INV-10034,07/04/2023,Customer 163,Mobile Phone,Electronics,3,"₹15,000",0%,"₹43,416.46",East,West Bengal
+INV-10034,01/09/2023,Customer 011,Mixer Grinder,Home,2,"₹3,500",10%,"₹6,208.13",West,Maharashtra
+INV-10035,21/02/2024,Customer 167,Bedsheet Set,Home,1,"₹1,500",25%,"₹1,120.16",West,Maharashtra
+INV-10035,14/03/2024,Customer 036,Mixer Grinder,Home,4,"₹3,500",40%,"₹8,760.48",East,West Bengal
+INV-10036,26/09/2023,Customer 156,Sports Shoes,Fashion,1,"₹3,200",0%,"₹3,118.33",North,Punjab
+INV-10036,11/01/2023,Customer 095,Mixer Grinder,Home,2,"₹3,500",10%,"₹6,343.52",North,Uttar Pradesh
+INV-10037,02/12/2023,Customer 001,Sports Shoes,Fashion,2,"₹3,200",0%,"₹6,215.28",West,Gujarat
+INV-10037,08/07/2024,Customer 070,Mobile Phone,Electronics,1,"₹15,000",10%,"₹13,476.76",North,Punjab
+INV-10038,29/10/2023,Customer 092,Mixer Grinder,Home,3,"₹3,500",5%,"₹10,213.22",South,Kerala
+INV-10038,not known,Customer 114,Earphones,Electronics,4,"₹1,200",0%,"₹4,796.22",East,Odisha
+INV-10039,17/09/2023,Customer 012,Power Bank,Electronics,4,"₹1,800",0%,"₹7,069.83",East,West Bengal
+INV-10039,22/01/2024,Customer 099,Bedsheet Set,Home,2,"₹1,500",10%,"₹2,800.54",East,Odisha
+INV-10040,28/06/2023,Customer 010,Bedsheet Set,Home,2,"₹1,500",0%,"₹2,890.30",West,Maharashtra
+INV-10040,14/10/2023,Customer 017,Pressure Cooker,Home,4,"₹2,400",0%,"₹9,723.25",East,Odisha
+INV-10041,11/11/2024,Customer 132,Earphones,Electronics,2,"₹1,200",5%,"₹2,195.23",East,Odisha
+INV-10041,02/06/2024,Customer 101,Mobile Phone,Electronics,2,"₹15,000",5%,"₹28,664.89",West,Gujarat
+INV-10042,23/07/2023,Customer 113,Sports Shoes,Fashion,3,"₹3,200",15%,"₹7,902.74",North,Punjab
+INV-10042,18/11/2024,Customer 115,Kurta,Fashion,3,₹900,5%,"₹2,522.20",South,Tamil Nadu
+INV-10043,24/03/2024,Customer 038,Earphones,Electronics,4,"₹1,200",5%,"₹4,420.22",North,Delhi
+INV-10043,05/03/2023,Customer 143,Bedsheet Set,Home,4,"₹1,500",0%,"₹6,111.23",West,Maharashtra
+INV-10044,08/11/2023,Customer 114,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,611.89",South,Kerala
+INV-10044,30/04/2023,Customer 117,Mobile Phone,Electronics,4,"₹15,000",40%,"₹35,579.64",North,Uttar Pradesh
+INV-10045,05/04/2023,Customer 086,Saree,Fashion,2,"₹2,800",5%,"₹5,565.91",East,West Bengal
+INV-10045,01/05/2023,Customer 088,Earphones,Electronics,3,"₹1,200",15%,"₹3,198.85",North,Uttar Pradesh
+INV-10046,18/06/2023,Customer 163,Mobile Phone,Electronics,2,"₹15,000",0%,"₹31,085.82",North,Delhi
+INV-10046,05/06/2023,Customer 167,Pressure Cooker,Home,4,"₹2,400",5%,"₹9,409.61",South,Tamil Nadu
+INV-10047,22/01/2023,Customer 038,Kurta,Fashion,2,₹900,0%,"₹1,716.79",South,Karnataka
+INV-10047,29/08/2024,Customer 092,Saree,Fashion,1,"₹2,800",0%,"₹2,856.61",East,Odisha
+INV-10048,24/09/2023,Customer 053,Pressure Cooker,Home,4,"₹2,400",40%,"₹5,901.85",East,Odisha
+INV-10048,30/09/2024,Customer 141,Mobile Phone,Electronics,4,"₹15,000",0%,"₹62,440.98",West,Maharashtra
+INV-10049,06/07/2024,Customer 120,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,431.39",North,Delhi
+INV-10049,23/04/2024,Customer 038,Mobile Phone,Electronics,2,"₹15,000",15%,"₹26,447.56",East,Odisha
+INV-10050,16/09/2023,Customer 132,Kurta,Fashion,4,₹900,0%,"₹3,664.69",East,Odisha
+INV-10050,21/12/2023,Customer 052,Mobile Phone,Electronics,1,"₹15,000",25%,"₹10,981.94",North,Punjab
+INV-10051,05/06/2024,Customer 091,Sports Shoes,Fashion,2,"₹3,200",15%,"₹5,356.63",East,West Bengal
+INV-10051,11/06/2024,Customer 025,Saree,Fashion,4,"₹2,800",40%,"₹6,882.67",West,Maharashtra
+INV-10052,08/07/2023,Customer 028,Pressure Cooker,Home,3,"₹2,400",40%,"₹4,153.55",East,Odisha
+INV-10052,06/08/2024,Customer 070,Mixer Grinder,Home,2,"₹3,500",40%,"₹4,301.53",South,Karnataka
+INV-10053,28/11/2024,Customer 023,Power Bank,Electronics,1,"₹1,800",25%,"₹1,389.59",North,Uttar Pradesh
+INV-10053,23/02/2023,Customer 085,Earphones,Electronics,4,"₹1,200",25%,"₹3,619.89",West,Maharashtra
+INV-10054,16/10/2023,Customer 097,Bedsheet Set,Home,2,"₹1,500",15%,"₹2,423.98",South,Kerala
+INV-10054,02/01/2024,Customer 074,Power Bank,Electronics,4,"₹1,800",0%,"₹7,491.41",West,Gujarat
+INV-10055,26/06/2024,Customer 167,Saree,Fashion,3,"₹2,800",0%,"₹8,292.04",East,West Bengal
+INV-10055,22/02/2024,Customer 033,Bedsheet Set,Home,4,"₹1,500",0%,"₹6,228.83",East,West Bengal
+INV-10056,04/02/2023,Customer 170,Power Bank,Electronics,2,"₹1,800",40%,"₹2,182.34",West,Maharashtra
+INV-10056,11/08/2023,Customer 098,Saree,Fashion,4,"₹2,800",0%,"₹11,716.30",West,Gujarat
+INV-10057,17/11/2024,Customer 134,Kurta,Fashion,1,₹900,5%,₹861.86,East,Odisha
+INV-10057,15/08/2023,Customer 179,Mixer Grinder,Home,2,"₹3,500",0%,"₹6,718.60",West,Maharashtra
+INV-10058,08/11/2024,Customer 073,Power Bank,Electronics,1,"₹1,800",10%,"₹1,568.19",North,Uttar Pradesh
+INV-10058,15/10/2023,Customer 075,Earphones,Electronics,1,"₹1,200",25%,₹924.59,West,Gujarat
+INV-10059,16/11/2024,Customer 044,Mobile Phone,Electronics,3,"₹15,000",10%,"₹39,766.66",East,West Bengal
+INV-10059,04/07/2023,Customer 113,Kurta,Fashion,3,₹900,15%,"₹2,377.80",West,Maharashtra
+INV-10060,24/09/2024,Customer 054,Mixer Grinder,Home,3,"₹3,500",0%,"₹10,770.56",East,West Bengal
+INV-10060,23/08/2023,Customer 060,Bedsheet Set,Home,4,"₹1,500",15%,"₹4,983.31",South,Tamil Nadu
+INV-10061,29/06/2024,Customer 099,Mobile Phone,Electronics,1,"₹15,000",40%,"₹8,941.16",South,Tamil Nadu
+INV-10061,20/06/2024,Customer 058,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,471.97",West,Gujarat
+INV-10062,30/04/2023,Customer 125,Pressure Cooker,Home,2,"₹2,400",0%,"₹5,014.24",North,Delhi
+INV-10062,28/09/2024,Customer 155,Kurta,Fashion,3,₹900,15%,"₹2,264.27",West,Gujarat
+INV-10063,15/10/2024,Customer 039,Saree,Fashion,1,"₹2,800",0%,"₹2,859.52",North,Punjab
+INV-10063,21/06/2023,Customer 148,Sports Shoes,Fashion,3,"₹3,200",15%,"₹8,424.63",North,Punjab
+INV-10064,19/04/2024,Customer 041,Mixer Grinder,Home,3,"₹3,500",0%,"₹10,921.90",East,Odisha
+INV-10064,28/10/2024,Customer 160,Earphones,Electronics,2,"₹1,200",15%,"₹2,040.93",South,Kerala
+INV-10065,24/09/2024,Customer 144,Earphones,Electronics,1,"₹1,200",25%,₹926.11,North,Punjab
+INV-10065,13/09/2023,Customer 104,Saree,Fashion,2,"₹2,800",25%,"₹4,364.25",South,Kerala
+INV-10066,09/01/2024,Customer 098,Bedsheet Set,Home,3,"₹1,500",25%,"₹3,516.28",East,Odisha
+INV-10066,22/07/2023,Customer 031,Mobile Phone,Electronics,2,"₹15,000",10%,"₹26,008.90",North,Delhi
+INV-10067,14/10/2024,Customer 003,Saree,Fashion,2,"₹2,800",25%,"₹4,167.02",South,Karnataka
+INV-10067,15/07/2023,Customer 013,Mobile Phone,Electronics,3,"₹15,000",25%,"₹33,948.84",East,West Bengal
+INV-10068,16/11/2023,Customer 001,Mixer Grinder,Home,1,"₹3,500",25%,"₹2,611.56",South,Kerala
+INV-10068,30/07/2024,Customer 024,Sports Shoes,Fashion,2,"₹3,200",15%,"₹5,217.82",West,Gujarat
+INV-10069,19/09/2024,Customer 047,Mobile Phone,Electronics,3,"₹15,000",15%,"₹39,523.77",West,Gujarat
+INV-10069,27/11/2023,Customer 173,Power Bank,Electronics,1,"₹1,800",25%,"₹1,348.62",North,Punjab
+INV-10070,11/11/2023,Customer 106,Sports Shoes,Fashion,4,"₹3,200",15%,"₹11,376.43",North,Uttar Pradesh
+INV-10070,02/08/2023,Customer 002,Pressure Cooker,Home,4,"₹2,400",25%,"₹7,396.88",West,Maharashtra
+INV-10071,07/10/2023,Customer 093,Sports Shoes,Fashion,4,"₹3,200",5%,"₹11,617.89",North,Delhi
+INV-10071,01/07/2024,Customer 142,Mobile Phone,Electronics,1,"₹15,000",15%,"₹13,265.19",North,Delhi
+INV-10072,26/04/2023,Customer 128,Bedsheet Set,Home,1,"₹1,500",15%,"₹1,252.14",South,Kerala
+INV-10072,30/08/2024,Customer 168,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,421.92",East,West Bengal
+INV-10073,02/05/2024,Customer 013,Bedsheet Set,Home,1,"₹1,500",15%,"₹1,269.67",East,West Bengal
+INV-10073,28/05/2024,Customer 068,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,565.09",East,West Bengal
+INV-10074,14/01/2023,Customer 149,Pressure Cooker,Home,4,"₹2,400",0%,"₹10,010.80",West,Gujarat
+INV-10074,16/07/2024,Customer 176,Saree,Fashion,1,"₹2,800",40%,"₹1,744.53",South,Tamil Nadu
+INV-10075,03/11/2024,Customer 011,Mobile Phone,Electronics,1,"₹15,000",0%,"₹15,680.77",West,Maharashtra
+INV-10075,20/01/2023,Customer 017,Sports Shoes,Fashion,1,"₹3,200",0%,"₹3,145.68",North,Punjab
+INV-10076,01/02/2023,Customer 135,Earphones,Electronics,3,"₹1,200",0%,"₹3,491.10",North,Delhi
+INV-10076,02/01/2023,Customer 097,Earphones,Electronics,2,"₹1,200",10%,"₹2,233.36",East,West Bengal
+INV-10077,24/10/2023,Customer 076,Power Bank,Electronics,2,"₹1,800",0%,"₹3,643.40",South,Kerala
+INV-10077,27/04/2024,Customer 082,Power Bank,Electronics,2,"₹1,800",0%,"₹3,468.39",North,Delhi
+INV-10078,30/04/2023,Customer 093,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,365.86",North,Delhi
+INV-10078,31/03/2024,Customer 054,Mixer Grinder,Home,2,"₹3,500",40%,"₹4,036.68",West,Gujarat
+INV-10079,19/07/2024,Customer 069,Sports Shoes,Fashion,4,"₹3,200",0%,"₹12,388.50",North,Delhi
+INV-10079,03/10/2024,Customer 164,Kurta,Fashion,2,₹900,25%,"₹1,344.18",East,West Bengal
+INV-10080,23/07/2023,Customer 062,Mobile Phone,Electronics,1,"₹15,000",40%,"₹9,138.38",South,Kerala
+INV-10080,08/09/2023,Customer 140,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,348.84",North,Punjab
+INV-10081,24/01/2024,Customer 139,Power Bank,Electronics,4,"₹1,800",40%,"₹4,404.85",South,Tamil Nadu
+INV-10081,03/06/2023,Customer 180,Mobile Phone,Electronics,4,"₹15,000",10%,"₹52,857.31",North,Punjab
+INV-10082,16/02/2023,Customer 035,Kurta,Fashion,2,₹900,0%,"₹1,827.62",East,Odisha
+INV-10082,07/07/2024,Customer 176,Mixer Grinder,Home,2,"₹3,500",5%,"₹6,393.40",East,Odisha
+INV-10083,01/10/2023,Customer 119,Mixer Grinder,Home,3,"₹3,500",25%,"₹8,256.28",South,Karnataka
+INV-10083,15/07/2023,Customer 067,Kurta,Fashion,3,₹900,40%,"₹1,678.44",West,Maharashtra
+INV-10084,15/08/2023,Customer 170,Pressure Cooker,Home,4,"₹2,400",25%,"₹7,163.23",North,Uttar Pradesh
+INV-10084,06/12/2024,Customer 031,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,829.94",West,Maharashtra
+INV-10085,05/05/2023,Customer 015,Earphones,Electronics,1,"₹1,200",25%,₹862.41,West,Gujarat
+INV-10085,04/03/2024,Customer 066,Mobile Phone,Electronics,2,"₹15,000",0%,"₹30,629.58",East,Odisha
+INV-10086,28/10/2023,Customer 169,Saree,Fashion,3,"₹2,800",25%,"₹6,272.20",West,Maharashtra
+INV-10086,05/09/2024,Customer 033,Mixer Grinder,Home,2,"₹3,500",0%,"₹7,259.83",West,Maharashtra
+INV-10087,19/05/2023,Customer 119,Pressure Cooker,Home,4,"₹2,400",10%,"₹8,837.27",West,Gujarat
+INV-10087,09/02/2023,Customer 136,Mobile Phone,Electronics,1,"₹15,000",25%,"₹11,661.67",South,Tamil Nadu
+INV-10088,29/05/2023,Customer 051,Mixer Grinder,Home,2,"₹3,500",40%,"₹4,032.62",East,Odisha
+INV-10088,24/04/2023,Customer 054,Kurta,Fashion,2,₹900,0%,"₹1,810.54",South,Karnataka
+INV-10089,14/10/2024,Customer 130,Power Bank,Electronics,3,"₹1,800",5%,"₹5,255.29",East,Odisha
+INV-10089,06/05/2024,Customer 011,Power Bank,Electronics,2,"₹1,800",0%,"₹3,435.58",West,Gujarat
+INV-10090,09/10/2023,Customer 156,Mobile Phone,Electronics,1,"₹15,000",0%,"₹15,249.49",East,Odisha
+INV-10090,02/02/2024,Customer 169,Bedsheet Set,Home,1,"₹1,500",15%,"₹1,252.18",East,Odisha
+INV-10091,30/08/2024,Customer 171,Mobile Phone,Electronics,3,"₹15,000",15%,"₹37,026.70",North,Punjab
+INV-10091,07/06/2024,Customer 048,Pressure Cooker,Home,4,"₹2,400",0%,"₹9,781.57",East,Odisha
+INV-10092,12/10/2023,Customer 006,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,419.76",South,Kerala
+INV-10092,03/02/2023,Customer 022,Kurta,Fashion,4,₹900,25%,"₹2,788.44",East,Odisha
+INV-10093,14/07/2023,Customer 170,Mixer Grinder,Home,4,"₹3,500",15%,"₹11,450.35",East,Odisha
+INV-10093,08/06/2024,Customer 008,Earphones,Electronics,2,"₹1,200",5%,"₹2,230.48",West,Maharashtra
+INV-10094,06/01/2024,Customer 112,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,495.17",North,Punjab
+INV-10094,22/03/2024,Customer 080,Sports Shoes,Fashion,3,"₹3,200",15%,"₹7,951.19",South,Tamil Nadu
+INV-10095,16/03/2024,Customer 015,Mobile Phone,Electronics,2,"₹15,000",40%,"₹18,581.44",North,Delhi
+INV-10095,28/08/2024,Customer 137,Power Bank,Electronics,4,"₹1,800",5%,"₹6,755.52",North,Uttar Pradesh
+INV-10096,03/04/2023,Customer 069,Sports Shoes,Fashion,3,"₹3,200",15%,"₹8,402.64",South,Tamil Nadu
+INV-10096,14/04/2023,Customer 089,Pressure Cooker,Home,2,"₹2,400",25%,"₹3,772.14",North,Punjab
+INV-10097,10/12/2024,Customer 017,Pressure Cooker,Home,3,"₹2,400",15%,"₹5,904.57",West,Gujarat
+INV-10097,09/05/2023,Customer 073,Mobile Phone,Electronics,3,"₹15,000",0%,"₹43,345.45",North,Uttar Pradesh
+INV-10098,23/09/2024,Customer 101,Earphones,Electronics,4,"₹1,200",10%,"₹4,149.05",West,Maharashtra
+INV-10098,04/04/2023,Customer 058,Mixer Grinder,Home,2,"₹3,500",10%,"₹6,106.11",East,West Bengal
+INV-10099,09/08/2023,Customer 179,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,143.50",East,West Bengal
+INV-10099,05/04/2024,Customer 140,Earphones,Electronics,1,"₹1,200",0%,"₹1,171.04",North,Punjab
+INV-10100,14/12/2024,Customer 082,Mixer Grinder,Home,4,"₹3,500",0%,"₹14,255.24",North,Delhi
+INV-10100,09/08/2024,Customer 119,Sports Shoes,Fashion,1,"₹3,200",10%,"₹2,866.88",North,Uttar Pradesh
+INV-10101,05/09/2023,Customer 175,Mobile Phone,Electronics,3,"₹15,000",10%,"₹40,068.29",North,Delhi
+INV-10101,15/03/2024,Customer 057,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,353.62",North,Uttar Pradesh
+INV-10102,11/07/2023,Customer 041,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,470.29",South,Kerala
+INV-10102,19/08/2023,Customer 043,Pressure Cooker,Home,1,"₹2,400",5%,"₹2,332.22",East,Odisha
+INV-10103,30/10/2024,Customer 057,Sports Shoes,Fashion,1,"₹3,200",10%,"₹3,002.34",North,Delhi
+INV-10103,26/06/2023,Customer 060,Earphones,Electronics,2,"₹1,200",15%,"₹1,977.07",East,Odisha
+INV-10104,11/11/2023,Customer 063,Mixer Grinder,Home,1,"₹3,500",10%,"₹3,214.81",South,Tamil Nadu
+INV-10104,08/08/2024,Customer 018,Kurta,Fashion,3,₹900,25%,"₹2,120.81",North,Uttar Pradesh
+INV-10105,12/07/2024,Customer 157,Sports Shoes,Fashion,2,"₹3,200",0%,"₹6,279.65",North,Punjab
+INV-10105,21/08/2024,Customer 112,Earphones,Electronics,1,"₹1,200",5%,"₹1,148.52",West,Maharashtra
+INV-10106,05/05/2024,Customer 056,Mobile Phone,Electronics,4,"₹15,000",5%,"₹59,236.10",South,Kerala
+INV-10106,19/04/2023,Customer 151,Saree,Fashion,1,"₹2,800",25%,"₹2,082.74",North,Uttar Pradesh
+INV-10107,25/07/2024,Customer 028,Sports Shoes,Fashion,3,"₹3,200",15%,"₹8,278.91",North,Uttar Pradesh
+INV-10107,04/05/2023,Customer 141,Bedsheet Set,Home,4,"₹1,500",0%,"₹6,114.26",South,Karnataka
+INV-10108,11/11/2024,Customer 108,Mobile Phone,Electronics,4,"₹15,000",10%,"₹56,168.75",South,Karnataka
+INV-10108,22/10/2024,Customer 113,Earphones,Electronics,1,"₹1,200",0%,"₹1,220.08",South,Kerala
+INV-10109,16/01/2024,Customer 015,Kurta,Fashion,1,₹900,0%,₹913.01,East,West Bengal
+INV-10109,02/10/2024,Customer 082,Sports Shoes,Fashion,4,"₹3,200",0%,"₹13,229.92",North,Uttar Pradesh
+INV-10110,01/07/2024,Customer 090,Sports Shoes,Fashion,1,"₹3,200",10%,"₹2,881.26",North,Delhi
+INV-10110,22/10/2024,Customer 105,Mobile Phone,Electronics,2,"₹15,000",40%,"₹17,990.67",East,West Bengal
+INV-10111,12/11/2024,Customer 161,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,355.78",East,West Bengal
+INV-10111,26/04/2023,Customer 065,Kurta,Fashion,2,₹900,10%,"₹1,645.21",West,Gujarat
+INV-10112,15/10/2024,Customer 004,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,489.56",South,Karnataka
+INV-10112,11/08/2023,Customer 052,Earphones,Electronics,4,"₹1,200",0%,"₹4,964.58",West,Maharashtra
+INV-10113,19/02/2023,Customer 128,Earphones,Electronics,3,"₹1,200",0%,"₹3,515.81",East,West Bengal
+INV-10113,15/03/2024,Customer 147,Kurta,Fashion,2,₹900,10%,"₹1,551.66",South,Tamil Nadu
+INV-10114,24/02/2024,Customer 051,Saree,Fashion,1,"₹2,800",15%,"₹2,317.20",South,Tamil Nadu
+INV-10114,02/01/2023,Customer 024,Bedsheet Set,Home,3,"₹1,500",25%,"₹3,411.08",South,Karnataka
+INV-10115,12/04/2024,Customer 169,Bedsheet Set,Home,2,"₹1,500",0%,"₹2,905.98",North,Delhi
+INV-10115,04/02/2023,Customer 134,Bedsheet Set,Home,1,"₹1,500",15%,"₹1,303.90",West,Gujarat
+INV-10116,05/03/2023,Customer 153,Power Bank,Electronics,1,"₹1,800",15%,"₹1,532.82",East,West Bengal
+INV-10116,30/01/2023,Customer 013,Kurta,Fashion,3,₹900,25%,"₹1,996.51",North,Punjab
+INV-10117,22/07/2023,Customer 091,Pressure Cooker,Home,4,"₹2,400",25%,"₹7,204.02",North,Delhi
+INV-10117,18/08/2023,Customer 052,Pressure Cooker,Home,4,"₹2,400",25%,"₹7,130.10",East,West Bengal
+INV-10118,24/07/2024,Customer 151,Earphones,Electronics,1,"₹1,200",0%,"₹1,244.16",North,Delhi
+INV-10118,18/11/2024,Customer 035,Power Bank,Electronics,3,"₹1,800",5%,"₹5,296.05",North,Uttar Pradesh
+INV-10119,16/04/2024,Customer 001,Power Bank,Electronics,2,"₹1,800",40%,"₹2,104.07",West,Maharashtra
+INV-10119,07/05/2023,Customer 010,Sports Shoes,Fashion,1,"₹3,200",0%,"₹3,357.00",East,West Bengal
+INV-10120,20/03/2024,Customer 002,Earphones,Electronics,2,"₹1,200",0%,"₹2,345.08",West,Maharashtra
+INV-10120,26/05/2024,Customer 077,Sports Shoes,Fashion,1,"₹3,200",0%,"₹3,069.07",East,West Bengal
+INV-10121,27/01/2023,Customer 145,Kurta,Fashion,1,₹900,15%,₹794.48,West,Gujarat
+INV-10121,07/03/2024,Customer 007,Sports Shoes,Fashion,2,"₹3,200",25%,"₹4,924.36",North,Uttar Pradesh
+INV-10122,07/03/2023,Customer 062,Sports Shoes,Fashion,1,"₹3,200",0%,"₹3,072.54",West,Maharashtra
+INV-10122,14/05/2023,Customer 117,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,457.90",East,Odisha
+INV-10123,07/10/2023,Customer 173,Saree,Fashion,1,"₹2,800",25%,"₹2,053.45",East,West Bengal
+INV-10123,25/10/2023,Customer 112,Saree,Fashion,2,"₹2,800",0%,"₹5,675.27",West,Gujarat
+INV-10124,29/06/2024,Customer 099,Power Bank,Electronics,1,"₹1,800",10%,"₹1,645.26",East,Odisha
+INV-10124,29/11/2024,Customer 013,Kurta,Fashion,2,₹900,0%,"₹1,860.66",East,West Bengal
+INV-10125,09/05/2023,Customer 106,Earphones,Electronics,4,"₹1,200",15%,"₹4,122.05",West,Gujarat
+INV-10125,12/04/2024,Customer 113,Mixer Grinder,Home,4,"₹3,500",25%,"₹9,979.69",East,Odisha
+INV-10126,05/01/2024,Customer 080,Mixer Grinder,Home,2,"₹3,500",25%,"₹5,212.59",East,West Bengal
+INV-10126,24/04/2024,Customer 110,Earphones,Electronics,3,"₹1,200",0%,"₹3,618.57",South,Tamil Nadu
+INV-10127,01/02/2024,Customer 158,Earphones,Electronics,3,"₹1,200",0%,"₹3,463.52",East,Odisha
+INV-10127,28/05/2023,Customer 057,Power Bank,Electronics,2,"₹1,800",0%,"₹3,514.22",South,Karnataka
+INV-10128,05/01/2023,Customer 113,Mobile Phone,Electronics,1,"₹15,000",40%,"₹8,652.64",South,Tamil Nadu
+INV-10128,14/01/2024,Customer 115,Earphones,Electronics,3,"₹1,200",0%,"₹3,598.37",West,Gujarat
+INV-10129,27/11/2023,Customer 164,Mixer Grinder,Home,4,"₹3,500",0%,"₹13,764.33",West,Maharashtra
+INV-10129,29/06/2023,Customer 133,Pressure Cooker,Home,4,"₹2,400",0%,"₹9,539.70",North,Uttar Pradesh
+INV-10130,28/11/2023,Customer 050,Power Bank,Electronics,3,"₹1,800",0%,"₹5,636.97",South,Karnataka
+INV-10130,16/06/2023,Customer 129,Saree,Fashion,1,"₹2,800",0%,"₹2,814.98",East,West Bengal
+INV-10131,22/10/2023,Customer 055,Mixer Grinder,Home,2,"₹3,500",0%,"₹6,933.11",North,Uttar Pradesh
+INV-10131,14/01/2024,Customer 066,Bedsheet Set,Home,1,"₹1,500",15%,"₹1,298.43",East,Odisha
+INV-10132,25/11/2023,Customer 035,Saree,Fashion,3,"₹2,800",5%,"₹8,142.43",North,Delhi
+INV-10132,23/05/2024,Customer 121,Sports Shoes,Fashion,1,"₹3,200",40%,"₹1,919.48",North,Delhi
+INV-10133,29/10/2023,Customer 084,Sports Shoes,Fashion,2,"₹3,200",10%,"₹5,523.10",West,Gujarat
+INV-10133,11/08/2023,Customer 005,Earphones,Electronics,4,"₹1,200",0%,"₹4,966.53",North,Uttar Pradesh
+INV-10134,23/04/2023,Customer 046,Pressure Cooker,Home,4,"₹2,400",10%,"₹8,255.99",East,Odisha
+INV-10134,15/06/2024,Customer 051,Sports Shoes,Fashion,4,"₹3,200",15%,"₹10,834.24",West,Gujarat
+INV-10135,28/10/2024,Customer 111,Pressure Cooker,Home,4,"₹2,400",5%,"₹9,124.65",North,Delhi
+INV-10135,25/05/2024,Customer 114,Kurta,Fashion,4,₹900,0%,"₹3,758.01",North,Delhi
+INV-10136,09/07/2024,Customer 070,Power Bank,Electronics,4,"₹1,800",0%,"₹7,324.80",South,Tamil Nadu
+INV-10136,27/10/2023,Customer 114,Kurta,Fashion,1,₹900,0%,₹934.15,North,Punjab
+INV-10137,04/10/2024,Customer 006,Saree,Fashion,3,"₹2,800",10%,"₹7,346.91",East,West Bengal
+INV-10137,12/09/2024,Customer 097,Saree,Fashion,3,"₹2,800",5%,"₹7,756.30",West,Maharashtra
+INV-10138,05/02/2023,Customer 040,Power Bank,Electronics,1,"₹1,800",0%,"₹1,720.09",East,Odisha
+INV-10138,06/03/2024,Customer 137,Earphones,Electronics,2,"₹1,200",25%,"₹1,860.35",West,Maharashtra
+INV-10139,06/05/2023,Customer 071,Mobile Phone,Electronics,2,"₹15,000",15%,"₹24,789.97",South,Karnataka
+INV-10139,24/01/2023,Customer 081,Mobile Phone,Electronics,4,"₹15,000",10%,"₹56,566.53",South,Karnataka
+INV-10140,05/01/2023,Customer 152,Bedsheet Set,Home,2,"₹1,500",10%,"₹2,774.09",West,Maharashtra
+INV-10140,25/01/2024,Customer 037,Bedsheet Set,Home,3,"₹1,500",40%,"₹2,567.86",South,Kerala
+INV-10141,27/06/2024,Customer 147,Pressure Cooker,Home,3,"₹2,400",40%,"₹4,352.09",East,West Bengal
+INV-10141,30/11/2024,Customer 167,Earphones,Electronics,3,"₹1,200",25%,"₹2,682.56",South,Tamil Nadu
+INV-10142,19/07/2024,Customer 164,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,324.73",South,Karnataka
+INV-10142,21/11/2024,Customer 039,Power Bank,Electronics,4,"₹1,800",0%,"₹7,450.38",North,Delhi
+INV-10143,03/08/2024,Customer 055,Saree,Fashion,2,"₹2,800",5%,"₹5,332.15",East,West Bengal
+INV-10143,18/11/2023,Customer 077,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,520.25",North,Punjab
+INV-10144,08/07/2024,Customer 103,Kurta,Fashion,1,₹900,0%,₹907.87,West,Maharashtra
+INV-10144,05/01/2024,Customer 078,Earphones,Electronics,4,"₹1,200",5%,"₹4,529.22",North,Delhi
+INV-10145,09/07/2024,Customer 008,Mixer Grinder,Home,3,"₹3,500",10%,"₹9,377.69",North,Uttar Pradesh
+INV-10145,07/08/2024,Customer 027,Kurta,Fashion,1,₹900,0%,₹898.87,South,Tamil Nadu
+INV-10146,12/08/2024,Customer 163,Bedsheet Set,Home,4,"₹1,500",5%,"₹5,827.37",North,Delhi
+INV-10146,29/07/2023,Customer 035,Mobile Phone,Electronics,4,"₹15,000",0%,"₹62,580.21",East,West Bengal
+INV-10147,12/01/2024,Customer 172,Mobile Phone,Electronics,3,"₹15,000",40%,"₹27,544.17",South,Tamil Nadu
+INV-10147,18/07/2024,Customer 059,Mixer Grinder,Home,1,"₹3,500",5%,"₹3,430.50",West,Gujarat
+INV-10148,26/04/2024,Customer 033,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,159.69",East,Odisha
+INV-10148,17/03/2023,Customer 142,Saree,Fashion,2,"₹2,800",10%,"₹4,845.34",East,Odisha
+INV-10149,30/12/2024,Customer 102,Earphones,Electronics,3,"₹1,200",0%,"₹3,693.82",East,Odisha
+INV-10149,27/05/2024,Customer 104,Mobile Phone,Electronics,2,"₹15,000",25%,"₹22,240.74",North,Punjab
+INV-10150,28/04/2023,Customer 103,Earphones,Electronics,3,"₹1,200",10%,"₹3,298.45",East,Odisha
+INV-10150,30/08/2024,Customer 047,Earphones,Electronics,2,"₹1,200",10%,"₹2,065.07",South,Kerala
+INV-10151,23/02/2023,Customer 171,Power Bank,Electronics,3,"₹1,800",15%,"₹4,519.08",North,Delhi
+INV-10151,09/03/2023,Customer 167,Mobile Phone,Electronics,4,"₹15,000",15%,"₹51,956.19",East,West Bengal
+INV-10152,16/12/2024,Customer 158,Mixer Grinder,Home,4,"₹3,500",0%,"₹13,616.64",North,Punjab
+INV-10152,31/05/2024,Customer 122,Earphones,Electronics,3,"₹1,200",25%,"₹2,813.63",North,Punjab
+INV-10153,05/06/2024,Customer 061,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,473.84",South,Tamil Nadu
+INV-10153,28/10/2024,Customer 146,Power Bank,Electronics,1,"₹1,800",25%,"₹1,331.23",East,Odisha
+INV-10154,16/07/2024,Customer 150,Pressure Cooker,Home,2,"₹2,400",0%,"₹5,036.04",South,Karnataka
+INV-10154,16/10/2024,Customer 060,Kurta,Fashion,1,₹900,0%,₹921.64,North,Uttar Pradesh
+INV-10155,29/11/2023,Customer 062,Mixer Grinder,Home,1,"₹3,500",15%,"₹2,966.17",East,Odisha
+INV-10155,01/04/2023,Customer 124,Kurta,Fashion,3,₹900,0%,"₹2,567.47",West,Maharashtra
+INV-10156,25/07/2023,Customer 020,Saree,Fashion,1,"₹2,800",0%,"₹2,700.09",East,Odisha
+INV-10156,27/06/2024,Customer 114,Kurta,Fashion,3,₹900,5%,"₹2,630.69",North,Punjab
+INV-10157,07/05/2023,Customer 146,Power Bank,Electronics,4,"₹1,800",0%,"₹6,972.96",North,Delhi
+INV-10157,05/03/2024,Customer 004,Mobile Phone,Electronics,3,"₹15,000",15%,"₹36,704.04",South,Kerala
+INV-10158,14/07/2024,Customer 153,Earphones,Electronics,4,"₹1,200",15%,"₹3,944.05",East,Odisha
+INV-10158,26/06/2024,Customer 111,Bedsheet Set,Home,3,"₹1,500",25%,"₹3,225.92",South,Kerala
+INV-10159,30/03/2023,Customer 026,Bedsheet Set,Home,1,"₹1,500",25%,"₹1,137.85",East,Odisha
+INV-10159,24/12/2023,Customer 073,Sports Shoes,Fashion,2,"₹3,200",40%,"₹3,906.65",East,West Bengal
+INV-10160,26/09/2023,Customer 041,Saree,Fashion,3,"₹2,800",0%,"₹8,274.33",West,Maharashtra
+INV-10160,26/04/2024,Customer 148,Sports Shoes,Fashion,4,"₹3,200",10%,"₹12,012.84",South,Karnataka
+INV-10161,20/01/2023,Customer 127,Sports Shoes,Fashion,4,"₹3,200",25%,"₹9,854.83",North,Punjab
+INV-10161,10/06/2024,Customer 003,Kurta,Fashion,3,₹900,25%,"₹2,040.95",East,West Bengal
+INV-10162,13/05/2023,Customer 095,Mobile Phone,Electronics,1,"₹15,000",0%,"₹15,616.04",North,Uttar Pradesh
+INV-10162,25/11/2023,Customer 129,Bedsheet Set,Home,2,"₹1,500",0%,"₹2,870.24",North,Delhi
+INV-10163,05/05/2024,Customer 105,Saree,Fashion,4,"₹2,800",0%,"₹10,717.81",South,Kerala
+INV-10163,31/08/2023,Customer 096,Pressure Cooker,Home,4,"₹2,400",25%,"₹6,958.49",West,Gujarat
+INV-10164,26/01/2024,Customer 109,Mobile Phone,Electronics,4,"₹15,000",0%,"₹60,860.83",South,Karnataka
+INV-10164,22/05/2023,Customer 144,Mixer Grinder,Home,3,"₹3,500",0%,"₹10,306.79",East,West Bengal
+INV-10165,23/12/2023,Customer 144,Bedsheet Set,Home,4,"₹1,500",5%,"₹5,556.00",North,Punjab
+INV-10165,04/04/2024,Customer 080,Mobile Phone,Electronics,4,"₹15,000",25%,"₹46,813.16",West,Maharashtra
+INV-10166,04/12/2023,Customer 127,Kurta,Fashion,3,₹900,0%,"₹2,696.16",East,Odisha
+INV-10166,29/12/2023,Customer 142,Bedsheet Set,Home,4,"₹1,500",15%,"₹4,993.11",North,Delhi
+INV-10167,08/03/2024,Customer 172,Sports Shoes,Fashion,3,"₹3,200",10%,"₹9,031.62",South,Kerala
+INV-10167,08/04/2024,Customer 164,Saree,Fashion,2,"₹2,800",5%,"₹5,159.24",North,Uttar Pradesh
+INV-10168,29/04/2024,Customer 027,Bedsheet Set,Home,1,"₹1,500",40%,₹938.07,South,Kerala
+INV-10168,01/11/2023,Customer 004,Power Bank,Electronics,3,"₹1,800",40%,"₹3,223.83",South,Karnataka
+INV-10169,26/06/2023,Customer 116,Mixer Grinder,Home,1,"₹3,500",40%,"₹2,178.32",West,Gujarat
+INV-10169,18/04/2024,Customer 109,Saree,Fashion,1,"₹2,800",40%,"₹1,748.66",West,Maharashtra
+INV-10170,12/04/2024,Customer 151,Power Bank,Electronics,3,"₹1,800",10%,"₹5,003.56",West,Maharashtra
+INV-10170,28/03/2023,Customer 097,Mixer Grinder,Home,2,"₹3,500",5%,"₹6,545.64",North,Punjab
+INV-10171,27/02/2023,Customer 152,Pressure Cooker,Home,3,"₹2,400",25%,"₹5,349.46",North,Punjab
+INV-10171,20/12/2023,Customer 069,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,073.63",West,Gujarat
+INV-10172,22/01/2023,Customer 156,Mobile Phone,Electronics,3,"₹15,000",10%,"₹42,389.51",South,Karnataka
+INV-10172,07/06/2023,Customer 074,Mobile Phone,Electronics,4,"₹15,000",40%,"₹34,828.00",West,Gujarat
+INV-10173,19/11/2023,Customer 176,Saree,Fashion,2,"₹2,800",25%,"₹4,406.36",North,Delhi
+INV-10173,23/07/2024,Customer 131,Mixer Grinder,Home,1,"₹3,500",10%,"₹3,206.96",North,Punjab
+INV-10174,19/06/2023,Customer 125,Pressure Cooker,Home,2,"₹2,400",5%,"₹4,414.44",South,Kerala
+INV-10174,26/10/2023,Customer 074,Mobile Phone,Electronics,4,"₹15,000",25%,"₹43,921.71",East,Odisha
+INV-10175,30/04/2024,Customer 128,Power Bank,Electronics,3,"₹1,800",0%,"₹5,600.67",West,Maharashtra
+INV-10175,17/05/2024,Customer 087,Sports Shoes,Fashion,2,"₹3,200",0%,"₹6,562.48",North,Delhi
+INV-10176,09/01/2023,Customer 059,Pressure Cooker,Home,2,"₹2,400",5%,"₹4,588.94",North,Delhi
+INV-10176,26/08/2023,Customer 155,Power Bank,Electronics,3,"₹1,800",0%,"₹5,149.90",West,Gujarat
+INV-10177,11/02/2024,Customer 163,Kurta,Fashion,3,₹900,25%,"₹2,119.70",South,Karnataka
+INV-10177,04/01/2024,Customer 166,Mixer Grinder,Home,3,"₹3,500",40%,"₹6,447.35",South,Tamil Nadu
+INV-10178,27/09/2024,Customer 029,Earphones,Electronics,2,"₹1,200",15%,"₹1,999.16",South,Kerala
+INV-10178,15/04/2024,Customer 178,Sports Shoes,Fashion,3,"₹3,200",25%,"₹7,396.98",North,Punjab
+INV-10179,16/09/2023,Customer 143,Bedsheet Set,Home,2,"₹1,500",0%,"₹2,936.31",North,Uttar Pradesh
+INV-10179,03/06/2024,Customer 089,Saree,Fashion,2,"₹2,800",10%,"₹4,957.90",South,Karnataka
+INV-10180,31/10/2024,Customer 045,Bedsheet Set,Home,2,"₹1,500",15%,"₹2,539.56",East,West Bengal
+INV-10180,11/04/2024,Customer 093,Bedsheet Set,Home,2,"₹1,500",0%,"₹2,878.24",West,Gujarat
+INV-10181,03/01/2024,Customer 177,Mobile Phone,Electronics,1,"₹15,000",40%,"₹8,600.81",West,Maharashtra
+INV-10181,11/01/2024,Customer 068,Power Bank,Electronics,3,"₹1,800",40%,"₹3,124.48",East,Odisha
+INV-10182,28/05/2023,Customer 066,Mobile Phone,Electronics,4,"₹15,000",0%,"₹57,776.47",East,Odisha
+INV-10182,12/08/2023,Customer 158,Mixer Grinder,Home,2,"₹3,500",10%,"₹6,017.25",West,Maharashtra
+INV-10183,19/12/2023,Customer 002,Mobile Phone,Electronics,2,"₹15,000",0%,"₹29,162.20",East,West Bengal
+INV-10183,16/12/2024,Customer 174,Mobile Phone,Electronics,4,"₹15,000",15%,"₹50,579.42",East,West Bengal
+INV-10184,24/06/2024,Customer 017,Mixer Grinder,Home,2,"₹3,500",40%,"₹4,231.57",South,Kerala
+INV-10184,02/12/2023,Customer 093,Mixer Grinder,Home,2,"₹3,500",0%,"₹6,763.88",South,Tamil Nadu
+INV-10185,19/03/2024,Customer 129,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,441.96",North,Delhi
+INV-10185,14/02/2024,Customer 166,Sports Shoes,Fashion,4,"₹3,200",15%,"₹10,563.42",South,Kerala
+INV-10186,22/01/2024,Customer 072,Kurta,Fashion,2,₹900,0%,"₹1,850.91",South,Kerala
+INV-10186,10/07/2023,Customer 110,Power Bank,Electronics,4,"₹1,800",40%,"₹4,262.46",North,Punjab
+INV-10187,17/09/2024,Customer 132,Mixer Grinder,Home,4,"₹3,500",10%,"₹12,354.26",North,Punjab
+INV-10187,08/08/2024,Customer 052,Mixer Grinder,Home,4,"₹3,500",25%,"₹10,827.45",West,Gujarat
+INV-10188,31/05/2023,Customer 030,Sports Shoes,Fashion,2,"₹3,200",10%,"₹5,671.58",North,Punjab
+INV-10188,30/06/2023,Customer 043,Kurta,Fashion,4,₹900,5%,"₹3,398.23",South,Tamil Nadu
+INV-10189,24/02/2023,Customer 136,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,979.57",East,West Bengal
+INV-10189,18/04/2024,Customer 007,Sports Shoes,Fashion,3,"₹3,200",10%,"₹9,035.92",West,Maharashtra
+INV-10190,30/03/2024,Customer 074,Power Bank,Electronics,3,"₹1,800",25%,"₹3,882.88",North,Uttar Pradesh
+INV-10190,29/07/2024,Customer 172,Kurta,Fashion,1,₹900,40%,₹545.93,West,Gujarat
+INV-10191,03/04/2023,Customer 151,Saree,Fashion,4,"₹2,800",0%,"₹10,990.33",East,Odisha
+INV-10191,19/07/2023,Customer 115,Saree,Fashion,3,"₹2,800",10%,"₹7,372.83",North,Uttar Pradesh
+INV-10192,27/08/2024,Customer 015,Sports Shoes,Fashion,4,"₹3,200",0%,"₹12,651.06",North,Delhi
+INV-10192,30/12/2023,Customer 082,Mixer Grinder,Home,2,"₹3,500",0%,"₹6,877.54",North,Uttar Pradesh
+INV-10193,08/01/2023,Customer 026,Kurta,Fashion,3,₹900,0%,"₹2,733.47",East,Odisha
+INV-10193,16/08/2023,Customer 055,Power Bank,Electronics,1,"₹1,800",0%,"₹1,754.75",West,Gujarat
+INV-10194,03/10/2024,Customer 048,Earphones,Electronics,2,"₹1,200",10%,"₹2,055.51",West,Gujarat
+INV-10194,17/07/2024,Customer 028,Pressure Cooker,Home,2,"₹2,400",25%,"₹3,513.38",North,Uttar Pradesh
+INV-10195,25/01/2024,Customer 012,Kurta,Fashion,3,₹900,0%,"₹2,737.81",South,Kerala
+INV-10195,08/02/2023,Customer 113,Power Bank,Electronics,4,"₹1,800",40%,"₹4,324.54",North,Delhi
+INV-10196,31/12/2023,Customer 086,Power Bank,Electronics,2,"₹1,800",0%,"₹3,540.49",North,Delhi
+INV-10196,31/01/2023,Customer 122,Bedsheet Set,Home,2,"₹1,500",5%,"₹2,727.74",West,Gujarat
+INV-10197,03/06/2024,Customer 016,Bedsheet Set,Home,4,"₹1,500",25%,"₹4,488.53",West,Gujarat
+INV-10197,06/09/2024,Customer 072,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,426.23",North,Punjab
+INV-10198,09/02/2023,Customer 032,Bedsheet Set,Home,2,"₹1,500",40%,"₹1,721.97",East,Odisha
+INV-10198,10/09/2023,Customer 097,Earphones,Electronics,2,"₹1,200",0%,"₹2,372.05",East,West Bengal
+INV-10199,07/02/2023,Customer 148,Pressure Cooker,Home,2,"₹2,400",5%,"₹4,525.99",West,Maharashtra
+INV-10199,06/05/2023,Customer 159,Mobile Phone,Electronics,3,"₹15,000",0%,"₹46,610.00",South,Karnataka
+INV-10200,22/12/2024,Customer 156,Pressure Cooker,Home,4,"₹2,400",15%,"₹8,099.32",West,Maharashtra
+INV-10200,11/11/2023,Customer 141,Mobile Phone,Electronics,1,"₹15,000",0%,"₹14,560.18",East,Odisha
+INV-10201,13/10/2023,Customer 147,Sports Shoes,Fashion,3,"₹3,200",10%,"₹8,867.76",East,Odisha
+INV-10201,24/02/2023,Customer 023,Bedsheet Set,Home,4,"₹1,500",5%,"₹5,552.62",East,West Bengal
+INV-10202,07/06/2023,Customer 173,Earphones,Electronics,4,"₹1,200",5%,"₹4,593.06",North,Uttar Pradesh
+INV-10202,07/03/2023,Customer 126,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,289.57",South,Tamil Nadu
+INV-10203,08/11/2024,Customer 088,Saree,Fashion,1,"₹2,800",25%,"₹2,001.39",South,Karnataka
+INV-10203,05/01/2024,Customer 178,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,218.56",North,Punjab
+INV-10204,10/05/2023,Customer 006,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,603.04",East,West Bengal
+INV-10204,02/11/2024,Customer 138,Mobile Phone,Electronics,2,"₹15,000",40%,"₹18,883.79",East,West Bengal
+INV-10205,19/10/2024,Customer 081,Mobile Phone,Electronics,4,"₹15,000",15%,"₹51,929.82",South,Karnataka
+INV-10205,20/07/2024,Customer 039,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,700.25",East,West Bengal
+INV-10206,06/12/2023,Customer 174,Power Bank,Electronics,1,"₹1,800",0%,"₹1,755.07",South,Karnataka
+INV-10206,15/08/2023,Customer 166,Power Bank,Electronics,4,"₹1,800",5%,"₹6,502.34",West,Maharashtra
+INV-10207,01/09/2023,Customer 040,Saree,Fashion,3,"₹2,800",0%,"₹8,198.39",West,Maharashtra
+INV-10207,22/11/2024,Customer 026,Saree,Fashion,2,"₹2,800",15%,"₹4,554.81",West,Gujarat
+INV-10208,06/05/2023,Customer 072,Pressure Cooker,Home,3,"₹2,400",5%,"₹6,870.51",East,Odisha
+INV-10208,05/12/2024,Customer 106,Kurta,Fashion,2,₹900,0%,"₹1,862.24",West,Gujarat
+INV-10209,30/04/2024,Customer 159,Bedsheet Set,Home,4,"₹1,500",0%,"₹5,737.97",South,Karnataka
+INV-10209,25/01/2023,Customer 072,Power Bank,Electronics,4,"₹1,800",25%,"₹5,516.06",South,Karnataka
+INV-10210,18/05/2023,Customer 143,Earphones,Electronics,2,"₹1,200",0%,"₹2,341.70",East,Odisha
+INV-10210,31/07/2024,Customer 121,Sports Shoes,Fashion,2,"₹3,200",40%,"₹3,842.77",North,Punjab
+INV-10211,16/10/2024,Customer 064,Sports Shoes,Fashion,4,"₹3,200",40%,"₹7,875.00",South,Tamil Nadu
+INV-10211,11/02/2024,Customer 024,Power Bank,Electronics,2,"₹1,800",40%,"₹2,182.53",East,Odisha
+INV-10212,29/08/2023,Customer 145,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,794.33",West,Maharashtra
+INV-10212,12/03/2023,Customer 149,Mobile Phone,Electronics,4,"₹15,000",0%,"₹58,767.33",South,Kerala
+INV-10213,12/06/2024,Customer 171,Mixer Grinder,Home,3,"₹3,500",0%,"₹10,018.50",South,Tamil Nadu
+INV-10213,20/05/2023,Customer 014,Mixer Grinder,Home,3,"₹3,500",5%,"₹9,741.52",West,Gujarat
+INV-10214,08/05/2023,Customer 166,Mobile Phone,Electronics,3,"₹15,000",15%,"₹39,993.10",South,Tamil Nadu
+INV-10214,29/10/2024,Customer 066,Kurta,Fashion,1,₹900,5%,₹848.22,West,Gujarat
+INV-10215,27/03/2023,Customer 177,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,466.71",South,Karnataka
+INV-10215,11/11/2024,Customer 148,Mobile Phone,Electronics,4,"₹15,000",15%,"₹51,117.08",West,Maharashtra
+INV-10216,06/12/2023,Customer 031,Pressure Cooker,Home,3,"₹2,400",10%,"₹6,555.34",North,Uttar Pradesh
+INV-10216,04/10/2024,Customer 169,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,282.03",East,West Bengal
+INV-10217,27/04/2023,Customer 120,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,879.73",East,Odisha
+INV-10217,21/03/2023,Customer 170,Power Bank,Electronics,3,"₹1,800",0%,"₹5,346.61",South,Karnataka
+INV-10218,30/06/2023,Customer 130,Power Bank,Electronics,4,"₹1,800",0%,"₹7,401.98",West,Gujarat
+INV-10218,25/06/2024,Customer 146,Kurta,Fashion,2,₹900,40%,"₹1,089.56",South,Karnataka
+INV-10219,22/02/2024,Customer 002,Sports Shoes,Fashion,4,"₹3,200",0%,"₹12,882.01",East,West Bengal
+INV-10219,07/02/2024,Customer 005,Saree,Fashion,3,"₹2,800",10%,"₹7,462.74",East,Odisha
+INV-10220,06/08/2023,Customer 130,Kurta,Fashion,4,₹900,5%,"₹3,387.55",East,West Bengal
+INV-10220,25/03/2024,Customer 166,Power Bank,Electronics,4,"₹1,800",0%,"₹6,938.86",North,Uttar Pradesh
+INV-10221,23/01/2024,Customer 102,Power Bank,Electronics,3,"₹1,800",10%,"₹4,881.45",West,Gujarat
+INV-10221,14/12/2023,Customer 155,Power Bank,Electronics,2,"₹1,800",0%,"₹3,537.39",West,Maharashtra
+INV-10222,11/06/2023,Customer 114,Power Bank,Electronics,3,"₹1,800",5%,"₹5,218.58",West,Gujarat
+INV-10222,27/07/2023,Customer 024,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,526.16",East,Odisha
+INV-10223,21/01/2024,Customer 115,Mobile Phone,Electronics,2,"₹15,000",0%,"₹31,200.93",South,Karnataka
+INV-10223,02/10/2023,Customer 007,Mobile Phone,Electronics,1,"₹15,000",0%,"₹15,152.83",East,West Bengal
+INV-10224,02/09/2023,Customer 071,Sports Shoes,Fashion,1,"₹3,200",25%,"₹2,418.83",South,Kerala
+INV-10224,26/04/2024,Customer 178,Mixer Grinder,Home,1,"₹3,500",15%,"₹3,022.74",North,Delhi
+INV-10225,17/10/2024,Customer 169,Mixer Grinder,Home,3,"₹3,500",40%,"₹6,404.01",East,Odisha
+INV-10225,17/10/2023,Customer 161,Mobile Phone,Electronics,1,"₹15,000",40%,"₹9,038.52",East,West Bengal
+INV-10226,17/09/2023,Customer 154,Mobile Phone,Electronics,4,"₹15,000",0%,"₹62,120.72",East,West Bengal
+INV-10226,19/06/2023,Customer 147,Power Bank,Electronics,1,"₹1,800",5%,"₹1,773.73",South,Kerala
+INV-10227,05/08/2024,Customer 095,Power Bank,Electronics,4,"₹1,800",25%,"₹5,295.33",West,Gujarat
+INV-10227,22/11/2024,Customer 005,Earphones,Electronics,2,"₹1,200",10%,"₹2,149.59",West,Gujarat
+INV-10228,27/03/2024,Customer 113,Bedsheet Set,Home,1,"₹1,500",40%,₹894.40,East,Odisha
+INV-10228,15/05/2024,Customer 155,Kurta,Fashion,4,₹900,25%,"₹2,609.72",West,Maharashtra
+INV-10229,07/10/2023,Customer 066,Saree,Fashion,2,"₹2,800",0%,"₹5,473.59",North,Punjab
+INV-10229,20/02/2023,Customer 142,Sports Shoes,Fashion,2,"₹3,200",0%,"₹6,523.55",East,West Bengal
+INV-10230,28/09/2023,Customer 114,Sports Shoes,Fashion,1,"₹3,200",5%,"₹2,959.46",South,Karnataka
+INV-10230,13/12/2023,Customer 017,Pressure Cooker,Home,1,"₹2,400",5%,"₹2,250.36",North,Delhi
+INV-10231,29/03/2023,Customer 134,Mobile Phone,Electronics,2,"₹15,000",0%,"₹31,330.47",North,Uttar Pradesh
+INV-10231,10/09/2023,Customer 132,Power Bank,Electronics,3,"₹1,800",10%,"₹5,081.58",South,Karnataka
+INV-10232,22/02/2023,Customer 137,Power Bank,Electronics,1,"₹1,800",5%,"₹1,733.02",South,Tamil Nadu
+INV-10232,22/09/2024,Customer 041,Pressure Cooker,Home,2,"₹2,400",5%,"₹4,548.64",West,Maharashtra
+INV-10233,22/02/2023,Customer 013,Saree,Fashion,4,"₹2,800",0%,"₹11,439.04",North,Punjab
+INV-10233,01/09/2023,Customer 151,Sports Shoes,Fashion,2,"₹3,200",40%,"₹3,793.15",East,Odisha
+INV-10234,11/12/2024,Customer 080,Kurta,Fashion,1,₹900,25%,₹654.99,West,Gujarat
+INV-10234,15/09/2023,Customer 096,Saree,Fashion,3,"₹2,800",5%,"₹8,128.05",South,Karnataka
+INV-10235,20/03/2024,Customer 135,Earphones,Electronics,2,"₹1,200",0%,"₹2,507.23",East,Odisha
+INV-10235,18/02/2023,Customer 026,Bedsheet Set,Home,4,"₹1,500",40%,"₹3,771.83",West,Gujarat
+INV-10236,27/12/2023,Customer 151,Mobile Phone,Electronics,2,"₹15,000",10%,"₹26,044.16",East,West Bengal
+INV-10236,08/11/2024,Customer 166,Kurta,Fashion,1,₹900,0%,₹907.86,South,Kerala
+INV-10237,29/03/2023,Customer 003,Power Bank,Electronics,4,"₹1,800",40%,"₹4,196.50",North,Delhi
+INV-10237,29/11/2023,Customer 052,Power Bank,Electronics,1,"₹1,800",15%,"₹1,454.94",North,Uttar Pradesh
+INV-10238,09/12/2024,Customer 136,Saree,Fashion,4,"₹2,800",0%,"₹11,293.32",North,Uttar Pradesh
+INV-10238,08/09/2024,Customer 079,Sports Shoes,Fashion,2,"₹3,200",0%,"₹6,089.75",West,Maharashtra
+INV-10239,10/02/2024,Customer 057,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,451.39",East,West Bengal
+INV-10239,04/09/2023,Customer 031,Kurta,Fashion,1,₹900,0%,₹882.21,North,Delhi
+INV-10240,29/05/2024,Customer 158,Earphones,Electronics,3,"₹1,200",15%,"₹3,095.88",East,West Bengal
+INV-10240,16/03/2024,Customer 178,Mixer Grinder,Home,4,"₹3,500",10%,"₹13,205.44",South,Tamil Nadu
+INV-10241,21/06/2024,Customer 048,Mixer Grinder,Home,2,"₹3,500",5%,"₹6,951.30",West,Gujarat
+INV-10241,24/11/2023,Customer 056,Mixer Grinder,Home,4,"₹3,500",0%,"₹14,203.88",South,Tamil Nadu
+INV-10242,25/06/2024,Customer 097,Kurta,Fashion,3,₹900,0%,"₹2,661.70",East,Odisha
+INV-10242,29/05/2023,Customer 057,Mixer Grinder,Home,1,"₹3,500",0%,"₹3,446.46",North,Punjab
+INV-10243,12/09/2023,Customer 094,Saree,Fashion,3,"₹2,800",5%,"₹7,743.83",West,Gujarat
+INV-10243,03/07/2023,Customer 063,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,861.63",West,Gujarat
+INV-10244,02/02/2023,Customer 053,Saree,Fashion,3,"₹2,800",25%,"₹6,214.76",West,Maharashtra
+INV-10244,08/03/2023,Customer 147,Mobile Phone,Electronics,3,"₹15,000",10%,"₹41,508.86",North,Uttar Pradesh
+INV-10245,28/01/2023,Customer 029,Saree,Fashion,3,"₹2,800",0%,"₹8,138.61",East,West Bengal
+INV-10245,05/11/2024,Customer 026,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,350.96",West,Maharashtra
+INV-10246,16/06/2024,Customer 043,Pressure Cooker,Home,4,"₹2,400",40%,"₹5,841.53",East,Odisha
+INV-10246,09/01/2023,Customer 023,Power Bank,Electronics,3,"₹1,800",40%,"₹3,379.95",South,Karnataka
+INV-10247,13/02/2024,Customer 081,Bedsheet Set,Home,1,"₹1,500",15%,"₹1,296.70",East,Odisha
+INV-10247,25/01/2024,Customer 030,Pressure Cooker,Home,1,"₹2,400",15%,"₹2,080.81",West,Gujarat
+INV-10248,17/08/2023,Customer 063,Power Bank,Electronics,2,"₹1,800",5%,"₹3,286.07",North,Delhi
+INV-10248,15/04/2023,Customer 152,Earphones,Electronics,1,"₹1,200",0%,"₹1,237.58",South,Kerala
+INV-10249,11/12/2024,Customer 075,Power Bank,Electronics,4,"₹1,800",5%,"₹6,794.83",North,Punjab
+INV-10249,11/06/2024,Customer 164,Sports Shoes,Fashion,1,"₹3,200",5%,"₹3,153.85",North,Punjab
+INV-10250,13/09/2024,Customer 095,Kurta,Fashion,4,₹900,5%,"₹3,402.91",West,Maharashtra
+INV-10250,28/12/2023,Customer 118,Kurta,Fashion,3,₹900,10%,"₹2,312.35",East,Odisha
+INV-10251,02/02/2024,Customer 062,Pressure Cooker,Home,2,"₹2,400",5%,"₹4,340.76",North,Uttar Pradesh
+INV-10251,19/02/2024,Customer 111,Bedsheet Set,Home,2,"₹1,500",5%,"₹2,789.98",West,Maharashtra
+INV-10252,21/01/2024,Customer 076,Mobile Phone,Electronics,3,"₹15,000",15%,"₹36,701.63",North,Uttar Pradesh
+INV-10252,25/10/2024,Customer 034,Power Bank,Electronics,2,"₹1,800",40%,"₹2,133.07",East,West Bengal
+INV-10253,20/06/2023,Customer 144,Mobile Phone,Electronics,2,"₹15,000",0%,"₹30,265.02",South,Tamil Nadu
+INV-10253,11/01/2024,Customer 133,Sports Shoes,Fashion,1,"₹3,200",0%,"₹3,218.65",East,West Bengal
+INV-10254,15/11/2023,Customer 003,Kurta,Fashion,3,₹900,40%,"₹1,662.89",West,Gujarat
+INV-10254,15/06/2023,Customer 099,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,585.46",North,Delhi
+INV-10255,21/06/2024,Customer 013,Earphones,Electronics,4,"₹1,200",10%,"₹4,132.40",North,Uttar Pradesh
+INV-10255,11/07/2023,Customer 108,Mobile Phone,Electronics,2,"₹15,000",0%,"₹29,730.65",East,Odisha
+INV-10256,03/03/2024,Customer 119,Mixer Grinder,Home,4,"₹3,500",0%,"₹14,345.52",South,Tamil Nadu
+INV-10256,09/08/2023,Customer 136,Earphones,Electronics,1,"₹1,200",15%,₹984.19,West,Maharashtra
+INV-10257,09/08/2024,Customer 126,Saree,Fashion,3,"₹2,800",25%,"₹6,200.99",North,Punjab
+INV-10257,29/05/2023,Customer 011,Pressure Cooker,Home,1,"₹2,400",40%,"₹1,416.14",South,Tamil Nadu
+INV-10258,22/09/2024,Customer 010,Mobile Phone,Electronics,1,"₹15,000",15%,"₹13,310.96",South,Tamil Nadu
+INV-10258,13/06/2024,Customer 061,Earphones,Electronics,4,"₹1,200",0%,"₹4,570.09",South,Tamil Nadu
+INV-10259,14/11/2024,Customer 165,Kurta,Fashion,3,₹900,40%,"₹1,624.34",East,Odisha
+INV-10259,04/11/2024,Customer 087,Power Bank,Electronics,4,"₹1,800",25%,"₹5,343.90",South,Kerala
+INV-10260,15/06/2023,Customer 065,Bedsheet Set,Home,3,"₹1,500",10%,"₹4,217.63",South,Tamil Nadu
+INV-10260,03/11/2023,Customer 020,Mobile Phone,Electronics,3,"₹15,000",0%,"₹44,271.14",North,Delhi
+INV-10261,24/03/2023,Customer 163,Mixer Grinder,Home,2,"₹3,500",25%,"₹5,272.53",East,Odisha
+INV-10261,06/06/2023,Customer 169,Sports Shoes,Fashion,2,"₹3,200",15%,"₹5,481.08",East,West Bengal
+INV-10262,27/03/2023,Customer 147,Sports Shoes,Fashion,2,"₹3,200",5%,"₹6,287.92",West,Gujarat
+INV-10262,03/06/2024,Customer 149,Saree,Fashion,4,"₹2,800",10%,"₹10,343.86",North,Uttar Pradesh
+INV-10263,07/08/2023,Customer 104,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,830.65",West,Maharashtra
+INV-10263,02/02/2024,Customer 124,Saree,Fashion,2,"₹2,800",0%,"₹5,849.70",North,Uttar Pradesh
+INV-10264,16/11/2024,Customer 133,Kurta,Fashion,1,₹900,15%,₹786.26,West,Maharashtra
+INV-10264,07/03/2023,Customer 020,Bedsheet Set,Home,2,"₹1,500",0%,"₹3,082.04",West,Maharashtra
+INV-10265,16/02/2024,Customer 127,Mixer Grinder,Home,2,"₹3,500",0%,"₹6,791.96",East,Odisha
+INV-10265,02/03/2023,Customer 167,Sports Shoes,Fashion,4,"₹3,200",25%,"₹9,697.65",East,West Bengal
+INV-10266,08/02/2023,Customer 069,Pressure Cooker,Home,3,"₹2,400",15%,"₹5,958.34",South,Tamil Nadu
+INV-10266,17/11/2024,Customer 123,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,886.27",South,Kerala
+INV-10267,20/07/2023,Customer 168,Sports Shoes,Fashion,4,"₹3,200",0%,"₹13,318.72",North,Uttar Pradesh
+INV-10267,27/09/2024,Customer 028,Power Bank,Electronics,3,"₹1,800",40%,"₹3,089.62",North,Punjab
+INV-10268,07/08/2023,Customer 060,Earphones,Electronics,1,"₹1,200",0%,"₹1,180.61",South,Karnataka
+INV-10268,14/05/2023,Customer 121,Power Bank,Electronics,4,"₹1,800",15%,"₹6,073.61",West,Maharashtra
+INV-10269,29/12/2023,Customer 068,Sports Shoes,Fashion,2,"₹3,200",15%,"₹5,617.94",West,Gujarat
+INV-10269,20/08/2024,Customer 144,Mixer Grinder,Home,1,"₹3,500",5%,"₹3,455.95",North,Delhi
+INV-10270,06/07/2023,Customer 030,Mobile Phone,Electronics,1,"₹15,000",10%,"₹13,851.54",South,Karnataka
+INV-10270,24/04/2024,Customer 109,Earphones,Electronics,2,"₹1,200",0%,"₹2,431.69",East,West Bengal
+INV-10271,05/10/2024,Customer 114,Kurta,Fashion,2,₹900,0%,"₹1,858.55",North,Uttar Pradesh
+INV-10271,04/08/2023,Customer 034,Saree,Fashion,2,"₹2,800",25%,"₹4,043.25",South,Tamil Nadu
+INV-10272,06/06/2023,Customer 034,Pressure Cooker,Home,2,"₹2,400",15%,"₹4,151.47",East,West Bengal
+INV-10272,26/03/2024,Customer 140,Kurta,Fashion,4,₹900,5%,"₹3,267.93",South,Kerala
+INV-10273,11/11/2023,Customer 068,Saree,Fashion,4,"₹2,800",0%,"₹10,786.00",South,Karnataka
+INV-10273,10/12/2023,Customer 026,Bedsheet Set,Home,2,"₹1,500",0%,"₹2,852.37",West,Gujarat
+INV-10274,26/05/2023,Customer 066,Kurta,Fashion,1,₹900,15%,₹797.46,West,Gujarat
+INV-10274,28/10/2023,Customer 084,Saree,Fashion,3,"₹2,800",0%,"₹8,648.63",West,Maharashtra
+INV-10275,23/10/2023,Customer 060,Mobile Phone,Electronics,1,"₹15,000",10%,"₹14,155.81",East,Odisha
+INV-10275,04/06/2023,Customer 140,Sports Shoes,Fashion,3,"₹3,200",25%,"₹7,076.79",South,Kerala
+INV-10276,05/01/2024,Customer 148,Bedsheet Set,Home,2,"₹1,500",25%,"₹2,164.67",South,Kerala
+INV-10276,24/07/2023,Customer 157,Power Bank,Electronics,4,"₹1,800",5%,"₹6,926.13",South,Karnataka
+INV-10277,04/11/2023,Customer 176,Pressure Cooker,Home,3,"₹2,400",0%,"₹6,937.11",West,Maharashtra
+INV-10277,31/08/2024,Customer 058,Kurta,Fashion,4,₹900,15%,"₹3,177.11",South,Karnataka
+INV-10278,13/06/2024,Customer 056,Sports Shoes,Fashion,2,"₹3,200",0%,"₹6,663.59",North,Punjab
+INV-10278,05/12/2023,Customer 059,Mobile Phone,Electronics,1,"₹15,000",40%,"₹8,770.14",West,Gujarat
+INV-10279,29/10/2023,Customer 047,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,538.30",North,Delhi
+INV-10279,18/09/2023,Customer 069,Pressure Cooker,Home,2,"₹2,400",10%,"₹4,334.26",West,Maharashtra
+INV-10280,26/01/2024,Customer 170,Saree,Fashion,1,"₹2,800",25%,"₹2,009.35",West,Gujarat
+INV-10280,18/05/2024,Customer 027,Mixer Grinder,Home,1,"₹3,500",5%,"₹3,474.44",North,Uttar Pradesh
+INV-10281,27/08/2024,Customer 164,Bedsheet Set,Home,1,"₹1,500",25%,"₹1,070.75",West,Gujarat
+INV-10281,03/11/2023,Customer 180,Earphones,Electronics,4,"₹1,200",25%,"₹3,635.32",South,Kerala
+INV-10282,21/07/2024,Customer 173,Bedsheet Set,Home,2,"₹1,500",0%,"₹3,016.63",North,Uttar Pradesh
+INV-10282,25/05/2023,Customer 178,Saree,Fashion,4,"₹2,800",0%,"₹10,858.92",North,Uttar Pradesh
+INV-10283,21/07/2023,Customer 154,Mobile Phone,Electronics,2,"₹15,000",5%,"₹28,176.99",East,West Bengal
+INV-10283,09/07/2023,Customer 164,Bedsheet Set,Home,2,"₹1,500",15%,"₹2,668.78",West,Maharashtra
+INV-10284,01/06/2023,Customer 080,Mobile Phone,Electronics,1,"₹15,000",40%,"₹8,876.88",East,West Bengal
+INV-10284,21/08/2023,Customer 061,Earphones,Electronics,2,"₹1,200",0%,"₹2,488.13",East,West Bengal
+INV-10285,20/08/2024,Customer 146,Earphones,Electronics,1,"₹1,200",25%,₹911.01,North,Uttar Pradesh
+INV-10285,13/04/2024,Customer 159,Sports Shoes,Fashion,1,"₹3,200",5%,"₹3,190.72",South,Tamil Nadu
+INV-10286,07/09/2023,Customer 059,Saree,Fashion,4,"₹2,800",40%,"₹6,870.63",West,Maharashtra
+INV-10286,04/09/2023,Customer 004,Earphones,Electronics,1,"₹1,200",15%,₹973.16,South,Karnataka
+INV-10287,24/06/2023,Customer 179,Kurta,Fashion,1,₹900,40%,₹529.45,West,Gujarat
+INV-10287,04/05/2023,Customer 012,Mobile Phone,Electronics,2,"₹15,000",10%,"₹27,652.75",East,Odisha
+INV-10288,08/09/2024,Customer 069,Bedsheet Set,Home,1,"₹1,500",10%,"₹1,414.54",South,Tamil Nadu
+INV-10288,05/07/2023,Customer 153,Bedsheet Set,Home,2,"₹1,500",0%,"₹2,945.32",North,Delhi
+INV-10289,21/09/2023,Customer 048,Power Bank,Electronics,1,"₹1,800",10%,"₹1,585.33",North,Punjab
+INV-10289,03/11/2023,Customer 037,Saree,Fashion,1,"₹2,800",25%,"₹2,149.78",West,Maharashtra
+INV-10290,12/02/2023,Customer 150,Saree,Fashion,4,"₹2,800",0%,"₹10,864.74",South,Tamil Nadu
+INV-10290,25/09/2023,Customer 160,Earphones,Electronics,1,"₹1,200",0%,"₹1,153.65",South,Kerala
+INV-10291,14/05/2024,Customer 036,Power Bank,Electronics,4,"₹1,800",40%,"₹4,424.34",South,Karnataka
+INV-10291,04/12/2024,Customer 046,Kurta,Fashion,3,₹900,0%,"₹2,794.63",South,Tamil Nadu
+INV-10292,21/09/2024,Customer 009,Mixer Grinder,Home,1,"₹3,500",40%,"₹2,147.09",South,Kerala
+INV-10292,04/03/2023,Customer 089,Mixer Grinder,Home,3,"₹3,500",40%,"₹6,155.04",West,Gujarat
+INV-10293,12/01/2023,Customer 110,Saree,Fashion,4,"₹2,800",0%,"₹11,164.09",West,Gujarat
+INV-10293,02/06/2023,Customer 009,Mobile Phone,Electronics,4,"₹15,000",0%,"₹60,965.77",South,Tamil Nadu
+INV-10294,15/10/2024,Customer 087,Kurta,Fashion,2,₹900,25%,"₹1,380.26",North,Uttar Pradesh
+INV-10294,04/12/2023,Customer 137,Bedsheet Set,Home,2,"₹1,500",15%,"₹2,508.91",North,Uttar Pradesh
+INV-10295,04/06/2024,Customer 083,Mixer Grinder,Home,4,"₹3,500",10%,"₹13,205.25",South,Kerala
+INV-10295,05/06/2024,Customer 179,Sports Shoes,Fashion,4,"₹3,200",0%,"₹12,850.84",South,Karnataka
+INV-10296,22/09/2024,Customer 093,Mobile Phone,Electronics,2,"₹15,000",0%,"₹29,142.05",South,Karnataka
+INV-10296,17/04/2024,Customer 083,Kurta,Fashion,3,₹900,10%,"₹2,385.73",North,Punjab
+INV-10297,22/04/2023,Customer 075,Earphones,Electronics,4,"₹1,200",0%,"₹4,756.58",East,West Bengal
+INV-10297,05/01/2024,Customer 051,Bedsheet Set,Home,2,"₹1,500",15%,"₹2,677.50",West,Gujarat
+INV-10298,21/02/2023,Customer 075,Bedsheet Set,Home,4,"₹1,500",0%,"₹5,733.61",North,Punjab
+INV-10298,21/10/2024,Customer 162,Pressure Cooker,Home,4,"₹2,400",25%,"₹7,470.01",West,Gujarat
+INV-10299,09/07/2024,Customer 061,Bedsheet Set,Home,4,"₹1,500",5%,"₹5,879.58",East,Odisha
+INV-10299,23/11/2023,Customer 037,Kurta,Fashion,3,₹900,15%,"₹2,190.09",East,West Bengal
+INV-10300,09/05/2024,Customer 073,Power Bank,Electronics,4,"₹1,800",0%,"₹7,105.74",North,Delhi
+INV-10300,17/11/2024,Customer 039,Mixer Grinder,Home,2,"₹3,500",10%,"₹6,607.17",West,Maharashtra
+INV-10301,29/11/2023,Customer 130,Earphones,Electronics,4,"₹1,200",40%,"₹2,871.99",East,Odisha
+INV-10301,08/11/2023,Customer 059,Sports Shoes,Fashion,2,"₹3,200",25%,"₹4,724.65",South,Kerala
+INV-10302,11/10/2024,Customer 069,Sports Shoes,Fashion,4,"₹3,200",0%,"₹12,221.75",South,Kerala
+INV-10302,13/05/2023,Customer 077,Mixer Grinder,Home,3,"₹3,500",25%,"₹7,908.40",North,Uttar Pradesh
+INV-10303,17/10/2024,Customer 150,Bedsheet Set,Home,3,"₹1,500",15%,"₹3,659.52",North,Delhi
+INV-10303,12/11/2023,Customer 134,Bedsheet Set,Home,2,"₹1,500",10%,"₹2,743.06",North,Uttar Pradesh
+INV-10304,21/03/2023,Customer 164,Kurta,Fashion,3,₹900,0%,"₹2,763.73",West,Maharashtra
+INV-10304,04/11/2024,Customer 146,Earphones,Electronics,2,"₹1,200",40%,"₹1,428.92",North,Delhi
+INV-10305,28/11/2023,Customer 167,Power Bank,Electronics,2,"₹1,800",0%,"₹3,533.26",East,West Bengal
+INV-10305,23/11/2024,Customer 141,Earphones,Electronics,2,"₹1,200",0%,"₹2,303.33",West,Gujarat
+INV-10306,05/02/2024,Customer 163,Mobile Phone,Electronics,3,"₹15,000",0%,"₹44,829.27",North,Punjab
+INV-10306,04/07/2023,Customer 039,Bedsheet Set,Home,4,"₹1,500",0%,"₹6,004.03",South,Kerala
+INV-10307,26/11/2023,Customer 153,Saree,Fashion,3,"₹2,800",0%,"₹8,011.63",South,Karnataka
+INV-10307,18/01/2023,Customer 081,Power Bank,Electronics,3,"₹1,800",0%,"₹5,404.38",West,Gujarat
+INV-10308,25/09/2023,Customer 121,Sports Shoes,Fashion,2,"₹3,200",25%,"₹4,569.50",South,Karnataka
+INV-10308,06/11/2023,Customer 099,Pressure Cooker,Home,2,"₹2,400",5%,"₹4,706.32",North,Uttar Pradesh
+INV-10309,01/06/2024,Customer 153,Earphones,Electronics,1,"₹1,200",10%,"₹1,029.04",East,West Bengal
+INV-10309,13/09/2024,Customer 049,Pressure Cooker,Home,2,"₹2,400",10%,"₹4,460.36",South,Karnataka
+INV-10310,06/05/2023,Customer 144,Kurta,Fashion,1,₹900,0%,₹912.91,East,Odisha
+INV-10310,29/06/2023,Customer 031,Sports Shoes,Fashion,4,"₹3,200",0%,"₹13,232.01",West,Maharashtra
+INV-10311,02/10/2024,Customer 167,Earphones,Electronics,4,"₹1,200",0%,"₹5,007.31",North,Delhi
+INV-10311,13/07/2024,Customer 073,Sports Shoes,Fashion,1,"₹3,200",25%,"₹2,493.75",North,Uttar Pradesh
+INV-10312,26/09/2024,Customer 148,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,307.27",East,West Bengal
+INV-10312,11/04/2023,Customer 075,Mixer Grinder,Home,4,"₹3,500",15%,"₹11,718.47",East,West Bengal
+INV-10313,31/07/2024,Customer 101,Mixer Grinder,Home,3,"₹3,500",5%,"₹10,442.83",West,Maharashtra
+INV-10313,09/08/2023,Customer 158,Mobile Phone,Electronics,2,"₹15,000",40%,"₹17,549.32",South,Tamil Nadu
+INV-10314,15/08/2023,Customer 123,Earphones,Electronics,1,"₹1,200",0%,"₹1,186.30",West,Gujarat
+INV-10314,09/09/2024,Customer 032,Mobile Phone,Electronics,1,"₹15,000",0%,"₹15,394.22",West,Gujarat
+INV-10315,14/02/2023,Customer 032,Power Bank,Electronics,1,"₹1,800",40%,"₹1,080.77",South,Tamil Nadu
+INV-10315,21/11/2024,Customer 156,Earphones,Electronics,1,"₹1,200",0%,"₹1,235.10",South,Tamil Nadu
+INV-10316,18/01/2023,Customer 032,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,277.43",South,Kerala
+INV-10316,01/05/2024,Customer 146,Saree,Fashion,3,"₹2,800",0%,"₹8,008.85",South,Kerala
+INV-10317,19/09/2024,Customer 083,Mobile Phone,Electronics,4,"₹15,000",40%,"₹35,558.37",West,Gujarat
+INV-10317,25/06/2023,Customer 143,Kurta,Fashion,2,₹900,40%,"₹1,087.23",South,Kerala
+INV-10318,29/11/2023,Customer 104,Mixer Grinder,Home,3,"₹3,500",0%,"₹11,022.24",North,Delhi
+INV-10318,13/05/2023,Customer 081,Power Bank,Electronics,2,"₹1,800",5%,"₹3,331.04",East,West Bengal
+INV-10319,15/05/2023,Customer 002,Mixer Grinder,Home,4,"₹3,500",0%,"₹13,734.93",North,Uttar Pradesh
+INV-10319,13/08/2024,Customer 062,Mixer Grinder,Home,4,"₹3,500",0%,"₹14,363.44",East,Odisha
+INV-10320,14/08/2024,Customer 094,Saree,Fashion,1,"₹2,800",5%,"₹2,764.43",South,Karnataka
+INV-10320,01/07/2023,Customer 158,Mobile Phone,Electronics,1,"₹15,000",15%,"₹12,236.40",North,Uttar Pradesh
+INV-10321,18/01/2024,Customer 128,Mixer Grinder,Home,3,"₹3,500",15%,"₹8,626.28",North,Delhi
+INV-10321,19/01/2024,Customer 161,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,509.51",East,Odisha
+INV-10322,30/05/2024,Customer 078,Power Bank,Electronics,2,"₹1,800",0%,"₹3,664.38",West,Gujarat
+INV-10322,26/05/2023,Customer 076,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,466.15",North,Delhi
+INV-10323,28/08/2024,Customer 023,Pressure Cooker,Home,2,"₹2,400",40%,"₹2,883.07",East,Odisha
+INV-10323,13/12/2024,Customer 056,Power Bank,Electronics,4,"₹1,800",0%,"₹7,184.77",North,Delhi
+INV-10324,01/06/2023,Customer 096,Bedsheet Set,Home,4,"₹1,500",5%,"₹5,438.12",South,Karnataka
+INV-10324,30/04/2024,Customer 007,Earphones,Electronics,2,"₹1,200",0%,"₹2,504.58",East,Odisha
+INV-10325,24/07/2023,Customer 134,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,316.17",West,Gujarat
+INV-10325,24/10/2024,Customer 141,Earphones,Electronics,2,"₹1,200",0%,"₹2,315.01",South,Kerala
+INV-10326,05/03/2023,Customer 041,Mixer Grinder,Home,3,"₹3,500",0%,"₹10,715.23",North,Uttar Pradesh
+INV-10326,30/04/2024,Customer 135,Earphones,Electronics,1,"₹1,200",5%,"₹1,189.83",South,Tamil Nadu
+INV-10327,20/09/2024,Customer 159,Saree,Fashion,3,"₹2,800",10%,"₹7,276.23",East,Odisha
+INV-10327,28/01/2024,Customer 073,Power Bank,Electronics,1,"₹1,800",5%,"₹1,641.21",South,Kerala
+INV-10328,03/12/2024,Customer 071,Saree,Fashion,3,"₹2,800",25%,"₹6,098.64",West,Gujarat
+INV-10328,13/02/2023,Customer 096,Earphones,Electronics,3,"₹1,200",0%,"₹3,458.29",South,Karnataka
+INV-10329,11/04/2024,Customer 078,Bedsheet Set,Home,3,"₹1,500",40%,"₹2,785.76",South,Kerala
+INV-10329,24/03/2024,Customer 109,Bedsheet Set,Home,4,"₹1,500",0%,"₹5,800.40",South,Kerala
+INV-10330,30/12/2023,Customer 088,Bedsheet Set,Home,2,"₹1,500",0%,"₹2,891.22",South,Kerala
+INV-10330,20/08/2023,Customer 100,Kurta,Fashion,1,₹900,0%,₹909.67,South,Karnataka
+INV-10331,05/05/2024,Customer 091,Bedsheet Set,Home,1,"₹1,500",25%,"₹1,105.60",South,Tamil Nadu
+INV-10331,11/03/2023,Customer 177,Kurta,Fashion,3,₹900,10%,"₹2,541.68",West,Gujarat
+INV-10332,07/11/2024,Customer 077,Earphones,Electronics,2,"₹1,200",15%,"₹2,078.20",East,Odisha
+INV-10332,21/10/2024,Customer 170,Pressure Cooker,Home,1,"₹2,400",15%,"₹1,961.29",North,Uttar Pradesh
+INV-10333,27/08/2024,Customer 176,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,471.44",West,Gujarat
+INV-10333,08/11/2024,Customer 039,Pressure Cooker,Home,4,"₹2,400",40%,"₹5,503.03",North,Punjab
+INV-10334,14/05/2023,Customer 044,Kurta,Fashion,3,₹900,40%,"₹1,546.10",North,Punjab
+INV-10334,20/08/2023,Customer 109,Kurta,Fashion,2,₹900,15%,"₹1,485.83",North,Uttar Pradesh
+INV-10335,26/01/2024,Customer 097,Saree,Fashion,3,"₹2,800",5%,"₹8,362.49",South,Karnataka
+INV-10335,12/10/2024,Customer 099,Mixer Grinder,Home,3,"₹3,500",0%,"₹10,090.90",West,Maharashtra
+INV-10336,26/05/2023,Customer 120,Bedsheet Set,Home,1,"₹1,500",25%,"₹1,167.70",South,Kerala
+INV-10336,26/08/2023,Customer 067,Saree,Fashion,3,"₹2,800",25%,"₹6,057.98",South,Kerala
+INV-10337,08/06/2024,Customer 021,Power Bank,Electronics,4,"₹1,800",40%,"₹4,235.37",South,Kerala
+INV-10337,05/01/2024,Customer 163,Bedsheet Set,Home,2,"₹1,500",0%,"₹3,124.00",South,Tamil Nadu
+INV-10338,11/08/2023,Customer 104,Mobile Phone,Electronics,4,"₹15,000",15%,"₹49,973.65",West,Gujarat
+INV-10338,13/04/2023,Customer 177,Mobile Phone,Electronics,4,"₹15,000",10%,"₹55,859.02",East,Odisha
+INV-10339,04/05/2023,Customer 157,Mobile Phone,Electronics,3,"₹15,000",15%,"₹39,932.03",South,Tamil Nadu
+INV-10339,15/07/2023,Customer 157,Saree,Fashion,1,"₹2,800",5%,"₹2,559.90",East,Odisha
+INV-10340,07/12/2024,Customer 002,Power Bank,Electronics,1,"₹1,800",0%,"₹1,719.02",North,Delhi
+INV-10340,04/02/2023,Customer 102,Earphones,Electronics,3,"₹1,200",25%,"₹2,755.81",West,Gujarat
+INV-10341,01/12/2023,Customer 028,Pressure Cooker,Home,4,"₹2,400",0%,"₹9,289.41",West,Gujarat
+INV-10341,03/09/2023,Customer 171,Saree,Fashion,4,"₹2,800",0%,"₹11,232.35",South,Kerala
+INV-10342,01/02/2024,Customer 108,Mobile Phone,Electronics,4,"₹15,000",40%,"₹37,623.33",North,Uttar Pradesh
+INV-10342,09/05/2023,Customer 013,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,471.58",South,Kerala
+INV-10343,08/07/2023,Customer 116,Bedsheet Set,Home,3,"₹1,500",10%,"₹4,192.95",North,Punjab
+INV-10343,09/02/2024,Customer 167,Mixer Grinder,Home,3,"₹3,500",15%,"₹8,487.04",North,Uttar Pradesh
+INV-10344,09/02/2023,Customer 110,Mobile Phone,Electronics,2,"₹15,000",10%,"₹25,817.60",West,Gujarat
+INV-10344,27/11/2023,Customer 144,Power Bank,Electronics,2,"₹1,800",25%,"₹2,610.39",West,Maharashtra
+INV-10345,21/06/2023,Customer 045,Kurta,Fashion,2,₹900,0%,"₹1,806.60",East,Odisha
+INV-10345,14/02/2024,Customer 120,Sports Shoes,Fashion,4,"₹3,200",10%,"₹11,719.20",West,Gujarat
+INV-10346,07/07/2024,Customer 022,Mobile Phone,Electronics,4,"₹15,000",5%,"₹59,458.19",South,Karnataka
+INV-10346,20/01/2024,Customer 177,Mobile Phone,Electronics,3,"₹15,000",25%,"₹34,892.55",South,Tamil Nadu
+INV-10347,28/05/2023,Customer 030,Power Bank,Electronics,3,"₹1,800",25%,"₹4,223.75",North,Uttar Pradesh
+INV-10347,13/06/2024,Customer 134,Sports Shoes,Fashion,1,"₹3,200",0%,"₹3,127.01",North,Delhi
+INV-10348,19/05/2024,Customer 016,Mixer Grinder,Home,4,"₹3,500",0%,"₹14,392.66",South,Karnataka
+INV-10348,30/11/2024,Customer 073,Bedsheet Set,Home,3,"₹1,500",25%,"₹3,461.24",South,Karnataka
+INV-10349,31/01/2023,Customer 009,Sports Shoes,Fashion,3,"₹3,200",15%,"₹8,089.96",West,Maharashtra
+INV-10349,26/01/2024,Customer 179,Saree,Fashion,2,"₹2,800",0%,"₹5,363.06",East,Odisha
+INV-10350,04/01/2024,Customer 095,Kurta,Fashion,3,₹900,0%,"₹2,634.73",West,Gujarat
+INV-10350,31/03/2024,Customer 098,Mobile Phone,Electronics,4,"₹15,000",40%,"₹36,438.66",East,Odisha
+INV-10351,14/01/2024,Customer 025,Mixer Grinder,Home,1,"₹3,500",0%,"₹3,651.48",West,Maharashtra
+INV-10351,02/03/2024,Customer 088,Sports Shoes,Fashion,3,"₹3,200",5%,"₹9,423.16",South,Tamil Nadu
+INV-10352,07/10/2024,Customer 004,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,440.76",East,Odisha
+INV-10352,08/08/2023,Customer 044,Mobile Phone,Electronics,3,"₹15,000",0%,"₹46,985.39",West,Maharashtra
+INV-10353,06/02/2024,Customer 096,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,697.65",South,Karnataka
+INV-10353,29/08/2024,Customer 169,Mobile Phone,Electronics,4,"₹15,000",10%,"₹56,304.59",North,Uttar Pradesh
+INV-10354,24/07/2023,Customer 041,Pressure Cooker,Home,1,"₹2,400",15%,"₹1,974.55",South,Kerala
+INV-10354,15/02/2023,Customer 156,Mixer Grinder,Home,1,"₹3,500",0%,"₹3,536.33",East,Odisha
+INV-10355,07/02/2023,Customer 100,Power Bank,Electronics,4,"₹1,800",40%,"₹4,105.38",South,Kerala
+INV-10355,14/07/2024,Customer 016,Mobile Phone,Electronics,2,"₹15,000",10%,"₹25,925.10",East,West Bengal
+INV-10356,12/04/2024,Customer 174,Bedsheet Set,Home,1,"₹1,500",5%,"₹1,446.15",South,Tamil Nadu
+INV-10356,24/01/2024,Customer 097,Saree,Fashion,3,"₹2,800",10%,"₹7,507.51",North,Punjab
+INV-10357,24/02/2023,Customer 042,Sports Shoes,Fashion,4,"₹3,200",10%,"₹11,051.39",East,Odisha
+INV-10357,15/04/2023,Customer 179,Bedsheet Set,Home,3,"₹1,500",25%,"₹3,427.19",South,Kerala
+INV-10358,18/04/2024,Customer 122,Bedsheet Set,Home,4,"₹1,500",15%,"₹5,136.95",South,Kerala
+INV-10358,01/04/2023,Customer 057,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,535.52",East,West Bengal
+INV-10359,06/05/2023,Customer 069,Bedsheet Set,Home,3,"₹1,500",5%,"₹4,081.23",West,Gujarat
+INV-10359,25/04/2024,Customer 179,Mixer Grinder,Home,2,"₹3,500",0%,"₹6,963.51",East,West Bengal
+INV-10360,17/05/2024,Customer 115,Kurta,Fashion,1,₹900,0%,₹938.03,South,Tamil Nadu
+INV-10360,06/07/2024,Customer 115,Saree,Fashion,2,"₹2,800",40%,"₹3,392.08",North,Uttar Pradesh
+INV-10361,10/08/2024,Customer 047,Bedsheet Set,Home,2,"₹1,500",0%,"₹3,021.25",West,Maharashtra
+INV-10361,28/04/2024,Customer 173,Power Bank,Electronics,4,"₹1,800",40%,"₹4,252.13",North,Uttar Pradesh
+INV-10362,02/09/2024,Customer 078,Saree,Fashion,2,"₹2,800",10%,"₹4,859.80",North,Uttar Pradesh
+INV-10362,12/08/2023,Customer 125,Sports Shoes,Fashion,3,"₹3,200",40%,"₹5,704.89",West,Gujarat
+INV-10363,16/05/2024,Customer 046,Sports Shoes,Fashion,3,"₹3,200",5%,"₹8,781.35",East,Odisha
+INV-10363,01/07/2024,Customer 043,Kurta,Fashion,1,₹900,10%,₹771.77,West,Gujarat
+INV-10364,27/04/2023,Customer 105,Sports Shoes,Fashion,4,"₹3,200",15%,"₹10,510.26",North,Uttar Pradesh
+INV-10364,12/02/2024,Customer 157,Saree,Fashion,4,"₹2,800",15%,"₹9,280.85",South,Kerala
+INV-10365,21/02/2024,Customer 149,Pressure Cooker,Home,2,"₹2,400",25%,"₹3,490.64",West,Gujarat
+INV-10365,24/07/2023,Customer 107,Pressure Cooker,Home,1,"₹2,400",40%,"₹1,484.20",South,Kerala
+INV-10366,02/08/2024,Customer 014,Bedsheet Set,Home,1,"₹1,500",40%,₹900.61,South,Tamil Nadu
+INV-10366,04/05/2023,Customer 166,Kurta,Fashion,3,₹900,0%,"₹2,690.71",West,Gujarat
+INV-10367,13/12/2023,Customer 102,Saree,Fashion,2,"₹2,800",15%,"₹4,915.13",South,Kerala
+INV-10367,28/12/2024,Customer 166,Earphones,Electronics,4,"₹1,200",15%,"₹4,179.70",North,Delhi
+INV-10368,08/05/2024,Customer 041,Saree,Fashion,4,"₹2,800",10%,"₹9,884.18",West,Gujarat
+INV-10368,19/07/2024,Customer 089,Mixer Grinder,Home,4,"₹3,500",0%,"₹13,911.33",East,West Bengal
+INV-10369,26/05/2023,Customer 056,Earphones,Electronics,4,"₹1,200",0%,"₹4,852.72",East,West Bengal
+INV-10369,21/12/2023,Customer 108,Saree,Fashion,2,"₹2,800",0%,"₹5,384.20",South,Karnataka
+INV-10370,30/06/2024,Customer 131,Bedsheet Set,Home,2,"₹1,500",25%,"₹2,249.63",North,Uttar Pradesh
+INV-10370,14/08/2024,Customer 063,Mixer Grinder,Home,3,"₹3,500",0%,"₹10,705.50",North,Punjab
+INV-10371,04/12/2024,Customer 127,Sports Shoes,Fashion,3,"₹3,200",10%,"₹8,546.01",West,Maharashtra
+INV-10371,29/07/2023,Customer 063,Sports Shoes,Fashion,4,"₹3,200",0%,"₹12,193.06",North,Punjab
+INV-10372,14/04/2024,Customer 018,Mobile Phone,Electronics,1,"₹15,000",10%,"₹13,554.91",West,Maharashtra
+INV-10372,06/06/2024,Customer 118,Saree,Fashion,3,"₹2,800",10%,"₹7,706.25",West,Gujarat
+INV-10373,22/12/2023,Customer 083,Kurta,Fashion,3,₹900,15%,"₹2,372.62",East,Odisha
+INV-10373,26/12/2023,Customer 112,Power Bank,Electronics,1,"₹1,800",15%,"₹1,559.82",West,Gujarat
+INV-10374,25/03/2023,Customer 123,Earphones,Electronics,3,"₹1,200",0%,"₹3,610.09",West,Gujarat
+INV-10374,04/05/2024,Customer 073,Bedsheet Set,Home,2,"₹1,500",25%,"₹2,151.96",East,West Bengal
+INV-10375,05/04/2024,Customer 019,Power Bank,Electronics,4,"₹1,800",10%,"₹6,500.58",West,Gujarat
+INV-10375,07/12/2024,Customer 052,Bedsheet Set,Home,2,"₹1,500",0%,"₹2,927.78",East,West Bengal
+INV-10376,26/06/2023,Customer 042,Pressure Cooker,Home,3,"₹2,400",5%,"₹6,884.03",West,Maharashtra
+INV-10376,19/08/2024,Customer 094,Pressure Cooker,Home,3,"₹2,400",5%,"₹6,947.14",South,Kerala
+INV-10377,04/04/2023,Customer 089,Saree,Fashion,4,"₹2,800",15%,"₹9,495.43",West,Maharashtra
+INV-10377,24/10/2023,Customer 015,Saree,Fashion,1,"₹2,800",40%,"₹1,656.20",North,Delhi
+INV-10378,01/03/2024,Customer 054,Sports Shoes,Fashion,4,"₹3,200",40%,"₹7,854.53",East,West Bengal
+INV-10378,22/05/2023,Customer 127,Sports Shoes,Fashion,2,"₹3,200",15%,"₹5,554.38",West,Gujarat
+INV-10379,10/08/2023,Customer 153,Mixer Grinder,Home,2,"₹3,500",0%,"₹6,900.47",South,Tamil Nadu
+INV-10379,13/09/2023,Customer 178,Power Bank,Electronics,4,"₹1,800",15%,"₹6,098.27",West,Gujarat
+INV-10380,02/10/2024,Customer 059,Saree,Fashion,3,"₹2,800",0%,"₹8,053.26",North,Punjab
+INV-10380,11/01/2023,Customer 151,Sports Shoes,Fashion,1,"₹3,200",0%,"₹3,166.42",North,Punjab
+INV-10381,05/08/2023,Customer 050,Mobile Phone,Electronics,1,"₹15,000",0%,"₹14,930.09",East,Odisha
+INV-10381,17/04/2023,Customer 118,Earphones,Electronics,3,"₹1,200",40%,"₹2,254.18",East,West Bengal
+INV-10382,18/10/2023,Customer 140,Saree,Fashion,3,"₹2,800",0%,"₹8,452.26",East,Odisha
+INV-10382,02/10/2023,Customer 128,Mixer Grinder,Home,2,"₹3,500",15%,"₹5,716.17",East,West Bengal
+INV-10383,26/09/2024,Customer 072,Power Bank,Electronics,4,"₹1,800",10%,"₹6,204.51",East,West Bengal
+INV-10383,11/07/2023,Customer 148,Power Bank,Electronics,2,"₹1,800",25%,"₹2,703.97",West,Maharashtra
+INV-10384,15/01/2024,Customer 078,Power Bank,Electronics,4,"₹1,800",0%,"₹7,330.66",North,Uttar Pradesh
+INV-10384,21/03/2024,Customer 097,Mobile Phone,Electronics,4,"₹15,000",0%,"₹58,360.96",South,Kerala
+INV-10385,16/12/2023,Customer 123,Mixer Grinder,Home,4,"₹3,500",10%,"₹13,188.29",North,Punjab
+INV-10385,16/10/2023,Customer 131,Pressure Cooker,Home,1,"₹2,400",40%,"₹1,407.12",South,Kerala
+INV-10386,26/09/2024,Customer 058,Mixer Grinder,Home,1,"₹3,500",25%,"₹2,643.79",West,Gujarat
+INV-10386,14/02/2023,Customer 115,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,058.04",West,Gujarat
+INV-10387,01/03/2023,Customer 057,Mixer Grinder,Home,4,"₹3,500",0%,"₹13,413.97",South,Tamil Nadu
+INV-10387,27/07/2024,Customer 111,Bedsheet Set,Home,1,"₹1,500",10%,"₹1,396.40",East,West Bengal
+INV-10388,24/10/2023,Customer 123,Power Bank,Electronics,4,"₹1,800",0%,"₹7,173.85",North,Uttar Pradesh
+INV-10388,06/08/2023,Customer 068,Pressure Cooker,Home,3,"₹2,400",10%,"₹6,745.48",West,Gujarat
+INV-10389,13/11/2024,Customer 127,Kurta,Fashion,4,₹900,15%,"₹2,910.64",East,Odisha
+INV-10389,11/12/2023,Customer 088,Pressure Cooker,Home,2,"₹2,400",10%,"₹4,483.28",East,West Bengal
+INV-10390,22/04/2024,Customer 108,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,363.37",South,Kerala
+INV-10390,03/07/2024,Customer 045,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,698.52",West,Gujarat
+INV-10391,02/05/2023,Customer 043,Power Bank,Electronics,4,"₹1,800",40%,"₹4,174.37",South,Kerala
+INV-10391,13/04/2023,Customer 098,Saree,Fashion,3,"₹2,800",0%,"₹8,787.46",West,Maharashtra
+INV-10392,25/01/2023,Customer 071,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,296.87",South,Kerala
+INV-10392,06/03/2023,Customer 113,Mobile Phone,Electronics,4,"₹15,000",5%,"₹55,910.74",North,Uttar Pradesh
+INV-10393,26/01/2024,Customer 159,Pressure Cooker,Home,4,"₹2,400",10%,"₹8,415.91",North,Delhi
+INV-10393,04/07/2024,Customer 171,Earphones,Electronics,4,"₹1,200",15%,"₹3,940.83",West,Gujarat
+INV-10394,16/06/2024,Customer 058,Saree,Fashion,2,"₹2,800",40%,"₹3,378.80",West,Maharashtra
+INV-10394,24/11/2024,Customer 071,Kurta,Fashion,2,₹900,5%,"₹1,628.96",East,Odisha
+INV-10395,23/02/2023,Customer 122,Mobile Phone,Electronics,1,"₹15,000",15%,"₹12,625.70",North,Uttar Pradesh
+INV-10395,09/10/2024,Customer 173,Earphones,Electronics,1,"₹1,200",25%,₹910.39,South,Karnataka
+INV-10396,07/03/2023,Customer 169,Pressure Cooker,Home,4,"₹2,400",0%,"₹9,271.12",North,Uttar Pradesh
+INV-10396,08/02/2024,Customer 141,Sports Shoes,Fashion,1,"₹3,200",5%,"₹2,960.80",South,Kerala
+INV-10397,13/04/2023,Customer 162,Mobile Phone,Electronics,1,"₹15,000",5%,"₹14,155.03",North,Delhi
+INV-10397,26/07/2023,Customer 169,Mobile Phone,Electronics,2,"₹15,000",5%,"₹28,281.96",West,Maharashtra
+INV-10398,06/12/2023,Customer 174,Pressure Cooker,Home,3,"₹2,400",0%,"₹6,895.40",North,Punjab
+INV-10398,29/10/2023,Customer 104,Kurta,Fashion,2,₹900,25%,"₹1,347.53",North,Uttar Pradesh
+INV-10399,29/03/2023,Customer 082,Saree,Fashion,2,"₹2,800",5%,"₹5,507.82",North,Uttar Pradesh
+INV-10399,24/11/2023,Customer 069,Mixer Grinder,Home,4,"₹3,500",5%,"₹13,652.72",North,Punjab
+INV-10400,26/10/2023,Customer 158,Mobile Phone,Electronics,4,"₹15,000",0%,"₹62,320.45",East,West Bengal
+INV-10400,03/11/2023,Customer 080,Mixer Grinder,Home,3,"₹3,500",15%,"₹8,767.00",South,Kerala
+INV-10401,23/01/2023,Customer 037,Mixer Grinder,Home,2,"₹3,500",25%,"₹5,001.82",North,Delhi
+INV-10401,01/12/2023,Customer 071,Power Bank,Electronics,4,"₹1,800",40%,"₹4,375.32",East,West Bengal
+INV-10402,20/03/2023,Customer 048,Mobile Phone,Electronics,2,"₹15,000",25%,"₹21,532.71",South,Karnataka
+INV-10402,21/03/2024,Customer 139,Earphones,Electronics,2,"₹1,200",5%,"₹2,276.71",East,Odisha
+INV-10403,08/04/2023,Customer 006,Kurta,Fashion,1,₹900,40%,₹537.07,North,Delhi
+INV-10403,25/05/2023,Customer 177,Mobile Phone,Electronics,4,"₹15,000",0%,"₹60,495.82",West,Gujarat
+INV-10404,18/05/2024,Customer 089,Mobile Phone,Electronics,2,"₹15,000",40%,"₹17,772.76",East,West Bengal
+INV-10404,12/09/2024,Customer 042,Saree,Fashion,2,"₹2,800",15%,"₹4,785.31",North,Punjab
+INV-10405,10/04/2024,Customer 059,Saree,Fashion,3,"₹2,800",0%,"₹8,560.45",East,West Bengal
+INV-10405,31/12/2023,Customer 165,Power Bank,Electronics,3,"₹1,800",40%,"₹3,258.97",North,Punjab
+INV-10406,26/12/2023,Customer 099,Saree,Fashion,4,"₹2,800",25%,"₹8,800.64",South,Karnataka
+INV-10406,24/12/2024,Customer 166,Bedsheet Set,Home,4,"₹1,500",15%,"₹5,330.84",East,West Bengal
+INV-10407,05/11/2023,Customer 054,Saree,Fashion,3,"₹2,800",40%,"₹4,933.64",South,Karnataka
+INV-10407,15/05/2024,Customer 148,Mixer Grinder,Home,4,"₹3,500",5%,"₹13,139.11",East,West Bengal
+INV-10408,17/06/2023,Customer 056,Pressure Cooker,Home,4,"₹2,400",15%,"₹8,007.25",South,Kerala
+INV-10408,17/01/2023,Customer 106,Kurta,Fashion,1,₹900,0%,₹938.02,North,Uttar Pradesh
+INV-10409,20/08/2024,Customer 056,Sports Shoes,Fashion,2,"₹3,200",25%,"₹4,910.35",East,Odisha
+INV-10409,18/09/2023,Customer 145,Saree,Fashion,1,"₹2,800",5%,"₹2,550.79",East,West Bengal
+INV-10410,17/10/2023,Customer 144,Power Bank,Electronics,3,"₹1,800",40%,"₹3,220.75",East,Odisha
+INV-10410,13/08/2024,Customer 100,Kurta,Fashion,2,₹900,10%,"₹1,608.60",West,Maharashtra
+INV-10411,11/10/2024,Customer 060,Earphones,Electronics,2,"₹1,200",0%,"₹2,500.43",East,Odisha
+INV-10411,03/12/2024,Customer 177,Sports Shoes,Fashion,2,"₹3,200",0%,"₹6,388.84",West,Gujarat
+INV-10412,09/02/2023,Customer 060,Power Bank,Electronics,3,"₹1,800",5%,"₹5,252.07",North,Punjab
+INV-10412,21/08/2024,Customer 166,Kurta,Fashion,1,₹900,0%,₹933.61,South,Karnataka
+INV-10413,17/01/2023,Customer 026,Kurta,Fashion,3,₹900,40%,"₹1,607.05",North,Delhi
+INV-10413,19/06/2023,Customer 097,Saree,Fashion,4,"₹2,800",10%,"₹10,002.82",East,Odisha
+INV-10414,30/09/2024,Customer 072,Sports Shoes,Fashion,4,"₹3,200",5%,"₹12,291.94",West,Maharashtra
+INV-10414,23/01/2024,Customer 091,Kurta,Fashion,1,₹900,40%,₹562.22,East,Odisha
+INV-10415,07/12/2024,Customer 177,Power Bank,Electronics,1,"₹1,800",0%,"₹1,862.93",West,Gujarat
+INV-10415,10/08/2024,Customer 171,Sports Shoes,Fashion,2,"₹3,200",15%,"₹5,488.78",East,Odisha
+INV-10416,20/11/2024,Customer 123,Power Bank,Electronics,3,"₹1,800",0%,"₹5,605.02",South,Tamil Nadu
+INV-10416,15/01/2023,Customer 118,Sports Shoes,Fashion,2,"₹3,200",0%,"₹6,531.89",East,West Bengal
+INV-10417,06/12/2024,Customer 138,Mobile Phone,Electronics,2,"₹15,000",0%,"₹28,601.62",East,Odisha
+INV-10417,27/02/2024,Customer 053,Pressure Cooker,Home,4,"₹2,400",40%,"₹5,945.00",West,Maharashtra
+INV-10418,19/03/2024,Customer 027,Pressure Cooker,Home,4,"₹2,400",10%,"₹8,827.35",South,Kerala
+INV-10418,08/12/2023,Customer 158,Mixer Grinder,Home,3,"₹3,500",10%,"₹9,528.79",West,Gujarat
+INV-10419,20/06/2024,Customer 119,Earphones,Electronics,3,"₹1,200",25%,"₹2,665.22",South,Kerala
+INV-10419,10/04/2023,Customer 109,Sports Shoes,Fashion,4,"₹3,200",15%,"₹11,365.06",West,Maharashtra
+INV-10420,22/12/2024,Customer 032,Sports Shoes,Fashion,3,"₹3,200",25%,"₹7,323.75",West,Maharashtra
+INV-10420,29/05/2024,Customer 066,Kurta,Fashion,4,₹900,10%,"₹3,279.04",North,Delhi
+INV-10421,20/02/2023,Customer 102,Earphones,Electronics,2,"₹1,200",40%,"₹1,370.86",North,Delhi
+INV-10421,17/02/2023,Customer 013,Power Bank,Electronics,2,"₹1,800",0%,"₹3,438.33",West,Gujarat
+INV-10422,14/11/2023,Customer 153,Power Bank,Electronics,2,"₹1,800",5%,"₹3,277.83",West,Gujarat
+INV-10422,24/08/2024,Customer 173,Power Bank,Electronics,4,"₹1,800",0%,"₹7,366.77",South,Karnataka
+INV-10423,26/05/2023,Customer 108,Pressure Cooker,Home,3,"₹2,400",25%,"₹5,223.92",South,Karnataka
+INV-10423,26/12/2023,Customer 081,Sports Shoes,Fashion,3,"₹3,200",40%,"₹5,807.91",East,West Bengal
+INV-10424,08/08/2024,Customer 143,Kurta,Fashion,4,₹900,40%,"₹2,244.72",West,Maharashtra
+INV-10424,11/02/2023,Customer 005,Saree,Fashion,2,"₹2,800",0%,"₹5,714.59",West,Maharashtra
+INV-10425,25/01/2024,Customer 152,Earphones,Electronics,2,"₹1,200",25%,"₹1,839.85",North,Delhi
+INV-10425,25/12/2023,Customer 132,Earphones,Electronics,3,"₹1,200",15%,"₹3,193.11",East,Odisha
+INV-10426,28/11/2024,Customer 030,Saree,Fashion,4,"₹2,800",10%,"₹10,028.73",West,Gujarat
+INV-10426,27/07/2023,Customer 158,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,505.64",South,Kerala
+INV-10427,19/03/2023,Customer 163,Kurta,Fashion,4,₹900,0%,"₹3,744.82",South,Kerala
+INV-10427,24/08/2024,Customer 126,Saree,Fashion,1,"₹2,800",25%,"₹2,027.53",West,Maharashtra
+INV-10428,02/01/2024,Customer 001,Pressure Cooker,Home,3,"₹2,400",15%,"₹5,827.61",South,Karnataka
+INV-10428,30/12/2024,Customer 147,Bedsheet Set,Home,1,"₹1,500",15%,"₹1,233.18",South,Karnataka
+INV-10429,28/08/2023,Customer 118,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,562.82",North,Delhi
+INV-10429,08/01/2024,Customer 027,Mixer Grinder,Home,3,"₹3,500",10%,"₹9,014.23",North,Uttar Pradesh
+INV-10430,21/01/2023,Customer 003,Kurta,Fashion,2,₹900,25%,"₹1,401.64",West,Maharashtra
+INV-10430,25/11/2024,Customer 120,Saree,Fashion,3,"₹2,800",25%,"₹6,315.51",East,West Bengal
+INV-10431,02/10/2023,Customer 146,Kurta,Fashion,2,₹900,5%,"₹1,737.00",North,Punjab
+INV-10431,21/01/2024,Customer 085,Power Bank,Electronics,2,"₹1,800",25%,"₹2,573.28",North,Uttar Pradesh
+INV-10432,21/05/2023,Customer 176,Earphones,Electronics,2,"₹1,200",25%,"₹1,819.34",South,Tamil Nadu
+INV-10432,28/02/2024,Customer 004,Mixer Grinder,Home,2,"₹3,500",10%,"₹6,250.60",South,Tamil Nadu
+INV-10433,20/07/2024,Customer 058,Saree,Fashion,1,"₹2,800",10%,"₹2,551.64",South,Karnataka
+INV-10433,11/10/2023,Customer 061,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,110.96",North,Delhi
+INV-10434,17/09/2023,Customer 173,Kurta,Fashion,1,₹900,5%,₹827.24,North,Uttar Pradesh
+INV-10434,14/03/2023,Customer 163,Mixer Grinder,Home,2,"₹3,500",0%,"₹7,089.29",East,West Bengal
+INV-10435,14/05/2024,Customer 044,Sports Shoes,Fashion,3,"₹3,200",40%,"₹5,868.60",North,Delhi
+INV-10435,02/06/2023,Customer 121,Power Bank,Electronics,3,"₹1,800",10%,"₹4,684.49",West,Gujarat
+INV-10436,20/06/2023,Customer 121,Earphones,Electronics,1,"₹1,200",40%,₹736.99,North,Punjab
+INV-10436,05/01/2024,Customer 029,Kurta,Fashion,1,₹900,25%,₹673.79,South,Karnataka
+INV-10437,28/03/2023,Customer 117,Bedsheet Set,Home,2,"₹1,500",10%,"₹2,712.50",North,Delhi
+INV-10437,07/09/2023,Customer 094,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,374.81",West,Maharashtra
+INV-10438,23/11/2024,Customer 159,Kurta,Fashion,3,₹900,10%,"₹2,463.83",West,Maharashtra
+INV-10438,14/11/2023,Customer 094,Mixer Grinder,Home,1,"₹3,500",0%,"₹3,449.23",North,Uttar Pradesh
+INV-10439,23/12/2024,Customer 048,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,452.70",North,Delhi
+INV-10439,31/12/2023,Customer 127,Earphones,Electronics,4,"₹1,200",0%,"₹4,898.21",East,Odisha
+INV-10440,29/09/2023,Customer 025,Earphones,Electronics,3,"₹1,200",0%,"₹3,738.14",East,Odisha
+INV-10440,19/04/2024,Customer 001,Power Bank,Electronics,1,"₹1,800",0%,"₹1,740.69",North,Punjab
+INV-10441,01/05/2024,Customer 115,Sports Shoes,Fashion,4,"₹3,200",25%,"₹9,273.29",South,Karnataka
+INV-10441,18/11/2023,Customer 111,Kurta,Fashion,1,₹900,15%,₹799.64,South,Kerala
+INV-10442,12/03/2024,Customer 132,Power Bank,Electronics,4,"₹1,800",0%,"₹7,525.95",West,Gujarat
+INV-10442,22/08/2024,Customer 001,Saree,Fashion,1,"₹2,800",5%,"₹2,688.64",South,Kerala
+INV-10443,09/07/2024,Customer 122,Mobile Phone,Electronics,3,"₹15,000",5%,"₹41,631.53",East,Odisha
+INV-10443,03/05/2024,Customer 154,Sports Shoes,Fashion,1,"₹3,200",40%,"₹1,891.57",South,Tamil Nadu
+INV-10444,18/04/2023,Customer 130,Sports Shoes,Fashion,4,"₹3,200",15%,"₹10,528.53",South,Tamil Nadu
+INV-10444,02/02/2024,Customer 004,Saree,Fashion,2,"₹2,800",40%,"₹3,435.00",North,Punjab
+INV-10445,21/03/2024,Customer 093,Mobile Phone,Electronics,4,"₹15,000",5%,"₹56,636.63",West,Maharashtra
+INV-10445,09/03/2024,Customer 155,Sports Shoes,Fashion,4,"₹3,200",25%,"₹10,033.84",South,Tamil Nadu
+INV-10446,26/09/2024,Customer 065,Saree,Fashion,4,"₹2,800",15%,"₹9,278.57",North,Uttar Pradesh
+INV-10446,05/06/2023,Customer 140,Sports Shoes,Fashion,3,"₹3,200",25%,"₹7,037.79",South,Kerala
+INV-10447,28/10/2024,Customer 052,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,956.02",South,Kerala
+INV-10447,20/01/2024,Customer 117,Mixer Grinder,Home,4,"₹3,500",0%,"₹13,448.27",South,Karnataka
+INV-10448,21/06/2023,Customer 109,Power Bank,Electronics,2,"₹1,800",0%,"₹3,687.99",North,Uttar Pradesh
+INV-10448,08/04/2024,Customer 125,Pressure Cooker,Home,1,"₹2,400",10%,"₹2,231.36",South,Karnataka
+INV-10449,22/09/2024,Customer 036,Bedsheet Set,Home,2,"₹1,500",0%,"₹3,094.48",West,Maharashtra
+INV-10449,14/12/2024,Customer 042,Pressure Cooker,Home,2,"₹2,400",10%,"₹4,171.47",East,Odisha
+INV-10450,24/11/2024,Customer 151,Kurta,Fashion,1,₹900,15%,₹740.00,North,Delhi
+INV-10450,15/05/2023,Customer 011,Earphones,Electronics,3,"₹1,200",40%,"₹2,162.51",North,Punjab
+INV-10451,11/07/2023,Customer 072,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,302.20",South,Tamil Nadu
+INV-10451,29/01/2024,Customer 148,Mobile Phone,Electronics,3,"₹15,000",0%,"₹44,862.29",East,West Bengal
+INV-10452,06/07/2024,Customer 177,Mobile Phone,Electronics,3,"₹15,000",40%,"₹27,469.98",North,Delhi
+INV-10452,13/02/2023,Customer 178,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,557.36",West,Maharashtra
+INV-10453,16/01/2024,Customer 154,Earphones,Electronics,2,"₹1,200",5%,"₹2,348.41",East,West Bengal
+INV-10453,21/03/2023,Customer 096,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,309.39",West,Gujarat
+INV-10454,04/01/2023,Customer 144,Mobile Phone,Electronics,1,"₹15,000",0%,"₹15,583.74",South,Kerala
+INV-10454,26/10/2023,Customer 028,Power Bank,Electronics,2,"₹1,800",15%,"₹2,957.87",West,Maharashtra
+INV-10455,18/10/2023,Customer 056,Earphones,Electronics,2,"₹1,200",10%,"₹2,207.84",South,Karnataka
+INV-10455,12/09/2023,Customer 138,Mobile Phone,Electronics,3,"₹15,000",0%,"₹44,977.40",West,Gujarat
+INV-10456,06/08/2024,Customer 015,Saree,Fashion,4,"₹2,800",0%,"₹11,681.66",North,Delhi
+INV-10456,19/01/2023,Customer 148,Pressure Cooker,Home,3,"₹2,400",15%,"₹6,033.52",West,Maharashtra
+INV-10457,12/08/2024,Customer 093,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,399.42",South,Kerala
+INV-10457,03/08/2024,Customer 046,Earphones,Electronics,4,"₹1,200",0%,"₹4,722.43",West,Gujarat
+INV-10458,14/10/2023,Customer 022,Pressure Cooker,Home,3,"₹2,400",5%,"₹6,602.18",East,West Bengal
+INV-10458,08/06/2023,Customer 162,Kurta,Fashion,2,₹900,15%,"₹1,474.16",North,Uttar Pradesh
+INV-10459,31/05/2024,Customer 095,Bedsheet Set,Home,1,"₹1,500",40%,₹944.88,South,Karnataka
+INV-10459,27/12/2024,Customer 127,Kurta,Fashion,2,₹900,40%,"₹1,070.93",East,West Bengal
+INV-10460,06/09/2024,Customer 114,Power Bank,Electronics,4,"₹1,800",10%,"₹6,567.77",East,West Bengal
+INV-10460,11/08/2023,Customer 031,Mobile Phone,Electronics,4,"₹15,000",15%,"₹50,341.32",West,Gujarat
+INV-10461,17/10/2024,Customer 005,Saree,Fashion,2,"₹2,800",0%,"₹5,563.26",East,West Bengal
+INV-10461,08/11/2024,Customer 087,Mobile Phone,Electronics,1,"₹15,000",15%,"₹12,456.65",West,Maharashtra
+INV-10462,14/12/2024,Customer 005,Kurta,Fashion,1,₹900,25%,₹663.86,South,Kerala
+INV-10462,04/11/2023,Customer 153,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,403.74",North,Delhi
+INV-10463,18/06/2023,Customer 026,Saree,Fashion,1,"₹2,800",15%,"₹2,329.33",North,Delhi
+INV-10463,29/12/2023,Customer 080,Pressure Cooker,Home,4,"₹2,400",0%,"₹9,320.87",South,Karnataka
+INV-10464,21/05/2024,Customer 011,Power Bank,Electronics,4,"₹1,800",25%,"₹5,480.40",North,Uttar Pradesh
+INV-10464,08/05/2024,Customer 045,Mobile Phone,Electronics,4,"₹15,000",0%,"₹60,039.47",North,Punjab
+INV-10465,23/10/2024,Customer 135,Earphones,Electronics,4,"₹1,200",0%,"₹4,715.39",South,Karnataka
+INV-10465,15/09/2024,Customer 146,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,448.36",South,Karnataka
+INV-10466,13/06/2023,Customer 036,Pressure Cooker,Home,2,"₹2,400",5%,"₹4,753.39",East,West Bengal
+INV-10466,02/11/2023,Customer 019,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,823.86",South,Tamil Nadu
+INV-10467,08/11/2023,Customer 100,Kurta,Fashion,3,₹900,10%,"₹2,488.80",South,Kerala
+INV-10467,01/11/2023,Customer 121,Pressure Cooker,Home,2,"₹2,400",10%,"₹4,402.27",North,Uttar Pradesh
+INV-10468,01/02/2024,Customer 088,Pressure Cooker,Home,4,"₹2,400",0%,"₹9,283.20",North,Delhi
+INV-10468,16/01/2024,Customer 144,Pressure Cooker,Home,3,"₹2,400",15%,"₹6,015.85",North,Delhi
+INV-10469,16/03/2024,Customer 045,Mobile Phone,Electronics,3,"₹15,000",0%,"₹43,016.72",South,Tamil Nadu
+INV-10469,03/06/2024,Customer 073,Sports Shoes,Fashion,3,"₹3,200",25%,"₹7,435.99",East,West Bengal
+INV-10470,08/02/2024,Customer 060,Saree,Fashion,4,"₹2,800",0%,"₹11,743.35",West,Maharashtra
+INV-10470,06/12/2024,Customer 058,Mixer Grinder,Home,3,"₹3,500",0%,"₹10,027.81",North,Punjab
+INV-10471,24/04/2024,Customer 134,Saree,Fashion,2,"₹2,800",0%,"₹5,635.83",North,Delhi
+INV-10471,18/07/2023,Customer 009,Pressure Cooker,Home,1,"₹2,400",40%,"₹1,434.55",West,Gujarat
+INV-10472,06/09/2024,Customer 152,Kurta,Fashion,3,₹900,0%,"₹2,601.73",South,Kerala
+INV-10472,13/06/2024,Customer 020,Saree,Fashion,2,"₹2,800",5%,"₹5,476.69",North,Uttar Pradesh
+INV-10473,29/01/2024,Customer 083,Earphones,Electronics,2,"₹1,200",15%,"₹2,049.43",North,Punjab
+INV-10473,30/09/2023,Customer 041,Kurta,Fashion,3,₹900,5%,"₹2,654.01",North,Uttar Pradesh
+INV-10474,26/10/2023,Customer 094,Earphones,Electronics,3,"₹1,200",0%,"₹3,711.88",West,Maharashtra
+INV-10474,28/05/2023,Customer 042,Pressure Cooker,Home,1,"₹2,400",5%,"₹2,197.17",North,Uttar Pradesh
+INV-10475,20/12/2023,Customer 084,Saree,Fashion,2,"₹2,800",10%,"₹4,883.44",East,West Bengal
+INV-10475,04/05/2024,Customer 096,Power Bank,Electronics,1,"₹1,800",25%,"₹1,366.07",West,Maharashtra
+INV-10476,03/06/2024,Customer 149,Sports Shoes,Fashion,1,"₹3,200",5%,"₹2,945.22",South,Karnataka
+INV-10476,06/03/2024,Customer 088,Pressure Cooker,Home,3,"₹2,400",25%,"₹5,390.35",South,Karnataka
+INV-10477,24/02/2023,Customer 075,Mixer Grinder,Home,2,"₹3,500",0%,"₹7,198.32",North,Uttar Pradesh
+INV-10477,12/10/2024,Customer 081,Mixer Grinder,Home,1,"₹3,500",40%,"₹2,193.06",West,Gujarat
+INV-10478,07/11/2024,Customer 130,Bedsheet Set,Home,4,"₹1,500",25%,"₹4,713.59",South,Karnataka
+INV-10478,11/09/2023,Customer 163,Mobile Phone,Electronics,1,"₹15,000",25%,"₹11,567.02",South,Kerala
+INV-10479,11/05/2023,Customer 080,Power Bank,Electronics,4,"₹1,800",25%,"₹5,262.69",West,Gujarat
+INV-10479,26/05/2023,Customer 143,Saree,Fashion,4,"₹2,800",5%,"₹10,444.66",East,West Bengal
+INV-10480,10/02/2023,Customer 124,Pressure Cooker,Home,2,"₹2,400",40%,"₹2,797.13",West,Gujarat
+INV-10480,27/11/2024,Customer 050,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,432.17",East,Odisha
+INV-10481,08/08/2024,Customer 144,Saree,Fashion,1,"₹2,800",15%,"₹2,412.04",North,Punjab
+INV-10481,07/07/2023,Customer 011,Kurta,Fashion,1,₹900,15%,₹758.89,East,Odisha
+INV-10482,20/12/2023,Customer 095,Bedsheet Set,Home,3,"₹1,500",40%,"₹2,661.51",East,West Bengal
+INV-10482,26/02/2024,Customer 131,Mixer Grinder,Home,3,"₹3,500",5%,"₹9,886.02",South,Karnataka
+INV-10483,27/03/2024,Customer 048,Kurta,Fashion,2,₹900,10%,"₹1,626.12",North,Uttar Pradesh
+INV-10483,16/01/2024,Customer 113,Kurta,Fashion,2,₹900,10%,"₹1,692.00",South,Tamil Nadu
+INV-10484,05/03/2023,Customer 086,Sports Shoes,Fashion,1,"₹3,200",10%,"₹2,913.88",East,West Bengal
+INV-10484,04/06/2023,Customer 073,Mixer Grinder,Home,2,"₹3,500",10%,"₹6,089.32",North,Delhi
+INV-10485,21/06/2024,Customer 046,Mixer Grinder,Home,1,"₹3,500",0%,"₹3,536.25",North,Uttar Pradesh
+INV-10485,10/11/2023,Customer 014,Mixer Grinder,Home,1,"₹3,500",40%,"₹2,074.42",East,Odisha
+INV-10486,16/02/2024,Customer 082,Kurta,Fashion,3,₹900,10%,"₹2,529.31",South,Karnataka
+INV-10486,03/06/2023,Customer 162,Earphones,Electronics,2,"₹1,200",25%,"₹1,826.41",West,Maharashtra
+INV-10487,23/06/2024,Customer 076,Kurta,Fashion,3,₹900,15%,"₹2,376.06",West,Gujarat
+INV-10487,30/07/2023,Customer 064,Bedsheet Set,Home,2,"₹1,500",25%,"₹2,147.70",South,Tamil Nadu
+INV-10488,26/05/2023,Customer 141,Mixer Grinder,Home,4,"₹3,500",0%,"₹14,433.41",North,Punjab
+INV-10488,25/07/2023,Customer 153,Mixer Grinder,Home,1,"₹3,500",5%,"₹3,218.45",West,Gujarat
+INV-10489,04/01/2023,Customer 145,Kurta,Fashion,3,₹900,15%,"₹2,220.69",North,Punjab
+INV-10489,11/09/2024,Customer 044,Saree,Fashion,1,"₹2,800",0%,"₹2,932.47",East,West Bengal
+INV-10490,24/08/2023,Customer 150,Mobile Phone,Electronics,3,"₹15,000",0%,"₹46,978.90",South,Tamil Nadu
+INV-10490,18/10/2024,Customer 074,Saree,Fashion,4,"₹2,800",10%,"₹10,561.68",East,West Bengal
+INV-10491,28/04/2023,Customer 132,Mobile Phone,Electronics,3,"₹15,000",0%,"₹43,518.35",North,Punjab
+INV-10491,03/06/2024,Customer 100,Mixer Grinder,Home,3,"₹3,500",10%,"₹9,755.60",West,Maharashtra
+INV-10492,27/10/2023,Customer 065,Mobile Phone,Electronics,3,"₹15,000",5%,"₹42,802.21",North,Punjab
+INV-10492,26/06/2024,Customer 004,Bedsheet Set,Home,2,"₹1,500",40%,"₹1,765.79",South,Karnataka
+INV-10493,17/03/2024,Customer 123,Saree,Fashion,1,"₹2,800",5%,"₹2,713.49",North,Uttar Pradesh
+INV-10493,24/10/2024,Customer 105,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,438.04",South,Kerala
+INV-10494,05/02/2023,Customer 112,Bedsheet Set,Home,2,"₹1,500",0%,"₹2,985.41",East,Odisha
+INV-10494,20/03/2024,Customer 152,Sports Shoes,Fashion,2,"₹3,200",25%,"₹4,742.62",West,Gujarat
+INV-10495,28/12/2024,Customer 022,Mobile Phone,Electronics,2,"₹15,000",10%,"₹26,464.28",East,West Bengal
+INV-10495,14/03/2023,Customer 148,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,807.57",West,Gujarat
+INV-10496,17/08/2024,Customer 004,Power Bank,Electronics,1,"₹1,800",40%,"₹1,054.37",North,Uttar Pradesh
+INV-10496,24/08/2024,Customer 088,Mobile Phone,Electronics,1,"₹15,000",5%,"₹13,569.17",East,Odisha
+INV-10497,28/01/2024,Customer 150,Mobile Phone,Electronics,4,"₹15,000",15%,"₹49,339.97",East,Odisha
+INV-10497,28/05/2023,Customer 109,Mixer Grinder,Home,4,"₹3,500",25%,"₹10,594.57",East,West Bengal
+INV-10498,25/07/2024,Customer 112,Bedsheet Set,Home,4,"₹1,500",5%,"₹5,631.27",North,Delhi
+INV-10498,26/05/2023,Customer 179,Pressure Cooker,Home,3,"₹2,400",0%,"₹7,495.98",East,Odisha
+INV-10499,29/06/2024,Customer 030,Pressure Cooker,Home,1,"₹2,400",5%,"₹2,301.55",East,West Bengal
+INV-10499,30/08/2023,Customer 123,Saree,Fashion,4,"₹2,800",0%,"₹11,143.54",South,Tamil Nadu
+INV-10500,17/07/2023,Customer 042,Saree,Fashion,2,"₹2,800",25%,"₹4,048.68",East,West Bengal
+INV-10500,14/09/2023,Customer 099,Mobile Phone,Electronics,4,"₹15,000",25%,"₹43,178.67",East,West Bengal
+INV-10501,11/07/2023,Customer 058,Bedsheet Set,Home,4,"₹1,500",0%,"₹6,089.53",West,Gujarat
+INV-10501,24/11/2023,Customer 058,Mixer Grinder,Home,2,"₹3,500",0%,"₹7,240.43",North,Uttar Pradesh
+INV-10502,20/12/2024,Customer 090,Earphones,Electronics,2,"₹1,200",5%,"₹2,341.70",East,Odisha
+INV-10502,31/08/2024,Customer 172,Mixer Grinder,Home,3,"₹3,500",25%,"₹8,138.00",East,Odisha
+INV-10503,13/12/2024,Customer 027,Power Bank,Electronics,1,"₹1,800",40%,"₹1,094.30",South,Tamil Nadu
+INV-10503,22/07/2024,Customer 135,Kurta,Fashion,2,₹900,5%,"₹1,723.09",North,Delhi
+INV-10504,23/04/2024,Customer 116,Pressure Cooker,Home,4,"₹2,400",0%,"₹9,231.57",West,Maharashtra
+INV-10504,04/10/2023,Customer 036,Sports Shoes,Fashion,2,"₹3,200",5%,"₹6,320.88",West,Maharashtra
+INV-10505,02/05/2024,Customer 130,Bedsheet Set,Home,2,"₹1,500",25%,"₹2,150.16",East,West Bengal
+INV-10505,08/12/2024,Customer 141,Kurta,Fashion,3,₹900,0%,"₹2,715.36",North,Delhi
+INV-10506,15/03/2023,Customer 179,Power Bank,Electronics,2,"₹1,800",0%,"₹3,704.32",East,Odisha
+INV-10506,27/12/2023,Customer 035,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,321.56",East,Odisha
+INV-10507,15/10/2024,Customer 179,Mobile Phone,Electronics,4,"₹15,000",0%,"₹62,949.69",South,Kerala
+INV-10507,07/09/2023,Customer 012,Pressure Cooker,Home,1,"₹2,400",0%,"₹2,385.72",North,Punjab
+INV-10508,15/12/2024,Customer 131,Bedsheet Set,Home,4,"₹1,500",15%,"₹5,337.37",West,Gujarat
+INV-10508,01/03/2024,Customer 140,Sports Shoes,Fashion,1,"₹3,200",15%,"₹2,596.58",East,West Bengal
+INV-10509,13/06/2023,Customer 169,Mobile Phone,Electronics,2,"₹15,000",15%,"₹25,930.38",North,Uttar Pradesh
+INV-10509,15/08/2024,Customer 132,Kurta,Fashion,2,₹900,25%,"₹1,326.82",West,Maharashtra
+INV-10510,15/12/2024,Customer 177,Mobile Phone,Electronics,4,"₹15,000",40%,"₹35,107.04",North,Delhi
+INV-10510,20/04/2024,Customer 116,Power Bank,Electronics,1,"₹1,800",10%,"₹1,626.90",East,Odisha
+INV-10511,16/09/2024,Customer 081,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,315.04",East,Odisha
+INV-10511,12/10/2023,Customer 161,Power Bank,Electronics,2,"₹1,800",40%,"₹2,159.55",North,Uttar Pradesh
+INV-10512,25/09/2023,Customer 070,Sports Shoes,Fashion,2,"₹3,200",15%,"₹5,417.30",East,Odisha
+INV-10512,24/10/2024,Customer 045,Earphones,Electronics,1,"₹1,200",5%,"₹1,154.78",South,Karnataka
+INV-10513,04/01/2023,Customer 089,Power Bank,Electronics,3,"₹1,800",0%,"₹5,419.24",West,Gujarat
+INV-10513,23/02/2023,Customer 016,Mixer Grinder,Home,1,"₹3,500",10%,"₹3,251.63",North,Delhi
+INV-10514,18/10/2024,Customer 117,Bedsheet Set,Home,2,"₹1,500",10%,"₹2,806.80",East,Odisha
+INV-10514,05/05/2024,Customer 049,Bedsheet Set,Home,1,"₹1,500",10%,"₹1,408.07",South,Kerala
+INV-10515,05/07/2023,Customer 105,Earphones,Electronics,2,"₹1,200",10%,"₹2,206.76",North,Delhi
+INV-10515,13/02/2023,Customer 031,Mobile Phone,Electronics,2,"₹15,000",40%,"₹18,434.03",North,Punjab
+INV-10516,19/10/2024,Customer 031,Kurta,Fashion,3,₹900,0%,"₹2,641.81",West,Gujarat
+INV-10516,04/08/2023,Customer 040,Mobile Phone,Electronics,2,"₹15,000",0%,"₹30,896.54",East,West Bengal
+INV-10517,04/04/2024,Customer 157,Bedsheet Set,Home,1,"₹1,500",25%,"₹1,175.22",East,West Bengal
+INV-10517,10/11/2023,Customer 090,Mobile Phone,Electronics,4,"₹15,000",5%,"₹54,372.26",North,Uttar Pradesh
+INV-10518,24/09/2024,Customer 152,Mobile Phone,Electronics,3,"₹15,000",5%,"₹44,805.87",South,Kerala
+INV-10518,21/08/2023,Customer 135,Bedsheet Set,Home,2,"₹1,500",0%,"₹3,044.92",West,Maharashtra
+INV-10519,11/07/2024,Customer 033,Mobile Phone,Electronics,4,"₹15,000",0%,"₹61,075.17",West,Maharashtra
+INV-10519,17/05/2024,Customer 014,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,667.67",South,Kerala
+INV-10520,31/12/2023,Customer 073,Kurta,Fashion,4,₹900,0%,"₹3,687.87",North,Punjab
+INV-10520,03/03/2024,Customer 051,Kurta,Fashion,2,₹900,5%,"₹1,712.94",South,Tamil Nadu
+INV-10521,01/05/2024,Customer 025,Sports Shoes,Fashion,4,"₹3,200",5%,"₹12,274.10",North,Delhi
+INV-10521,15/09/2024,Customer 179,Mixer Grinder,Home,3,"₹3,500",25%,"₹8,229.12",South,Tamil Nadu
+INV-10522,23/02/2023,Customer 146,Power Bank,Electronics,2,"₹1,800",5%,"₹3,296.48",South,Kerala
+INV-10522,29/10/2023,Customer 109,Power Bank,Electronics,1,"₹1,800",10%,"₹1,633.74",North,Uttar Pradesh
+INV-10523,19/08/2023,Customer 169,Pressure Cooker,Home,2,"₹2,400",15%,"₹4,260.74",North,Delhi
+INV-10523,08/06/2023,Customer 098,Pressure Cooker,Home,2,"₹2,400",5%,"₹4,334.38",North,Delhi
+INV-10524,13/07/2023,Customer 004,Mobile Phone,Electronics,3,"₹15,000",0%,"₹46,586.07",East,West Bengal
+INV-10524,20/12/2024,Customer 090,Earphones,Electronics,1,"₹1,200",25%,₹916.36,South,Karnataka
+INV-10525,14/06/2023,Customer 131,Power Bank,Electronics,1,"₹1,800",25%,"₹1,345.02",South,Kerala
+INV-10525,25/03/2023,Customer 168,Mobile Phone,Electronics,4,"₹15,000",0%,"₹62,028.08",East,West Bengal
+INV-10526,01/05/2024,Customer 061,Bedsheet Set,Home,1,"₹1,500",10%,"₹1,362.88",West,Gujarat
+INV-10526,25/10/2023,Customer 002,Sports Shoes,Fashion,4,"₹3,200",10%,"₹11,256.25",North,Delhi
+INV-10527,17/06/2024,Customer 101,Pressure Cooker,Home,4,"₹2,400",25%,"₹6,845.62",South,Kerala
+INV-10527,17/08/2023,Customer 061,Saree,Fashion,1,"₹2,800",25%,"₹2,131.61",West,Gujarat
+INV-10528,19/08/2023,Customer 041,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,919.39",South,Kerala
+INV-10528,03/01/2024,Customer 083,Saree,Fashion,3,"₹2,800",0%,"₹8,477.45",South,Kerala
+INV-10529,18/09/2024,Customer 111,Pressure Cooker,Home,4,"₹2,400",5%,"₹8,757.85",North,Delhi
+INV-10529,09/10/2023,Customer 057,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,768.20",West,Gujarat
+INV-10530,30/07/2023,Customer 169,Power Bank,Electronics,4,"₹1,800",40%,"₹4,447.06",East,Odisha
+INV-10530,21/05/2023,Customer 145,Saree,Fashion,4,"₹2,800",25%,"₹8,402.64",West,Maharashtra
+INV-10531,12/03/2024,Customer 098,Power Bank,Electronics,3,"₹1,800",5%,"₹4,959.04",South,Tamil Nadu
+INV-10531,19/10/2023,Customer 053,Bedsheet Set,Home,2,"₹1,500",40%,"₹1,783.49",North,Punjab
+INV-10532,03/01/2023,Customer 161,Earphones,Electronics,1,"₹1,200",15%,"₹1,041.76",East,Odisha
+INV-10532,06/10/2023,Customer 146,Mobile Phone,Electronics,4,"₹15,000",5%,"₹58,720.68",South,Kerala
+INV-10533,21/11/2024,Customer 083,Mixer Grinder,Home,4,"₹3,500",0%,"₹13,300.64",North,Delhi
+INV-10533,27/07/2023,Customer 037,Earphones,Electronics,4,"₹1,200",40%,"₹2,847.62",East,Odisha
+INV-10534,07/10/2023,Customer 148,Mixer Grinder,Home,3,"₹3,500",5%,"₹10,377.20",North,Punjab
+INV-10534,24/05/2023,Customer 059,Power Bank,Electronics,2,"₹1,800",0%,"₹3,754.07",West,Gujarat
+INV-10535,28/02/2023,Customer 178,Power Bank,Electronics,1,"₹1,800",0%,"₹1,713.01",West,Maharashtra
+INV-10535,17/07/2024,Customer 094,Kurta,Fashion,1,₹900,40%,₹545.94,East,Odisha
+INV-10536,28/05/2024,Customer 078,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,975.88",North,Uttar Pradesh
+INV-10536,02/03/2024,Customer 002,Earphones,Electronics,2,"₹1,200",5%,"₹2,303.74",East,West Bengal
+INV-10537,17/09/2023,Customer 130,Kurta,Fashion,4,₹900,25%,"₹2,587.40",South,Tamil Nadu
+INV-10537,26/12/2023,Customer 028,Pressure Cooker,Home,4,"₹2,400",0%,"₹9,901.00",East,West Bengal
+INV-10538,30/11/2024,Customer 171,Saree,Fashion,4,"₹2,800",5%,"₹10,315.91",West,Gujarat
+INV-10538,09/02/2023,Customer 156,Earphones,Electronics,3,"₹1,200",0%,"₹3,538.71",North,Delhi
+INV-10539,24/11/2024,Customer 132,Bedsheet Set,Home,4,"₹1,500",15%,"₹5,313.13",South,Tamil Nadu
+INV-10539,12/02/2024,Customer 131,Power Bank,Electronics,3,"₹1,800",5%,"₹5,040.82",West,Maharashtra
+INV-10540,07/06/2023,Customer 021,Saree,Fashion,1,"₹2,800",0%,"₹2,867.50",West,Gujarat
+INV-10540,16/12/2023,Customer 120,Earphones,Electronics,3,"₹1,200",5%,"₹3,481.35",East,West Bengal
+INV-10541,25/09/2024,Customer 143,Power Bank,Electronics,4,"₹1,800",0%,"₹6,884.07",East,West Bengal
+INV-10541,27/04/2024,Customer 094,Earphones,Electronics,1,"₹1,200",0%,"₹1,224.74",North,Uttar Pradesh
+INV-10542,09/02/2023,Customer 127,Saree,Fashion,4,"₹2,800",0%,"₹10,746.25",South,Kerala
+INV-10542,22/08/2024,Customer 007,Sports Shoes,Fashion,1,"₹3,200",0%,"₹3,080.95",North,Punjab
+INV-10543,10/04/2023,Customer 067,Kurta,Fashion,2,₹900,40%,"₹1,030.99",West,Gujarat
+INV-10543,07/05/2024,Customer 047,Power Bank,Electronics,2,"₹1,800",15%,"₹3,065.01",South,Kerala
+INV-10544,09/11/2024,Customer 166,Sports Shoes,Fashion,1,"₹3,200",5%,"₹2,900.95",South,Tamil Nadu
+INV-10544,12/08/2024,Customer 175,Power Bank,Electronics,3,"₹1,800",25%,"₹3,950.34",East,West Bengal
+INV-10545,04/07/2024,Customer 093,Mobile Phone,Electronics,3,"₹15,000",25%,"₹34,820.97",North,Delhi
+INV-10545,02/02/2024,Customer 123,Pressure Cooker,Home,3,"₹2,400",15%,"₹5,931.39",South,Tamil Nadu
+INV-10546,28/08/2024,Customer 005,Kurta,Fashion,4,₹900,0%,"₹3,535.93",West,Maharashtra
+INV-10546,15/01/2024,Customer 162,Earphones,Electronics,2,"₹1,200",40%,"₹1,439.86",North,Uttar Pradesh
+INV-10547,15/02/2024,Customer 059,Kurta,Fashion,2,₹900,40%,"₹1,121.06",West,Gujarat
+INV-10547,19/08/2023,Customer 079,Mobile Phone,Electronics,4,"₹15,000",25%,"₹46,955.60",South,Kerala
+INV-10548,12/03/2023,Customer 173,Earphones,Electronics,3,"₹1,200",15%,"₹2,951.88",North,Punjab
+INV-10548,22/05/2024,Customer 165,Bedsheet Set,Home,4,"₹1,500",15%,"₹5,008.23",South,Kerala
+INV-10549,19/06/2023,Customer 158,Kurta,Fashion,2,₹900,5%,"₹1,765.28",West,Maharashtra
+INV-10549,23/06/2023,Customer 119,Kurta,Fashion,3,₹900,0%,"₹2,709.01",South,Karnataka
+INV-10550,16/03/2023,Customer 173,Kurta,Fashion,3,₹900,5%,"₹2,665.59",South,Karnataka
+INV-10550,30/01/2024,Customer 113,Pressure Cooker,Home,1,"₹2,400",40%,"₹1,424.20",East,Odisha
+INV-10551,26/03/2024,Customer 168,Power Bank,Electronics,1,"₹1,800",10%,"₹1,598.59",South,Kerala
+INV-10551,21/02/2024,Customer 122,Mobile Phone,Electronics,1,"₹15,000",5%,"₹14,738.93",West,Gujarat
+INV-10552,14/05/2024,Customer 037,Earphones,Electronics,2,"₹1,200",10%,"₹2,182.25",South,Tamil Nadu
+INV-10552,15/04/2024,Customer 045,Earphones,Electronics,1,"₹1,200",5%,"₹1,185.41",South,Tamil Nadu
+INV-10553,27/01/2023,Customer 168,Saree,Fashion,1,"₹2,800",10%,"₹2,491.58",West,Gujarat
+INV-10553,30/06/2023,Customer 145,Pressure Cooker,Home,4,"₹2,400",10%,"₹8,279.17",West,Maharashtra
+INV-10554,20/03/2024,Customer 140,Mixer Grinder,Home,1,"₹3,500",0%,"₹3,493.04",North,Delhi
+INV-10554,08/06/2023,Customer 134,Earphones,Electronics,4,"₹1,200",5%,"₹4,749.19",East,West Bengal
+INV-10555,27/12/2024,Customer 034,Power Bank,Electronics,2,"₹1,800",25%,"₹2,640.07",East,West Bengal
+INV-10555,29/08/2024,Customer 156,Kurta,Fashion,4,₹900,15%,"₹2,949.17",South,Karnataka
+INV-10556,27/05/2023,Customer 102,Kurta,Fashion,2,₹900,25%,"₹1,374.90",North,Uttar Pradesh
+INV-10556,04/07/2024,Customer 074,Mobile Phone,Electronics,1,"₹15,000",15%,"₹12,417.65",East,West Bengal
+INV-10557,03/11/2024,Customer 102,Mobile Phone,Electronics,1,"₹15,000",0%,"₹14,776.93",North,Delhi
+INV-10557,19/09/2023,Customer 153,Saree,Fashion,2,"₹2,800",15%,"₹4,942.29",West,Gujarat
+INV-10558,18/08/2023,Customer 047,Mixer Grinder,Home,2,"₹3,500",0%,"₹7,073.39",South,Kerala
+INV-10558,29/05/2023,Customer 082,Kurta,Fashion,1,₹900,0%,₹896.06,East,Odisha
+INV-10559,16/05/2023,Customer 155,Earphones,Electronics,2,"₹1,200",5%,"₹2,203.33",South,Tamil Nadu
+INV-10559,23/11/2024,Customer 092,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,671.35",West,Gujarat
+INV-10560,04/03/2024,Customer 133,Sports Shoes,Fashion,1,"₹3,200",15%,"₹2,748.05",West,Gujarat
+INV-10560,10/11/2024,Customer 100,Bedsheet Set,Home,4,"₹1,500",0%,"₹5,749.26",North,Punjab
+INV-10561,21/05/2024,Customer 093,Mixer Grinder,Home,1,"₹3,500",40%,"₹2,089.28",South,Kerala
+INV-10561,25/11/2024,Customer 121,Earphones,Electronics,1,"₹1,200",15%,"₹1,067.13",South,Kerala
+INV-10562,21/02/2023,Customer 049,Mobile Phone,Electronics,1,"₹15,000",10%,"₹13,999.89",North,Delhi
+INV-10562,10/12/2023,Customer 071,Saree,Fashion,1,"₹2,800",0%,"₹2,931.43",North,Delhi
+INV-10563,03/06/2023,Customer 179,Mixer Grinder,Home,3,"₹3,500",25%,"₹8,048.40",East,West Bengal
+INV-10563,01/11/2023,Customer 147,Power Bank,Electronics,4,"₹1,800",25%,"₹5,495.85",North,Uttar Pradesh
+INV-10564,21/05/2023,Customer 140,Pressure Cooker,Home,4,"₹2,400",10%,"₹8,601.42",South,Kerala
+INV-10564,31/12/2023,Customer 106,Earphones,Electronics,4,"₹1,200",15%,"₹3,910.82",West,Gujarat
+INV-10565,28/12/2024,Customer 125,Earphones,Electronics,4,"₹1,200",0%,"₹4,798.39",North,Punjab
+INV-10565,23/11/2024,Customer 058,Kurta,Fashion,3,₹900,10%,"₹2,398.79",South,Tamil Nadu
+INV-10566,05/11/2024,Customer 013,Bedsheet Set,Home,4,"₹1,500",0%,"₹6,194.90",East,West Bengal
+INV-10566,28/07/2024,Customer 080,Pressure Cooker,Home,2,"₹2,400",5%,"₹4,559.92",East,West Bengal
+INV-10567,02/03/2024,Customer 053,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,872.70",East,West Bengal
+INV-10567,01/05/2023,Customer 014,Mobile Phone,Electronics,3,"₹15,000",40%,"₹26,735.51",South,Tamil Nadu
+INV-10568,05/11/2023,Customer 102,Saree,Fashion,4,"₹2,800",10%,"₹9,760.81",North,Punjab
+INV-10568,10/03/2024,Customer 180,Power Bank,Electronics,3,"₹1,800",10%,"₹4,938.25",East,West Bengal
+INV-10569,25/03/2024,Customer 135,Sports Shoes,Fashion,2,"₹3,200",0%,"₹6,215.15",East,West Bengal
+INV-10569,07/12/2023,Customer 023,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,863.55",North,Delhi
+INV-10570,10/09/2023,Customer 108,Earphones,Electronics,4,"₹1,200",5%,"₹4,698.60",East,Odisha
+INV-10570,09/06/2023,Customer 026,Saree,Fashion,4,"₹2,800",10%,"₹10,171.67",South,Karnataka
+INV-10571,20/05/2024,Customer 111,Pressure Cooker,Home,2,"₹2,400",40%,"₹2,879.86",East,West Bengal
+INV-10571,18/11/2024,Customer 094,Sports Shoes,Fashion,1,"₹3,200",5%,"₹3,093.02",North,Punjab
+INV-10572,10/09/2023,Customer 090,Earphones,Electronics,4,"₹1,200",15%,"₹4,058.60",North,Uttar Pradesh
+INV-10572,16/04/2023,Customer 039,Saree,Fashion,4,"₹2,800",15%,"₹9,174.41",West,Gujarat
+INV-10573,23/07/2024,Customer 111,Kurta,Fashion,2,₹900,0%,"₹1,733.68",South,Karnataka
+INV-10573,17/06/2024,Customer 177,Earphones,Electronics,4,"₹1,200",25%,"₹3,743.91",North,Delhi
+INV-10574,10/04/2023,Customer 087,Bedsheet Set,Home,1,"₹1,500",0%,"₹1,516.56",West,Maharashtra
+INV-10574,17/07/2023,Customer 049,Power Bank,Electronics,4,"₹1,800",5%,"₹6,607.72",North,Uttar Pradesh
+INV-10575,15/01/2024,Customer 121,Mixer Grinder,Home,4,"₹3,500",5%,"₹13,890.21",North,Uttar Pradesh
+INV-10575,22/11/2024,Customer 070,Mixer Grinder,Home,1,"₹3,500",0%,"₹3,638.72",North,Uttar Pradesh
+INV-10576,15/07/2024,Customer 151,Pressure Cooker,Home,3,"₹2,400",5%,"₹6,934.29",North,Punjab
+INV-10576,14/05/2024,Customer 018,Mixer Grinder,Home,4,"₹3,500",40%,"₹8,507.19",West,Maharashtra
+INV-10577,13/05/2024,Customer 169,Kurta,Fashion,3,₹900,10%,"₹2,351.08",North,Delhi
+INV-10577,06/04/2023,Customer 052,Pressure Cooker,Home,3,"₹2,400",5%,"₹6,908.93",East,Odisha
+INV-10578,18/06/2024,Customer 023,Earphones,Electronics,3,"₹1,200",0%,"₹3,446.54",East,Odisha
+INV-10578,29/08/2024,Customer 121,Kurta,Fashion,4,₹900,0%,"₹3,599.11",South,Karnataka
+INV-10579,09/08/2024,Customer 161,Earphones,Electronics,3,"₹1,200",0%,"₹3,501.73",North,Delhi
+INV-10579,19/12/2024,Customer 052,Saree,Fashion,2,"₹2,800",15%,"₹4,618.96",West,Maharashtra
+INV-10580,22/11/2023,Customer 117,Sports Shoes,Fashion,3,"₹3,200",0%,"₹9,325.41",West,Gujarat
+INV-10580,11/04/2023,Customer 014,Power Bank,Electronics,4,"₹1,800",0%,"₹7,466.63",South,Kerala
+INV-10581,26/05/2024,Customer 098,Kurta,Fashion,4,₹900,0%,"₹3,708.94",North,Punjab
+INV-10581,12/05/2023,Customer 151,Power Bank,Electronics,1,"₹1,800",0%,"₹1,745.84",North,Uttar Pradesh
+INV-10582,03/11/2023,Customer 172,Mobile Phone,Electronics,1,"₹15,000",10%,"₹13,485.82",East,Odisha
+INV-10582,03/01/2024,Customer 097,Sports Shoes,Fashion,4,"₹3,200",15%,"₹11,054.17",West,Maharashtra
+INV-10583,17/07/2023,Customer 079,Sports Shoes,Fashion,3,"₹3,200",25%,"₹7,145.41",West,Gujarat
+INV-10583,05/10/2024,Customer 043,Earphones,Electronics,1,"₹1,200",15%,"₹1,042.05",West,Maharashtra
+INV-10584,23/02/2023,Customer 163,Power Bank,Electronics,4,"₹1,800",40%,"₹4,416.80",South,Tamil Nadu
+INV-10584,28/10/2023,Customer 119,Bedsheet Set,Home,2,"₹1,500",15%,"₹2,506.62",South,Karnataka
+INV-10585,11/04/2023,Customer 145,Bedsheet Set,Home,3,"₹1,500",0%,"₹4,395.02",South,Kerala
+INV-10585,10/11/2023,Customer 133,Mobile Phone,Electronics,2,"₹15,000",0%,"₹28,535.96",East,Odisha
+INV-10586,05/02/2023,Customer 077,Mixer Grinder,Home,1,"₹3,500",25%,"₹2,749.70",South,Kerala
+INV-10586,21/01/2024,Customer 176,Saree,Fashion,1,"₹2,800",0%,"₹2,824.64",East,West Bengal
+INV-10587,21/11/2024,Customer 142,Power Bank,Electronics,1,"₹1,800",25%,"₹1,409.92",West,Maharashtra
+INV-10587,13/10/2023,Customer 138,Kurta,Fashion,1,₹900,0%,₹930.20,West,Maharashtra
+INV-10588,04/09/2024,Customer 073,Pressure Cooker,Home,4,"₹2,400",25%,"₹7,248.77",East,West Bengal
+INV-10588,06/06/2024,Customer 074,Bedsheet Set,Home,2,"₹1,500",40%,"₹1,804.25",West,Maharashtra
+INV-10589,25/04/2024,Customer 110,Saree,Fashion,4,"₹2,800",0%,"₹10,909.07",North,Uttar Pradesh
+INV-10589,17/10/2024,Customer 158,Pressure Cooker,Home,1,"₹2,400",25%,"₹1,841.17",South,Karnataka
+INV-10590,13/10/2023,Customer 030,Mobile Phone,Electronics,3,"₹15,000",10%,"₹42,254.96",East,West Bengal
+INV-10590,01/04/2023,Customer 049,Earphones,Electronics,3,"₹1,200",15%,"₹3,049.28",South,Kerala
+INV-10591,12/09/2024,Customer 170,Sports Shoes,Fashion,2,"₹3,200",40%,"₹3,782.11",North,Delhi
+INV-10591,27/12/2023,Customer 160,Kurta,Fashion,3,₹900,0%,"₹2,793.12",West,Gujarat
+INV-10592,04/04/2023,Customer 040,Mixer Grinder,Home,2,"₹3,500",10%,"₹6,432.06",North,Delhi
+INV-10592,15/01/2024,Customer 075,Pressure Cooker,Home,3,"₹2,400",25%,"₹5,224.17",South,Karnataka
+INV-10593,01/01/2024,Customer 128,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,600.68",West,Gujarat
+INV-10593,29/11/2023,Customer 173,Mobile Phone,Electronics,3,"₹15,000",0%,"₹43,923.57",East,West Bengal
+INV-10594,21/11/2023,Customer 090,Pressure Cooker,Home,2,"₹2,400",15%,"₹3,881.43",South,Karnataka
+INV-10594,13/02/2023,Customer 162,Pressure Cooker,Home,2,"₹2,400",10%,"₹4,325.23",South,Kerala
+INV-10595,02/10/2023,Customer 083,Earphones,Electronics,1,"₹1,200",10%,"₹1,036.88",South,Tamil Nadu
+INV-10595,20/04/2023,Customer 134,Mobile Phone,Electronics,4,"₹15,000",15%,"₹52,885.02",North,Punjab
+INV-10596,07/10/2023,Customer 038,Pressure Cooker,Home,2,"₹2,400",25%,"₹3,461.46",West,Maharashtra
+INV-10596,29/11/2023,Customer 034,Sports Shoes,Fashion,2,"₹3,200",5%,"₹6,052.24",East,West Bengal
+INV-10597,18/01/2024,Customer 047,Mixer Grinder,Home,3,"₹3,500",25%,"₹7,926.11",West,Gujarat
+INV-10597,31/03/2023,Customer 149,Kurta,Fashion,2,₹900,10%,"₹1,611.56",West,Gujarat
+INV-10598,18/07/2024,Customer 086,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,963.33",North,Uttar Pradesh
+INV-10598,15/09/2023,Customer 044,Earphones,Electronics,1,"₹1,200",10%,"₹1,036.06",North,Punjab
+INV-10599,10/02/2023,Customer 154,Mobile Phone,Electronics,4,"₹15,000",10%,"₹56,235.86",South,Karnataka
+INV-10599,04/01/2023,Customer 160,Mixer Grinder,Home,3,"₹3,500",10%,"₹9,623.75",South,Karnataka
+INV-10010,24/02/2023,Customer 067,Pressure Cooker,Home,2,"₹2,400",0%,"₹4,683.65",South,Kerala
+,,,,,,,,,,
+,,,,,,,,,,
