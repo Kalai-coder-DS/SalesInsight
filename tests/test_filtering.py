@@ -13,6 +13,8 @@ Sample rows (row: date, region, state, category, segment, sales):
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pandas as pd
 import pytest
 
@@ -405,3 +407,61 @@ def test_q4_stat_without_q4_data(sales_data):
     no_q4 = sales_data[sales_data["order_date"].dt.quarter != 4]
     q4 = next(s for s in dd.trend_stats(no_q4) if s["label"] == "Q4 share of revenue")
     assert q4["value"] == "-" and "no October-December" in q4["sub"]
+
+
+# --- 14D: Business Insights for uploaded files ----------------------------------------
+UPLOAD_SAMPLES = Path(__file__).resolve().parents[1] / "data" / "samples"
+
+
+def _prepared(name):
+    from salesinsight.upload import prepare_sales, read_upload, suggest_mapping
+    raw = read_upload(name, (UPLOAD_SAMPLES / name).read_bytes())
+    r = prepare_sales(raw, suggest_mapping(raw)[0])
+    return r.data, frozenset(r.capabilities), r.currency or "$"
+
+
+def test_rules_and_tests_follow_capabilities():
+    df, caps, _ = _prepared("indian_retail_sales.csv")          # no profit data
+    findings, skipped = dd.safe_findings(df, caps)
+    recs = dd.safe_recommendations(findings, caps)
+    assert recs and all(r.area in ("Customers", "Planning") for r in recs)
+    assert all(t.test not in ("discount_vs_margin", "region_margin", "category_margin") for t in findings["tests"])
+    assert "high_discount_loss" not in findings and "no profit or cost column" in skipped["high_discount_loss"]
+    assert dd.loss_tables(df, caps) == {}
+
+
+def test_demo_safe_layer_unchanged(sales_data):
+    a, _ = dd.safe_findings(sales_data)
+    b, _ = dd.safe_findings(sales_data, None)
+    assert set(a) == set(b) and len(a["tests"]) == len(b["tests"])
+    assert [r.title for r in dd.safe_recommendations(a)] == [r.title for r in dd.safe_recommendations(b, None)]
+
+
+def test_findings_wording_never_misleads():
+    df, caps, _ = _prepared("indian_retail_sales.csv")
+    findings, _ = dd.safe_findings(df, caps)
+    texts = " ".join(x["title"] + " " + x["text"] for x in dd.key_findings(df, findings, caps)
+                     + dd.opportunities(df, findings, caps))
+    assert "profit" not in texts.lower() and "grows -" not in texts and "-0.0%" not in texts
+    assert "Fastest-growing" not in texts or "(-" not in texts.split("Fastest-growing")[1].split(".")[0]
+
+
+def test_small_upload_still_gets_opportunities_and_report():
+    df, caps, cur = _prepared("cafe_daily_sales.csv")
+    findings, skipped = dd.safe_findings(df, caps)
+    opps = dd.opportunities(df, findings, caps)
+    assert [o["title"] for o in opps] == ["Best sellers to keep in stock", "Strongest and weakest day"]
+    report = dd.custom_report(df, findings, skipped, [], caps, "cafe_daily_sales.csv", cur)
+    assert report.startswith("# SalesInsight report: cafe_daily_sales.csv") and "nan" not in report.lower()
+    assert "## Not calculated for this file" in report
+
+
+def test_custom_report_uses_currency_and_kpi_rows_filter():
+    df, caps, cur = _prepared("indian_retail_sales.csv")
+    findings, skipped = dd.safe_findings(df, caps)
+    report = dd.custom_report(df, findings, skipped, dd.safe_recommendations(findings, caps), caps, "x.csv", cur)
+    assert "₹" in report and "$" not in report
+    keys = set(dd.kpi_rows(findings["kpis"], caps)["key"])
+    assert "total_revenue" in keys and not {"total_profit", "profit_margin_pct", "loss_amount"} & keys
+    from salesinsight.kpis import kpi_table
+    assert dd.kpi_rows(findings["kpis"]).equals(kpi_table(findings["kpis"]))    # demo: full table

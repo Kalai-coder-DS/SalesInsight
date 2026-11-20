@@ -388,8 +388,45 @@ def _attempt(func):
             return None, f"{type(exc).__name__}: {exc}"
 
 
-def safe_findings(df: pd.DataFrame) -> tuple[dict, dict]:
-    """Same keys as insights.collect_findings(); returns (findings, skipped {key: reason})."""
+# Phase 14D: what each finding, test and rule needs from an uploaded file.
+# caps=None (the Superstore data) means everything is available.
+PART_NEEDS: dict[str, set[str]] = {
+    "products": {"products"}, "categories": {"category"}, "subcategories": {"sub_category"},
+    "discount_bands": {"discount"}, "regions": {"region"}, "region_summary": {"region"},
+    "segments": {"segment"}, "customers": {"customers"}, "rfm": {"customers", "orders"},
+    "aov_ci": {"orders"}, "high_discount_loss": {"discount", "profit"},
+    "high_discount_lines_pct": {"discount", "profit"},
+}
+TEST_NEEDS: dict[str, set[str]] = {
+    "discount_vs_margin": {"discount", "profit"}, "discount_vs_loss": {"discount", "profit"},
+    "region_margin": {"region", "profit"}, "segment_order_value": {"segment", "orders"},
+    "category_margin": {"category", "profit"}, "q4_vs_rest": set(),
+}
+RULE_NEEDS: dict[str, set[str]] = {
+    "rule_discount_cap": {"discount", "profit"}, "rule_loss_subcategories": {"sub_category", "profit"},
+    "rule_weak_category": {"category", "profit"}, "rule_loss_states": {"state", "profit"},
+    "rule_region_focus": {"region", "profit"}, "rule_seasonality": set(),
+    "rule_at_risk": {"customers", "orders"}, "rule_acquisition": {"customers", "orders"},
+    "rule_order_value": {"orders"},
+}
+FIELD_WORDS = {"products": "product", "category": "category", "sub_category": "sub-category",
+               "discount": "discount", "profit": "profit or cost", "region": "region", "state": "state",
+               "segment": "customer segment", "customers": "customer", "orders": "order ID", "quantity": "quantity"}
+
+
+def _lacking(needs: set[str], caps) -> list[str]:
+    return [] if caps is None else sorted(n for n in needs if n not in caps)
+
+
+def _not_in_file(lacking: list[str]) -> str:
+    return "your file has no " + " or ".join(FIELD_WORDS.get(n, n) for n in lacking) + " column"
+
+
+def safe_findings(df: pd.DataFrame, caps: frozenset | set | None = None) -> tuple[dict, dict]:
+    """Same keys as insights.collect_findings(); returns (findings, skipped {key: reason}).
+
+    caps: capabilities of an uploaded file; parts it cannot support are skipped
+    with a plain reason instead of producing misleading numbers."""
     from salesinsight import customers as cu
     from salesinsight import kpis as kp
     from salesinsight import products as pr
@@ -416,6 +453,11 @@ def safe_findings(df: pd.DataFrame) -> tuple[dict, dict]:
         "high_discount_lines_pct": lambda: 100 * len(high) / len(df),
     }
     findings, skipped = {}, {}
+    for key, needs in PART_NEEDS.items():
+        lacking = _lacking(needs, caps)
+        if lacking and key in parts:
+            parts.pop(key)
+            skipped[key] = _not_in_file(lacking)
     # A trend line needs at least 3 months; fewer would make NumPy fit a line through 1-2 points.
     if df["order_date"].dt.to_period("M").nunique() < 3:
         parts.pop("trends")
@@ -427,9 +469,21 @@ def safe_findings(df: pd.DataFrame) -> tuple[dict, dict]:
         else:
             skipped[key] = error
     tests = []
-    for test in (st_.test_discount_vs_margin, st_.test_discount_vs_loss, st_.test_region_margin,
-                 st_.test_segment_order_value, lambda d: st_.test_category_margin(d, "Furniture"),
-                 st_.test_q4_vs_rest):
+    # The Superstore test compares Furniture; an upload compares its own weakest category.
+    category = "Furniture"
+    if caps is not None and {"category", "profit"} <= set(caps):
+        cats, _ = _attempt(lambda: breakdown(df, "category"))
+        if cats is not None and len(cats) > 1:
+            category = cats.loc[cats["profit_margin_pct"].idxmin(), "category"]
+    tests_to_run = {"discount_vs_margin": st_.test_discount_vs_margin, "discount_vs_loss": st_.test_discount_vs_loss,
+                    "region_margin": st_.test_region_margin, "segment_order_value": st_.test_segment_order_value,
+                    "category_margin": lambda d: st_.test_category_margin(d, category),
+                    "q4_vs_rest": st_.test_q4_vs_rest}
+    for name, test in tests_to_run.items():
+        lacking = _lacking(TEST_NEEDS[name], caps)
+        if lacking:
+            skipped[f"test: {name.replace('_', ' ')}"] = _not_in_file(lacking)
+            continue
         result, error = _attempt(lambda t=test: t(df))
         if error is None and result is not None and pd.notna(result.p_value):
             tests.append(result)
@@ -437,11 +491,14 @@ def safe_findings(df: pd.DataFrame) -> tuple[dict, dict]:
     return findings, skipped
 
 
-def safe_recommendations(findings: dict) -> list:
-    """Run every recommendation rule; a rule whose inputs are missing is skipped."""
+def safe_recommendations(findings: dict, caps: frozenset | set | None = None) -> list:
+    """Run every recommendation rule; a rule whose inputs are missing is skipped.
+    caps: an uploaded file's capabilities - rules it cannot support are not run at all."""
     from salesinsight.insights import RULES
     recs = []
     for rule in RULES:
+        if _lacking(RULE_NEEDS.get(rule.__name__, set()), caps):
+            continue
         rec, error = _attempt(lambda r=rule: r(findings))
         if error is None and rec is not None:
             recs.append(rec)
@@ -454,55 +511,89 @@ def safe_report(findings: dict, recs: list) -> str | None:
     return report if error is None else None
 
 
-def key_findings(df: pd.DataFrame, findings: dict) -> list[dict]:
+def key_findings(df: pd.DataFrame, findings: dict, caps: frozenset | set | None = None) -> list[dict]:
     """Short headline findings for the selection (each only if it can be calculated)."""
+    def has(*names: str) -> bool:
+        return caps is None or all(n in caps for n in names)
+
     out = []
     k = findings.get("kpis")
     if k:
-        out.append({"title": "Revenue and profit",
-                    "text": f"{short_money(k['total_revenue'])} revenue and {short_money(k['total_profit'])} "
-                            f"profit, a {k['profit_margin_pct']:.1f}% margin."})
-        out.append({"title": "Discounts",
-                    "text": f"{short_money(k['discount_given'])} given away ({k['effective_discount_pct']:.1f}% of "
-                            f"list price); {k['loss_lines_pct']:.1f}% of order lines lose money "
-                            f"({short_money(k['loss_amount'])})."})
+        if has("profit"):
+            out.append({"title": "Revenue and profit",
+                        "text": f"{short_money(k['total_revenue'])} revenue and {short_money(k['total_profit'])} "
+                                f"profit, a {k['profit_margin_pct']:.1f}% margin."})
+        else:
+            per = (f"{k['total_orders']:,} orders, {short_money(k['avg_order_value'])} on average"
+                   if has("orders") else f"{len(df):,} sales lines")
+            out.append({"title": "Revenue", "text": f"{short_money(k['total_revenue'])} revenue from {per}."})
+        if has("discount", "profit"):
+            out.append({"title": "Discounts",
+                        "text": f"{short_money(k['discount_given'])} given away ({k['effective_discount_pct']:.1f}% of "
+                                f"list price); {k['loss_lines_pct']:.1f}% of order lines lose money "
+                                f"({short_money(k['loss_amount'])})."})
+        elif has("discount"):
+            out.append({"title": "Discounts",
+                        "text": f"{short_money(k['discount_given'])} given away ({k['effective_discount_pct']:.1f}% of "
+                                "list price)."})
     s = findings.get("region_summary")
-    if s and s["loss_making_states"]:
+    if s and has("state", "profit") and s["loss_making_states"]:
         out.append({"title": "Loss-making states",
                     "text": f"{s['loss_making_states']} state(s) lose money in total "
                             f"({short_money(s['loss_making_states_total'])}); worst: {s['worst_state_by_profit']}."})
     cats = findings.get("categories")
-    if cats is not None and len(cats) > 1:
+    if cats is not None and len(cats) > 1 and has("profit"):
         weak = cats.loc[cats["profit_margin_pct"].idxmin()]
         out.append({"title": "Weakest category",
                     "text": f"{weak['category']} keeps only {weak['profit_margin_pct']:.1f}% of revenue as profit, "
                             f"with {weak['loss_lines_pct']:.0f}% of its lines at a loss."})
     t = findings.get("trends")
     if t and pd.notna(t.get("revenue_cagr_pct")):
+        cagr = t["revenue_cagr_pct"]
+        verb = "grows" if cagr >= 0 else "falls"
         out.append({"title": "Growth and seasonality",
-                    "text": f"Revenue grows {t['revenue_cagr_pct']:.1f}% a year; {t['peak_season_month']} is the peak "
+                    "text": f"Revenue {verb} {abs(cagr):.1f}% a year; {t['peak_season_month']} is the peak "
                             f"month and Q4 brings {t['q4_share_of_revenue_pct']:.1f}% of revenue."})
     return out
 
 
-def opportunities(df: pd.DataFrame, findings: dict) -> list[dict]:
+def opportunities(df: pd.DataFrame, findings: dict, caps: frozenset | set | None = None) -> list[dict]:
     """Where to grow: fastest-growing sub-categories and regions, and customers to win back."""
+    def has(*names: str) -> bool:
+        return caps is None or all(n in caps for n in names)
+
     out = []
     years = sorted(df["order_year"].unique())
-    if len(years) >= 2:
+    # Superstore: sub-categories. An upload uses the most detailed grouping it has.
+    group = next((g for g, cap in (("sub_category", "sub_category"), ("category", "category"),
+                                   ("product_name", "products")) if has(cap)), None)
+    group_word = {"sub_category": "sub-categories", "category": "categories", "product_name": "products"}.get(group)
+    if len(years) >= 2 and group:
         last, prev = years[-1], years[-2]
         g = df[df["order_year"].isin([prev, last])].pivot_table(
-            index="sub_category", columns="order_year", values="sales", aggfunc="sum", fill_value=0)
+            index=group, columns="order_year", values="sales", aggfunc="sum", fill_value=0)
         g = g[(g[prev] > 0) & (g[last] >= 0.01 * g[last].sum())]
         if len(g):
             g["growth"] = 100 * (g[last] - g[prev]) / g[prev]
-            top = g.sort_values("growth", ascending=False).head(3)
-            text = ", ".join(f"{name} ({row['growth']:+.0f}%)" for name, row in top.iterrows())
-            out.append({"title": f"Fastest-growing sub-categories ({last} vs {prev})", "text": text + "."})
+            ranked = g.sort_values("growth", ascending=False)
+            growing = ranked[ranked["growth"] > 0].head(3)          # never call a shrinking group "growing"
+            if len(growing):
+                text = ", ".join(f"{name} ({row['growth']:+.0f}%)" for name, row in growing.iterrows())
+                out.append({"title": f"Fastest-growing {group_word} ({last} vs {prev})", "text": text + "."})
+            else:
+                best = ranked.iloc[0]
+                out.append({"title": f"No {group_word[:-1] if group_word.endswith('s') else group_word} grew "
+                                     f"({last} vs {prev})",
+                            "text": f"{ranked.index[0]} held up best ({best['growth']:+.0f}%)."})
     s = findings.get("region_summary")
     if s and pd.notna(s.get("fastest_growing_region_cagr_pct")):
-        out.append({"title": "Fastest-growing region",
-                    "text": f"{s['fastest_growing_region']} grows {s['fastest_growing_region_cagr_pct']:.1f}% a year."})
+        rate = round(float(s["fastest_growing_region_cagr_pct"]), 1) + 0.0       # + 0.0 avoids "-0.0"
+        if rate > 0:
+            out.append({"title": "Fastest-growing region",
+                        "text": f"{s['fastest_growing_region']} grows {rate:.1f}% a year."})
+        else:
+            out.append({"title": "No region is growing",
+                        "text": f"{s['fastest_growing_region']} holds up best ({rate:+.1f}% a year)."})
     rfm = findings.get("rfm")
     if rfm is not None and "At risk" in set(rfm["rfm_segment"]):
         r = rfm.set_index("rfm_segment").loc["At risk"]
@@ -510,16 +601,45 @@ def opportunities(df: pd.DataFrame, findings: dict) -> list[dict]:
                     "text": f"{int(r['total_customers'])} 'At risk' customers brought {short_money(r['revenue'])} "
                             f"({r['share_of_revenue_pct']:.1f}% of revenue) but have stopped ordering."})
     bands = findings.get("discount_bands")
-    if bands is not None and len(bands):
+    if bands is not None and len(bands) and has("profit"):
         nd = bands[bands["discount_band"].astype(str) == "No discount"]
         if len(nd):
             out.append({"title": "Protect full-price sales",
                         "text": f"Lines sold without discount earn a {nd['profit_margin_pct'].iloc[0]:.1f}% margin."})
+    if caps is not None and len(out) < 2:          # uploads with little data: facts every sales file has
+        if has("products"):
+            prod = df.groupby("product_name")["sales"].sum().sort_values(ascending=False)
+            top = prod.head(3)
+            out.append({"title": "Best sellers to keep in stock",
+                        "text": ", ".join(f"{name} ({100 * v / prod.sum():.0f}%)" for name, v in top.items())
+                                + " of sales."})
+        days = df.groupby("order_weekday")["sales"].sum()
+        if len(days) >= 5:
+            out.append({"title": "Strongest and weakest day",
+                        "text": f"{days.idxmax()} brings {100 * days.max() / days.sum():.0f}% of sales, "
+                                f"{days.idxmin()} only {100 * days.min() / days.sum():.0f}% - a quiet day for "
+                                "promotions or staff planning."})
     return out
 
 
-def loss_tables(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
-    """Everything that lost money in the selection: products, sub-categories, states, customers."""
+LOSS_TAB_NEEDS = {"Products": "products", "Sub-categories": "sub_category", "States": "state", "Customers": "customers"}
+LOSS_COLUMN_NEEDS = {"category": "category", "sub_category": "sub_category", "region": "region", "segment": "segment",
+                     "effective_discount_pct": "discount", "total_orders": "orders"}
+
+
+def loss_tables(df: pd.DataFrame, caps: frozenset | set | None = None) -> dict[str, pd.DataFrame]:
+    """Everything that lost money in the selection: products, sub-categories, states, customers.
+    For an uploaded file only the tabs and columns it supports (none without profit data)."""
+    if caps is not None:
+        if "profit" not in caps:
+            return {}
+        tables = _loss_tables(df)
+        return {name: t[[c for c in t.columns if c not in LOSS_COLUMN_NEEDS or LOSS_COLUMN_NEEDS[c] in caps]]
+                for name, t in tables.items() if LOSS_TAB_NEEDS[name] in caps}
+    return _loss_tables(df)
+
+
+def _loss_tables(df: pd.DataFrame) -> dict[str, pd.DataFrame]:
     from salesinsight.customers import customer_table
     from salesinsight.products import loss_making_products, product_performance, subcategory_performance
     if df.empty:
@@ -566,3 +686,67 @@ def explorer_summary(df: pd.DataFrame, by: str) -> pd.DataFrame:
     if df.empty:
         return pd.DataFrame(columns=[by, "revenue", "profit", "total_orders", "profit_margin_pct"])
     return performance_table(df, [by]).sort_values("revenue", ascending=False).reset_index(drop=True)
+
+
+# ---------------------------------------------------------------------------
+# Business Insights for uploaded files (14D)
+# ---------------------------------------------------------------------------
+KPI_NEEDS: dict[str, set[str]] = {
+    "total_profit": {"profit"}, "profit_margin_pct": {"profit"}, "loss_lines": {"profit"},
+    "loss_lines_pct": {"profit"}, "loss_amount": {"profit"}, "total_orders": {"orders"},
+    "avg_order_value": {"orders"}, "avg_units_per_order": {"orders", "quantity"}, "total_customers": {"customers"},
+    "total_products": {"products"}, "units_sold": {"quantity"}, "revenue_before_discount": {"discount"},
+    "discount_given": {"discount"}, "effective_discount_pct": {"discount"}, "avg_line_discount_pct": {"discount"},
+}
+
+
+def kpi_rows(kpis: dict, caps: frozenset | set | None = None) -> pd.DataFrame:
+    """KPI table (metric, key, value, display) with only the figures the data supports."""
+    from salesinsight.kpis import kpi_table
+    table = kpi_table(kpis)
+    if caps is None:
+        return table
+    keep = [not _lacking(KPI_NEEDS.get(key, set()), caps) for key in table["key"]]
+    return table[keep].reset_index(drop=True)
+
+
+def custom_report(df: pd.DataFrame, findings: dict, skipped: dict, recs: list,
+                  caps: frozenset | set | None, source_name: str, currency: str = "$") -> str:
+    """A plain Markdown report for an uploaded file (the Superstore report has
+    sections that only make sense for that dataset)."""
+    def money(text: str) -> str:
+        return text if currency == "$" else text.replace("$", currency)
+
+    lines = [f"# SalesInsight report: {source_name}", "",
+             f"Period: {df['order_date'].min():%d %b %Y} - {df['order_date'].max():%d %b %Y}  ",
+             f"Rows analysed: {len(df):,}", ""]
+    k = findings.get("kpis")
+    if k:
+        rows = kpi_rows(k, caps)
+        lines += ["## Key figures", "", "| Metric | Value |", "|---|---|"]
+        lines += [f"| {r.metric} | {money(r.display)} |" for r in rows.itertuples()]
+        lines.append("")
+    kf = key_findings(df, findings, caps)
+    if kf:
+        lines += ["## Key findings", ""] + [f"- **{x['title']}:** {money(x['text'])}" for x in kf] + [""]
+    ops = opportunities(df, findings, caps)
+    if ops:
+        lines += ["## Opportunities", ""] + [f"- **{x['title']}:** {money(x['text'])}" for x in ops] + [""]
+    if recs:
+        lines += ["## Recommendations", ""]
+        for i, r in enumerate(recs, 1):
+            lines += [f"### {i}. {r.title} (priority {r.priority}, {r.area})", "",
+                      f"- **Finding:** {money(r.finding)}", f"- **Action:** {money(r.action)}",
+                      f"- **Expected impact:** {money(r.impact)}", ""]
+    tests = findings.get("tests", [])
+    if tests:
+        lines += ["## Statistical evidence", "", "| Question | Result | Effect size |", "|---|---|---|"]
+        lines += [f"| {t.question} | {'Significant' if t.significant else 'Not significant'} | "
+                  f"{t.effect_label} ({t.effect_measure} {t.effect_size:.2f}) |" for t in tests]
+        lines.append("")
+    if skipped:
+        lines += ["## Not calculated for this file", ""]
+        lines += [f"- {key.replace('_', ' ')}: {reason}" for key, reason in skipped.items()] + [""]
+    lines += ["---", "Generated by SalesInsight from an uploaded file. Associations are not proof of cause; "
+              "the uploaded data is not stored."]
+    return "\n".join(lines)

@@ -294,7 +294,7 @@ def test_whole_app_runs_on_uploaded_data():
 # 14C: pages adapt to what an uploaded file contains
 # --------------------------------------------------------------------------
 UPLOADS = ["indian_retail_sales.csv", "online_store_orders.xlsx", "cafe_daily_sales.csv"]
-ANALYTICS = ["overview", "trends", "products", "regions", "customers", "explorer"]
+ANALYTICS = ["overview", "trends", "products", "regions", "customers", "explorer", "insights"]
 
 
 @pytest.mark.parametrize("upload", UPLOADS)
@@ -322,3 +322,11 @@ def test_demo_pages_show_no_unavailable_notes():
         at = render_page(page)
         notes = [m.value for m in at.markdown if "si-unavailable" in m.value and "<style>" not in m.value]
         assert not notes, page
+
+
+def test_insights_page_for_upload_without_profit():
+    at = render_page("insights", {"harness_upload": "indian_retail_sales.csv"})
+    assert not at.exception and not at.error
+    text = page_text(at)
+    assert "₹" in text and "Priority" in text and "Win back" in text
+    assert "What is losing money" in text and "profit or cost column" in text

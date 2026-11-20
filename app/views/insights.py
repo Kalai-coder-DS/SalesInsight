@@ -12,18 +12,20 @@ import streamlit as st
 
 from components.context import get_context
 from components.kpi_cards import render_stat_cards
+from components import caps
 from components.layout import (card, card_title, chart_switch, csv_download, data_table, empty_state,
                                highlight_list, page_header, recommendation_cards, text_download)
+from components.theme import fx
 from salesinsight import dashboard_data as dd
 from salesinsight.filtering import describe_filters
 from salesinsight.insights import recommendations_to_frame
-from salesinsight.kpis import kpi_table, short_money
+from salesinsight.kpis import short_money
 
 
-def _compute(df: pd.DataFrame):
-    findings, skipped = dd.safe_findings(df)
-    recs = dd.safe_recommendations(findings)
-    report = dd.safe_report(findings, recs)
+def _compute(df: pd.DataFrame, capabilities=None):
+    findings, skipped = dd.safe_findings(df, capabilities)
+    recs = dd.safe_recommendations(findings, capabilities)
+    report = dd.safe_report(findings, recs) if capabilities is None else None   # uploads: custom_report()
     return findings, skipped, recs, report
 
 
@@ -32,13 +34,18 @@ def _cached(df: pd.DataFrame):
     return _compute(df)
 
 
-def _insights(df: pd.DataFrame, source: str):
+def _insights(df: pd.DataFrame, source: str, capabilities=None):
     """Demo data uses the shared cache. Uploaded data never does: the cache is shared by
     all visitors and outlives the session."""
     if source == "custom":
         with st.spinner("Generating insights..."):
-            return _compute(df)
+            return _compute(df, capabilities)
     return _cached(df)
+
+
+def _with_currency(frame: pd.DataFrame) -> pd.DataFrame:
+    """Text columns in the active currency (uploads); the demo data is unchanged."""
+    return frame.apply(lambda col: col.map(fx) if col.dtype == object or str(col.dtype).startswith("str") else col)
 
 
 def render() -> None:
@@ -51,7 +58,8 @@ def render() -> None:
         empty_state()
         return
 
-    findings, skipped, recs, report = _insights(df, ctx.source)
+    findings, skipped, recs, report = _insights(df, ctx.source, ctx.capabilities)
+    custom = ctx.source == "custom"
     k = findings.get("kpis", {})
     render_stat_cards([
         {"label": "Recommendations", "value": str(len(recs)),
@@ -68,11 +76,11 @@ def render() -> None:
     left, right = st.columns(2, gap="medium")
     with left, card("ins-findings"):
         card_title("Key findings", "What the selected data shows")
-        highlight_list(dd.key_findings(df, findings) or [{"title": "Not enough data",
+        highlight_list(dd.key_findings(df, findings, ctx.capabilities) or [{"title": "Not enough data",
                                                            "text": "Widen the filters to see findings."}])
     with right, card("ins-opps"):
         card_title("Sales opportunities", "Where to grow or protect profit")
-        opps = dd.opportunities(df, findings)
+        opps = dd.opportunities(df, findings, ctx.capabilities)
         highlight_list(opps or [{"title": "No clear opportunity", "text": "Widen the filters to compare periods."}])
 
     # --- Recommendations -----------------------------------------------------------------
@@ -83,24 +91,31 @@ def render() -> None:
         shown = [r for r in recs if area == "All" or r.area == area]
         if shown:
             recommendation_cards(shown)
+        elif custom and not recs:
+            st.info("No recommendation fits this data yet. Recommendations use profit or cost, discounts, "
+                    "categories, regions, customers with order IDs, and at least a full year of sales. "
+                    "Add the columns you have on the Data Source page.", icon=":material/info:")
         else:
             st.info("No recommendation applies to this selection.")
 
     # --- Loss-makers -----------------------------------------------------------------------
-    with card("ins-loss"):
-        card_title("What is losing money", "Everything with a negative total profit in the selection")
-        tables = dd.loss_tables(df)
-        tabs = st.tabs([f"{name} ({len(t)})" for name, t in tables.items()])
-        for tab, (name, table) in zip(tabs, tables.items()):
-            with tab:
-                if table.empty:
-                    st.success(f"No {name.lower()} lost money in this selection.")
-                else:
-                    data_table(table, money=["revenue", "profit"],
-                               pct=["profit_margin_pct", "effective_discount_pct"], ints=["total_orders"],
-                               height=300, key=f"in_loss_{name}")
-                    csv_download(table, f"loss_making_{name.lower().replace('-', '_')}.csv",
-                                 key=f"in_loss_csv_{name}")
+    tables = dd.loss_tables(df, ctx.capabilities)
+    if not tables:
+        caps.unavailable_card("ins-loss", "What is losing money", caps.missing("profit") or ["products"])
+    else:
+        with card("ins-loss"):
+            card_title("What is losing money", "Everything with a negative total profit in the selection")
+            tabs = st.tabs([f"{name} ({len(t)})" for name, t in tables.items()])
+            for tab, (name, table) in zip(tabs, tables.items()):
+                with tab:
+                    if table.empty:
+                        st.success(f"No {name.lower()} lost money in this selection.")
+                    else:
+                        data_table(table, money=["revenue", "profit"],
+                                   pct=["profit_margin_pct", "effective_discount_pct"], ints=["total_orders"],
+                                   height=300, key=f"in_loss_{name}")
+                        csv_download(table, f"loss_making_{name.lower().replace('-', '_')}.csv",
+                                     key=f"in_loss_csv_{name}")
 
     # --- Statistical evidence ----------------------------------------------------------------
     with card("ins-stats"):
@@ -117,7 +132,9 @@ def render() -> None:
             st.info("The statistical tests need a wider selection (more groups or more data).")
         if skipped:
             with st.expander(f"{len(skipped)} part(s) could not be calculated for this selection"):
-                st.caption("This is expected for small selections, e.g. regions cannot be compared "
+                st.caption("Some parts need columns your file does not have; others need more data "
+                           "(e.g. regions cannot be compared when only one region is selected)." if custom else
+                           "This is expected for small selections, e.g. regions cannot be compared "
                            "when only one region is selected.")
                 for key, reason in skipped.items():
                     st.markdown(f"- **{key}**: {reason}")
@@ -127,7 +144,10 @@ def render() -> None:
         card_title("Download", "Files are generated from the current selection")
         c1, c2, c3 = st.columns(3)
         with c1:
-            if report:
+            if custom:
+                text = dd.custom_report(df, findings, skipped, recs, ctx.capabilities, ctx.source_name, ctx.currency)
+                text_download(text, "salesinsight_report.md", "Insights report (.md)", key="in_dl_report")
+            elif report:
                 # Images in the report point to local chart files, so they are left out of the download.
                 text = "\n".join(line for line in report.splitlines() if not line.startswith("!["))
                 text_download(text, "salesinsight_report.md", "Insights report (.md)", key="in_dl_report")
@@ -135,8 +155,11 @@ def render() -> None:
                 st.caption("The full report needs a wider selection.")
         with c2:
             if recs:
-                csv_download(recommendations_to_frame(recs), "recommendations.csv", "Recommendations (.csv)",
-                             key="in_dl_recs")
+                frame = recommendations_to_frame(recs)
+                csv_download(_with_currency(frame) if custom else frame, "recommendations.csv",
+                             "Recommendations (.csv)", key="in_dl_recs")
         with c3:
             if k:
-                csv_download(kpi_table(k), "kpi_summary.csv", "KPI summary (.csv)", key="in_dl_kpis")
+                table = dd.kpi_rows(k, ctx.capabilities)
+                csv_download(_with_currency(table) if custom else table, "kpi_summary.csv", "KPI summary (.csv)",
+                             key="in_dl_kpis")
